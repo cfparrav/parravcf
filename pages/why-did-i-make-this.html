@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-src="../data/translations.json">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        (function () {
+            var t = localStorage.getItem("site-theme");
+            if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why did I make this website? — Carlos Parra</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Bitter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a class="wordmark" href="../index.html">parravcf<span>.</span></a>
+        <nav class="top-nav">
+            <a href="../index.html" data-i18n="nav.home">Home</a>
+            <a href="projects.html" data-i18n="nav.projects">Projects</a>
+            <a href="journal.html" data-i18n="nav.journal">Journal</a>
+            <a href="travel.html" data-i18n="nav.travel">Travel Memories</a>
+            <a href="now.html" data-i18n="nav.now">About Me</a>
+            <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+            <button type="button" id="lang-toggle" class="lang-toggle">ES</button>
+        </div>
+    </header>
+
+
+    <header class="page-header">
+
+        <a class="back-link" href="journal.html">← Journal</a>
+
+        <p class="post-meta"><span data-i18n="post.meta_label">journal</span> <span class="dot">·</span> august 12, 2026</p>
+        <h1 data-i18n="post.title">Why did I make this website?</h1>
+
+    </header>
+
+    <main>
+
+        <article>
+
+            <p>Like every personal website I can think of, this might sound cliché... but I wanted to create a space that feels like mine, while also being able to share it with everyone else.</p>
+
+            <p>I am a very visual person, and what you see on this website is a bit of what I like and reflects who I am, and those who know me in person would agree, I think, lol. That's why you probably noticed some influence from the 2013 aesthetic, including my "amazing" sense of humor and ideas. I wanted this site to feel that way because that's what I really like. Or maybe I'm feeling nostalgic right now, idk.</p>
+
+            <figure class="post-image">
+                <img src="../images/journal/2013-will-be-my-year.webp" alt="2013 will be my year — a nostalgic internet meme image">
+            </figure>
+
+            <p>Right now I can't tell you exactly where this website is going in the future. And honestly, I think we don't need to know yet... but you are here to see how it changes, how I change, just like a "normal" person does.</p>
+
+            <p>So probably you're asking yourself... why is this mexican guy writing this whole thing in English? The reason is pretty simple: I'd like that more people can read me, no disrespect to my close friends lol (who mostly speak Spanish, like I do). It also sucks to code everything in English, and send prompts in Spanish to Claude, it just doesn't match the vibe, you know? That's why I decided to keep it 💯% real witchu. Regardless, I will start writing in Spanish depending on the topic, just right now I'm leaning more towards English. And obviously there's a translation toggle button on the right top corner 😎.</p>
+
+            <p><strong>More context about the idea of creating a personal website:</strong></p>
+
+            <p>I've had this idea of a personal website sitting somewhere in the back of my head for quite some time now.</p>
+
+            <p>I imagined having a space where I could share ideas, things I like, what I've learned, and mostly random stuff that other people could find cool or interesting.</p>
+
+            <p class="pull">Most of my life I had this idea that if you don't share the things that make you happy, you somehow get to keep them more for yourself, for more time, without anyone questioning your happiness. Because at the end of the day, there's always someone who doesn't want to see you happy...</p>
+
+            <p>Looking back, that's a very selfish way of thinking, probably driven by fear.</p>
+
+            <p>Personally, I learned a lot simply by listening to people who think the opposite way. And lately I've made some reflection about it and ended up deciding that I also want to be someone who thinks like that. So I said to myself: fuck gatekeeping things... we should share at least a bit of something you're passionate about. You can also find joy doing it. It doesn't matter who reads it or not. You never know who you might be able to help or motivate by sharing.</p>
+
+            <p>That's why I added a comment/suggestions section to every post. I'd like you to share something with me too. A thought, an opinion, a recommendation, feedback, or whatever comes to mind. If you're too shy to post your name in the comments, you can always 'slide thru' my dms or send me an email if you are old fashioned 😉.</p>
+
+            <p>I think this might be a fun way to connect with more people.</p>
+
+            <p>And what better way to connect than by sharing something, and having someone share something back? Right? Que no?</p>
+
+            <p>That's what it's all about.</p>
+
+            <div class="now-playing">Now playing — "I Don't Owe You Anything," The Smiths</div>
+
+        </article>
+
+        <hr class="sep">
+
+        <section class="comments">
+            <h2>Say something back</h2>
+            <p class="comments-sub">thoughts, opinions, recommendations, whatever comes to mind.</p>
+
+            <form class="new-comment">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="what should we call you?">
+                <label for="msg">Your comment</label>
+                <textarea id="msg" placeholder="share a thought..."></textarea>
+                <br>
+                <button type="button" id="post-comment">Post comment</button>
+            </form>
+        </section>
+
+    </main>
+
+    <script src="../script.js" defer></script>
+
+    <script src="../i18n.js" defer></script>
+    <script src="../theme.js" defer></script>
+
+</body>
+
+</html>

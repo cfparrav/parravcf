@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-src="data/translations.json">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        (function () {
+            var t = localStorage.getItem("site-theme");
+            if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Bitter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a class="wordmark" href="index.html">parravcf<span>.</span></a>
+        <div class="header-actions">
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+            <button type="button" id="lang-toggle" class="lang-toggle">ES</button>
+        </div>
+    </header>
+
+    <header>
+
+        <h1 data-i18n="home.h1">Welcome to my internet space.</h1>
+
+        <p class="intro" data-i18n="home.intro">
+            A collection of things I'm working on.
+        </p>
+
+        <section class="why reveal">
+            <p><strong data-i18n="home.why.title">What is this?</strong></p>
+            <p data-i18n="home.why.body">
+                A place to put my ideas, share what I'm building, and write about the trips and random
+                thoughts that don't fit anywhere else. It's a small creative space of mine, and like everything
+                else here, it'll keep evolving with time. :) I made a whole post about it in case you're interested...
+            </p>
+            <p><a href="pages/why-did-i-make-this.html" data-i18n="home.why.link">Read the full post →</a></p>
+        </section>
+
+        <section class="corner reveal">
+            <p><strong data-i18n="home.interested">Here's what I'm interested in.</strong></p>
+            <p class="site-links">
+                <a href="pages/projects.html" data-i18n="nav.projects">Projects</a> ·
+                <a href="pages/journal.html" data-i18n="nav.journal">Journal</a> ·
+                <a href="pages/travel.html" data-i18n="nav.travel">Travel Memories</a> ·
+                <a href="pages/now.html" data-i18n="nav.now">About Me</a> ·
+                <a href="pages/contact.html" data-i18n="nav.contact">Contact</a>
+            </p>
+        </section>
+
+    </header>
+
+    <main>
+
+        <section class="latest-post reveal">
+
+            <h2 data-i18n="home.latest.label">Latest</h2>
+
+            <h3 data-i18n="home.latest.title">A Random Song Generator</h3>
+
+            <p data-i18n="home.latest.body">
+                I imported my whole likes from spotify into this section. This is for you to test, one song at a time, picked at random from what I actually listen to.
+            </p>
+
+            <a href="pages/music.html" data-i18n="home.latest.link">Try it →</a>
+
+        </section>
+
+    </main>
+
+    <script src="script.js" defer></script>
+    <script src="i18n.js" defer></script>
+    <script src="theme.js" defer></script>
+
+</body>
+
+</html>

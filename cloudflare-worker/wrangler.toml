@@ -1,0 +1,9 @@
+name = "cfparrav-song-suggestions"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+# After creating a KV namespace (`wrangler kv namespace create SUGGESTIONS`),
+# paste the id it gives you below.
+kv_namespaces = [
+  { binding = "SUGGESTIONS", id = "PASTE_YOUR_KV_NAMESPACE_ID_HERE" }
+]

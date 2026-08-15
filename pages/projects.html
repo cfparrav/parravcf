@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-src="../data/translations.json">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        (function () {
+            var t = localStorage.getItem("site-theme");
+            if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Carlos Parra</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Bitter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a class="wordmark" href="../index.html">parravcf<span>.</span></a>
+        <nav class="top-nav">
+            <a href="../index.html" data-i18n="nav.home">Home</a>
+            <a href="projects.html" data-i18n="nav.projects">Projects</a>
+            <a href="journal.html" data-i18n="nav.journal">Journal</a>
+            <a href="travel.html" data-i18n="nav.travel">Travel Memories</a>
+            <a href="now.html" data-i18n="nav.now">About Me</a>
+            <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+            <button type="button" id="lang-toggle" class="lang-toggle">ES</button>
+        </div>
+    </header>
+
+
+    <header class="page-header">
+
+        <a class="back-link" href="../index.html" data-i18n="common.back_home">← Home</a>
+
+        <h1 data-i18n="projects.h1">Projects</h1>
+
+        <p class="intro" data-i18n="projects.intro">
+            Things I've built, mostly to learn how they work.
+        </p>
+
+    </header>
+
+    <main>
+
+        <ul class="project-list">
+
+            <li class="project-entry">
+                <p class="project-meta">HTML · CSS · JavaScript</p>
+                <h2 data-i18n="projects.entry1.title">Random Song Generator</h2>
+                <p>
+                    <span data-i18n="projects.entry1.body">A little tool that picks one song at a time from what I actually have in my likes library. With a suggestion feature :)</span>
+                </p>
+                <div class="project-links">
+                    <a href="music.html" data-i18n="projects.entry1.link">Try it →</a>
+                </div>
+            </li>
+
+        </ul>
+
+    </main>
+
+    <script src="../i18n.js" defer></script>
+    <script src="../theme.js" defer></script>
+
+</body>
+
+</html>

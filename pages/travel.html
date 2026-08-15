@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-src="../data/translations.json">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        (function () {
+            var t = localStorage.getItem("site-theme");
+            if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Memories — Carlos Parra</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Bitter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a class="wordmark" href="../index.html">parravcf<span>.</span></a>
+        <nav class="top-nav">
+            <a href="../index.html" data-i18n="nav.home">Home</a>
+            <a href="projects.html" data-i18n="nav.projects">Projects</a>
+            <a href="journal.html" data-i18n="nav.journal">Journal</a>
+            <a href="travel.html" data-i18n="nav.travel">Travel Memories</a>
+            <a href="now.html" data-i18n="nav.now">About Me</a>
+            <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+            <button type="button" id="lang-toggle" class="lang-toggle">ES</button>
+        </div>
+    </header>
+
+
+    <header class="page-header">
+
+        <a class="back-link" href="../index.html" data-i18n="common.back_home">← Home</a>
+
+        <h1 data-i18n="travel.h1">Travel Memories</h1>
+
+        <p class="intro" data-i18n="travel.intro">
+            Here is my attempt to capture every emotion I felt, every experience good or bad, and thoughts that I had while traveling in a few pharagraphs. Also, including a few pictures 😊
+        </p>
+
+    </header>
+
+    <main>
+
+        <ul class="trip-list">
+
+            <li class="trip-entry">
+                <p class="trip-meta" data-i18n="travel.entry.meta">Not sure yet...</p>
+                <h2 data-i18n="travel.entry.title">Coming soon</h2>
+                <p>
+                    <span data-i18n="travel.entry.body">This is where I'll be posting a bit about my travel journal.</span>
+                </p>
+                <a href="#" data-i18n="common.readmore">Read more →</a>
+            </li>
+
+        </ul>
+
+    </main>
+
+    <script src="../i18n.js" defer></script>
+    <script src="../theme.js" defer></script>
+
+</body>
+
+</html>

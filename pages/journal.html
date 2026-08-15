@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-src="../data/translations.json">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        (function () {
+            var t = localStorage.getItem("site-theme");
+            if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal — Carlos Parra</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Bitter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a class="wordmark" href="../index.html">parravcf<span>.</span></a>
+        <nav class="top-nav">
+            <a href="../index.html" data-i18n="nav.home">Home</a>
+            <a href="projects.html" data-i18n="nav.projects">Projects</a>
+            <a href="journal.html" data-i18n="nav.journal">Journal</a>
+            <a href="travel.html" data-i18n="nav.travel">Travel Memories</a>
+            <a href="now.html" data-i18n="nav.now">About Me</a>
+            <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+            <button type="button" id="lang-toggle" class="lang-toggle">ES</button>
+        </div>
+    </header>
+
+
+    <header class="page-header">
+
+        <a class="back-link" href="../index.html" data-i18n="common.back_home">← Home</a>
+
+        <h1 data-i18n="journal.h1">Journal</h1>
+
+        <p class="intro" data-i18n="journal.intro">
+            Notes on what I'd like to initiate a chat about, and what I want everyone to hear.
+        </p>
+
+    </header>
+
+    <main>
+
+        <ul class="journal-list">
+
+            <li class="journal-entry">
+                <p class="journal-meta">August 13, 2026</p>
+                <h2 data-i18n="photos.h1">Photos I Think They Go Hard</h2>
+                <p data-i18n="photos.intro">
+                    These are pictures I think they go hard... so just sit back, relax, smoke one, drink some, and admire these pictures.
+                </p>
+                <a href="photos-i-think-they-go-hard.html" data-i18n="common.readmore">Read more →</a>
+            </li>
+
+            <li class="journal-entry">
+                <p class="journal-meta">August 12, 2026</p>
+                <h2>Why did I make this website?</h2>
+                <p>
+                    Like every personal website I can think of, this might sound cliché... but I wanted a space that feels like mine, while also being able to share it with everyone else.
+                </p>
+                <a href="why-did-i-make-this.html" data-i18n="common.readmore">Read more →</a>
+            </li>
+
+        </ul>
+
+    </main>
+
+    <script src="../i18n.js" defer></script>
+    <script src="../theme.js" defer></script>
+
+</body>
+
+</html>
