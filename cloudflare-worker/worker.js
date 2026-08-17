@@ -8,6 +8,9 @@
  *   DELETE /suggestions       -> (admin) delete a suggestion by its KV key
  *   GET    /rating            -> get up/down counts for a song (?title=...&artist=...)
  *   POST   /rate-song         -> submit an up/down vote for a song
+ *   GET    /comments          -> list comments for a page (?page=...)
+ *   POST   /comment           -> post a comment on a page
+ *   DELETE /comments          -> (admin) delete a comment by its KV key
  *
  * Uses POST /playlists/{id}/items (not the deprecated /tracks path -- Spotify's
  * Feb 2026 API migration removed /tracks for Development Mode apps).
@@ -241,6 +244,83 @@ async function handleRateSong(request, env) {
     return json(counts);
 }
 
+// Comments on journal/photo pages. Key is namespaced per page so listing a
+// page's comments is a cheap prefix scan, same pattern as suggestions.
+function commentKey(page, timestamp, id) {
+    return `comment:${page}:${timestamp}:${id}`;
+}
+
+async function handleListComments(request, env) {
+    const url = new URL(request.url);
+    const page = url.searchParams.get("page");
+    if (!page) return json({ comments: [] });
+
+    const list = await env.SUGGESTIONS.list({ prefix: `comment:${page}:` });
+    const records = await Promise.all(
+        list.keys.map(async (k) => {
+            const val = await env.SUGGESTIONS.get(k.name);
+            if (!val) return null;
+            return { key: k.name, ...JSON.parse(val) };
+        })
+    );
+    const cleaned = records
+        .filter(Boolean)
+        .sort((a, b) => new Date(a.posted_at) - new Date(b.posted_at))
+        .slice(-200);
+
+    return json({ comments: cleaned });
+}
+
+async function handlePostComment(request, env) {
+    let body;
+    try {
+        body = await request.json();
+    } catch {
+        return json({ error: "invalid body" }, 400);
+    }
+
+    const { page, name, message } = body || {};
+    const trimmedMessage = (message || "").trim();
+    if (!page || !trimmedMessage) {
+        return json({ error: "missing page or message" }, 400);
+    }
+    if (trimmedMessage.length > 2000) {
+        return json({ error: "comment too long" }, 400);
+    }
+
+    const record = {
+        name: (name && name.trim().slice(0, 80)) || "Anonymous",
+        message: trimmedMessage,
+        posted_at: new Date().toISOString(),
+    };
+    const key = commentKey(page, Date.now(), crypto.randomUUID());
+    await env.SUGGESTIONS.put(key, JSON.stringify(record));
+
+    return json({ success: true });
+}
+
+// Admin-only: delete a comment by its KV key, same auth as suggestion deletes.
+async function handleDeleteComment(request, env) {
+    const adminKey = request.headers.get("X-Admin-Key");
+    if (!adminKey || adminKey !== env.ADMIN_KEY) {
+        return json({ error: "unauthorized" }, 401);
+    }
+
+    let body;
+    try {
+        body = await request.json();
+    } catch {
+        return json({ error: "invalid body" }, 400);
+    }
+
+    if (!body?.key || !body.key.startsWith("comment:")) {
+        return json({ error: "invalid key" }, 400);
+    }
+
+    await env.SUGGESTIONS.delete(body.key);
+    return json({ success: true });
+}
+
 export default {
     async fetch(request, env) {
         if (request.method === "OPTIONS") {
@@ -267,6 +347,15 @@ export default {
             }
             if (url.pathname === "/rate-song" && request.method === "POST") {
                 return await handleRateSong(request, env);
+            }
+            if (url.pathname === "/comments" && request.method === "GET") {
+                return await handleListComments(request, env);
+            }
+            if (url.pathname === "/comment" && request.method === "POST") {
+                return await handlePostComment(request, env);
+            }
+            if (url.pathname === "/comments" && request.method === "DELETE") {
+                return await handleDeleteComment(request, env);
             }
             return json({ error: "not found" }, 404);
         } catch (err) {

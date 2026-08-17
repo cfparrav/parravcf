@@ -29,7 +29,7 @@
             <a href="../index.html" data-i18n="nav.home">Home</a>
             <a href="projects.html" data-i18n="nav.projects">Projects</a>
             <a href="journal.html" data-i18n="nav.journal">Journal</a>
-            <a href="travel.html" data-i18n="nav.travel">Travel Memories</a>
+            <a href="travel.html" data-i18n="nav.travel">Travel</a>
             <a href="now.html" data-i18n="nav.now">About Me</a>
             <a href="contact.html" data-i18n="nav.contact">Contact</a>
         </nav>
@@ -77,7 +77,7 @@
 
             <p>Personally, I learned a lot simply by listening to people who think the opposite way. And lately I've made some reflection about it and ended up deciding that I also want to be someone who thinks like that. So I said to myself: fuck gatekeeping things... we should share at least a bit of something you're passionate about. You can also find joy doing it. It doesn't matter who reads it or not. You never know who you might be able to help or motivate by sharing.</p>
 
-            <p>That's why I added a comment/suggestions section to every post. I'd like you to share something with me too. A thought, an opinion, a recommendation, feedback, or whatever comes to mind. If you're too shy to post your name in the comments, you can always 'slide thru' my dms or send me an email if you are old fashioned 😉.</p>
+            <p>That's why I added a comment/suggestions section to every post. I'd like you to share something with me too. A thought, an opinion, a recommendation, feedback, or whatever comes to mind. If you're too shy to post your name in the comments, you can always reach out through a DM or via email if you are old fashioned 😉.</p>
 
             <p>I think this might be a fun way to connect with more people.</p>
 
@@ -91,9 +91,11 @@
 
         <hr class="sep">
 
-        <section class="comments">
+        <section class="comments" data-page-id="why-did-i-make-this">
             <h2>Say something back</h2>
             <p class="comments-sub">thoughts, opinions, recommendations, whatever comes to mind.</p>
+
+            <div id="comments-list" class="comments-list"></div>
 
             <form class="new-comment">
                 <label for="name">Name</label>
@@ -102,12 +104,14 @@
                 <textarea id="msg" placeholder="share a thought..."></textarea>
                 <br>
                 <button type="button" id="post-comment">Post comment</button>
+                <p id="comment-status" class="comment-status"></p>
             </form>
         </section>
 
     </main>
 
     <script src="../script.js" defer></script>
+    <script src="../comments.js" defer></script>
 
     <script src="../i18n.js" defer></script>
     <script src="../theme.js" defer></script>

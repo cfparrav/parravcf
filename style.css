@@ -546,7 +546,8 @@ nav a:focus-visible,
     margin: 0;
 }
 
-.trip-entry h2 {
+.trip-entry h2,
+.trip-entry h3 {
     margin-top: 15px;
     font-size: clamp(1.4rem, 4vw, 1.9rem);
     line-height: 1.3;
@@ -562,6 +563,62 @@ nav a:focus-visible,
 .trip-entry a:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 4px;
+}
+
+.trip-thumb {
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    display: block;
+    margin-bottom: 14px;
+}
+
+.year-filter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: var(--space-md);
+}
+
+.year-btn {
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 6px 18px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.year-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.year-btn.is-active {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.year-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.trip-month + .trip-month {
+    margin-top: var(--space-lg);
+}
+
+.month-heading {
+    font-family: "Inter", sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin: 0 0 var(--space-md);
 }
 
 @media (max-width: 480px) {
@@ -911,6 +968,21 @@ section.comments h2 {
     font-size: 0.9rem;
     color: var(--body-text);
     font-family: "Inter", sans-serif;
+}
+
+.comments-list:empty {
+    display: none;
+}
+
+.comments-list {
+    margin-bottom: 24px;
+}
+
+.comment-status {
+    margin-top: 10px;
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    color: var(--muted);
 }
 
 form.new-comment {

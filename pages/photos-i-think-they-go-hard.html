@@ -12,7 +12,7 @@
         })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photos I Think They Go Hard — Carlos Parra</title>
+    <title>Random Pics — Carlos Parra</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +29,7 @@
             <a href="../index.html" data-i18n="nav.home">Home</a>
             <a href="projects.html" data-i18n="nav.projects">Projects</a>
             <a href="journal.html" data-i18n="nav.journal">Journal</a>
-            <a href="travel.html" data-i18n="nav.travel">Travel Memories</a>
+            <a href="travel.html" data-i18n="nav.travel">Travel</a>
             <a href="now.html" data-i18n="nav.now">About Me</a>
             <a href="contact.html" data-i18n="nav.contact">Contact</a>
         </nav>
@@ -44,7 +44,7 @@
         <a class="back-link" href="journal.html" data-i18n="common.back_journal">← Journal</a>
 
         <p class="post-meta"><span data-i18n="post.meta_label">journal</span> <span class="dot">·</span> august 13, 2026</p>
-        <h1 data-i18n="photos.h1">Photos I Think They Go Hard</h1>
+        <h1 data-i18n="photos.h1">Random Pics</h1>
 
     </header>
 
@@ -52,7 +52,7 @@
 
         <article>
 
-            <p data-i18n="photos.intro">These are pictures I think they go hard... so just sit back, relax, smoke one, drink some, and admire these pictures.</p>
+            <p data-i18n="photos.intro">A few pics I think they're cool, have a look.</p>
 
             <ul class="meme-gallery">
 
@@ -156,9 +156,11 @@
 
         <hr class="sep">
 
-        <section class="comments">
+        <section class="comments" data-page-id="photos-i-think-they-go-hard">
             <h2>Say something back</h2>
             <p class="comments-sub">thoughts, opinions, recommendations, whatever comes to mind.</p>
+
+            <div id="comments-list" class="comments-list"></div>
 
             <form class="new-comment">
                 <label for="name">Name</label>
@@ -167,12 +169,14 @@
                 <textarea id="msg" placeholder="share a thought..."></textarea>
                 <br>
                 <button type="button" id="post-comment">Post comment</button>
+                <p id="comment-status" class="comment-status"></p>
             </form>
         </section>
 
     </main>
 
     <script src="../script.js" defer></script>
+    <script src="../comments.js" defer></script>
     <script src="../i18n.js" defer></script>
     <script src="../theme.js" defer></script>
     <script src="../lightbox.js" defer></script>
