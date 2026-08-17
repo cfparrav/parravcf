@@ -23,6 +23,39 @@ document.addEventListener("DOMContentLoaded", () => {
     let selectedTrack = null;
     let debounceTimer = null;
 
+    function escapeHtml(str) {
+        const div = document.createElement("div");
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
+    function formatWhen(iso) {
+        const d = new Date(iso);
+        return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+    }
+
+    async function loadItemComments(key, listInner) {
+        try {
+            const res = await fetch(`${API_BASE}/comments?page=${encodeURIComponent(key)}`);
+            const data = await res.json();
+            const comments = data.comments || [];
+            listInner.innerHTML = comments.length
+                ? comments
+                      .map(
+                          (c) => `
+                    <div class="comment">
+                        <span class="who">${escapeHtml(c.name)}</span>
+                        <span class="when">${formatWhen(c.posted_at)}</span>
+                        <p>${escapeHtml(c.message)}</p>
+                    </div>`
+                      )
+                      .join("")
+                : `<p class="suggest-empty">No comments yet.</p>`;
+        } catch {
+            listInner.innerHTML = "";
+        }
+    }
+
     function renderResults(tracks) {
         if (!tracks.length) {
             resultsEl.innerHTML = "";
@@ -124,12 +157,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 .map(
                     (s) => `
                     <li class="suggestion-item">
-                        ${s.track_image ? `<img src="${s.track_image}" alt="">` : ""}
-                        <span>
-                            <strong>${s.track_name}</strong> — ${s.track_artist}<br>
-                            <span class="suggest-by">suggested by ${s.name}</span>
-                        </span>
-                        ${adminKey ? `<button type="button" class="suggest-delete" data-key="${s.key}">×</button>` : ""}
+                        <div class="suggestion-main">
+                            ${s.track_image ? `<img src="${s.track_image}" alt="">` : ""}
+                            <span>
+                                <strong>${s.track_name}</strong> — ${s.track_artist}<br>
+                                <span class="suggest-by">suggested by ${s.name}</span>
+                            </span>
+                            ${adminKey ? `<button type="button" class="suggest-delete" data-key="${s.key}">×</button>` : ""}
+                        </div>
+                        <div class="suggestion-comments">
+                            <button type="button" class="comments-toggle" data-key="${s.key}">💬 comments</button>
+                            <div class="suggestion-comments-body" hidden>
+                                <div class="suggestion-comments-list"></div>
+                                <form class="suggestion-comment-form" data-key="${s.key}">
+                                    <input type="text" class="sc-name" placeholder="name (optional)">
+                                    <input type="text" class="sc-msg" placeholder="say something about this pick...">
+                                    <button type="submit">Post</button>
+                                </form>
+                            </div>
+                        </div>
                     </li>`
                 )
                 .join("");
@@ -159,6 +205,56 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 });
             }
+
+            listEl.querySelectorAll(".comments-toggle").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const body = btn.nextElementSibling;
+                    const listInner = body.querySelector(".suggestion-comments-list");
+                    if (body.hasAttribute("hidden")) {
+                        body.removeAttribute("hidden");
+                        btn.textContent = "💬 hide comments";
+                        if (!listInner.dataset.loaded) {
+                            listInner.dataset.loaded = "1";
+                            loadItemComments(btn.getAttribute("data-key"), listInner);
+                        }
+                    } else {
+                        body.setAttribute("hidden", "");
+                        btn.textContent = "💬 comments";
+                    }
+                });
+            });
+
+            listEl.querySelectorAll(".suggestion-comment-form").forEach((form) => {
+                form.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    const key = form.getAttribute("data-key");
+                    const nameInput = form.querySelector(".sc-name");
+                    const msgInput = form.querySelector(".sc-msg");
+                    const message = msgInput.value.trim();
+                    if (!message) return;
+
+                    const submitBtn = form.querySelector("button");
+                    submitBtn.disabled = true;
+                    try {
+                        const res = await fetch(`${API_BASE}/comment`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ page: key, name: nameInput.value, message }),
+                        });
+                        const data = await res.json();
+                        if (data.success) {
+                            nameInput.value = "";
+                            msgInput.value = "";
+                            const listInner = form.closest(".suggestion-comments-body").querySelector(".suggestion-comments-list");
+                            loadItemComments(key, listInner);
+                        }
+                    } catch {
+                        // silently ignore — the form stays filled so the visitor can retry
+                    } finally {
+                        submitBtn.disabled = false;
+                    }
+                });
+            });
         } catch {
             listEl.innerHTML = "";
         }

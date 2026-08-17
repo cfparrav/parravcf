@@ -1192,13 +1192,20 @@ form.new-comment button:hover {
 
 .suggestion-item {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
+    gap: 8px;
     font-family: "Inter", sans-serif;
     font-size: 0.9rem;
     border: 1px solid var(--line);
     background: var(--paper);
     padding: 10px 12px;
+    position: relative;
+}
+
+.suggestion-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .suggestion-item img {
@@ -1236,10 +1243,6 @@ form.new-comment button:hover {
     color: var(--muted);
 }
 
-.suggestion-item {
-    position: relative;
-}
-
 .suggest-delete {
     margin-left: auto;
     font-family: "Inter", sans-serif;
@@ -1257,6 +1260,69 @@ form.new-comment button:hover {
 .suggest-delete:hover {
     color: var(--accent);
     border-color: var(--accent);
+}
+
+.comments-toggle {
+    align-self: flex-start;
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.comments-toggle:hover {
+    color: var(--accent);
+}
+
+.suggestion-comments-body {
+    border-top: 1px dashed var(--line);
+    padding-top: 8px;
+}
+
+.suggestion-comments-list:empty {
+    display: none;
+}
+
+.suggestion-comments-list .comment {
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    transform: none;
+}
+
+.suggestion-comment-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.suggestion-comment-form input[type="text"] {
+    flex: 1 1 140px;
+    padding: 6px 8px;
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--ink);
+    border-radius: 0;
+}
+
+.suggestion-comment-form button {
+    font-family: "Bitter", Georgia, serif;
+    font-size: 0.75rem;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 0;
+}
+
+.suggestion-comment-form button:hover {
+    background: var(--accent);
 }
 
 .song-rating {
