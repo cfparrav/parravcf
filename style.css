@@ -359,7 +359,6 @@ nav ul {
 }
 
 nav a,
-.site-links a,
 .back-link,
 .latest-post a,
 .trip-entry a,
@@ -373,7 +372,6 @@ nav a,
 }
 
 nav a:hover,
-.site-links a:hover,
 .back-link:hover,
 .latest-post a:hover,
 .trip-entry a:hover,
@@ -396,21 +394,51 @@ nav a:focus-visible,
     border-top: 1px solid var(--line);
 }
 
-.site-links {
-    margin-top: 10px;
-    line-height: 2.2;
-    font-family: "Inter", sans-serif;
-    font-size: 1.1rem;
+.interest-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
 }
 
-.site-links a {
+.interest-item a {
+    font-family: var(--font-accent);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    text-decoration: none;
     border-bottom: none;
-    text-decoration: underline dotted;
+    display: inline-flex;
+    align-items: center;
 }
 
-.site-links a:focus-visible {
+.interest-item a:hover {
+    color: var(--accent);
+}
+
+.interest-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    color: var(--muted);
+    flex-shrink: 0;
+}
+
+.interest-item a:hover .interest-icon {
+    color: var(--accent);
+}
+
+.interest-item a:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 4px;
+}
+
+.interest-item p {
+    margin: 4px 0 0;
+    color: var(--body-text);
 }
 
 /* Music page */
