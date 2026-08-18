@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://parravcf.vercel.app/sitemap.xml

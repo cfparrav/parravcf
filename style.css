@@ -9,6 +9,9 @@
     --link: #2a4d6e;
     --max-width: 700px;
 
+    --font-wordmark: "Rubik Glitch", "Bitter", Georgia, serif;
+    --font-accent: "Archivo Black", "Inter", sans-serif;
+
     --space-xl: clamp(48px, 10vw, 120px);
     --space-lg: clamp(32px, 6vw, 80px);
     --space-md: clamp(20px, 4vw, 40px);
@@ -52,8 +55,8 @@ body {
 }
 
 .wordmark {
-    font-family: "Bitter", Georgia, serif;
-    font-size: 0.95rem;
+    font-family: var(--font-wordmark);
+    font-size: 1.1rem;
     letter-spacing: 0.5px;
     color: var(--ink);
     text-decoration: none;
@@ -76,7 +79,9 @@ body {
 }
 
 .top-nav a {
-    font-family: "Inter", sans-serif;
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-accent);
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -87,6 +92,15 @@ body {
 
 .top-nav a:hover {
     color: var(--accent);
+}
+
+.nav-icon {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    flex-shrink: 0;
+    margin-right: 5px;
+    vertical-align: -2px;
 }
 
 .lang-toggle {
@@ -432,7 +446,7 @@ nav a:focus-visible,
 }
 
 .song-tags li {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-accent);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -456,7 +470,7 @@ nav a:focus-visible,
 }
 
 .song-review-label {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-accent);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -590,7 +604,7 @@ nav a:focus-visible,
 }
 
 .latest-post h2 {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-accent);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -656,7 +670,7 @@ nav a:focus-visible,
 }
 
 .trip-meta {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-accent);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -731,7 +745,7 @@ nav a:focus-visible,
 }
 
 .month-heading {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-accent);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -799,7 +813,7 @@ nav a:focus-visible,
 
 .journal-meta,
 .photo-meta {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-accent);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -844,7 +858,7 @@ nav a:focus-visible,
 }
 
 .now-label {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-accent);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -884,7 +898,7 @@ nav a:focus-visible,
 }
 
 .contact-label {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-accent);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -946,7 +960,7 @@ nav a:focus-visible,
 }
 
 .project-meta {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-accent);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -1223,7 +1237,7 @@ form.new-comment button:hover {
 }
 
 .suggest-label {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-accent);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 2px;
