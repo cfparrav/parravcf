@@ -8,6 +8,7 @@
  *   DELETE /suggestions       -> (admin) delete a suggestion by its KV key
  *   GET    /rating            -> get up/down counts for a song (?title=...&artist=...)
  *   POST   /rate-song         -> submit an up/down vote for a song
+ *   GET    /rated-songs       -> list songs that have any rating or comment activity
  *   GET    /comments          -> list comments for a page (?page=...)
  *   POST   /comment           -> post a comment on a page
  *   DELETE /comments          -> (admin) delete a comment by its KV key
@@ -290,6 +291,64 @@ async function handleRateSong(request, env) {
     return json(counts);
 }
 
+// Lists every song that has at least one rating or comment, so the site can
+// show a browsable "already ranked by visitors" section. Title/artist come
+// back lowercased (that's all the KV keys preserve) -- the frontend matches
+// them against its own songs.js data to recover the real display casing.
+async function handleListRatedSongs(env) {
+    const [ratingList, commentList] = await Promise.all([
+        env.SUGGESTIONS.list({ prefix: "rating:" }),
+        env.SUGGESTIONS.list({ prefix: "comment:song:" }),
+    ]);
+
+    const songs = {};
+
+    await Promise.all(
+        ratingList.keys.map(async (k) => {
+            const rest = k.name.slice("rating:".length); // "<title>::<artist>"
+            const sepIdx = rest.indexOf("::");
+            if (sepIdx === -1) return;
+            const titleKey = rest.slice(0, sepIdx);
+            const artistKey = rest.slice(sepIdx + 2);
+            const raw = await env.SUGGESTIONS.get(k.name);
+            const counts = raw ? JSON.parse(raw) : { up: 0, down: 0 };
+            const mapKey = `${titleKey}::${artistKey}`;
+            songs[mapKey] = {
+                titleKey,
+                artistKey,
+                up: counts.up || 0,
+                down: counts.down || 0,
+                commentCount: 0,
+            };
+        })
+    );
+
+    commentList.keys.forEach((k) => {
+        // Full key: comment:song:<title>::<artist>:<timestamp>:<uuid>
+        const rest = k.name.slice("comment:song:".length);
+        const lastColon = rest.lastIndexOf(":");
+        const secondLastColon = rest.lastIndexOf(":", lastColon - 1);
+        if (lastColon === -1 || secondLastColon === -1) return;
+        const titleArtistPart = rest.slice(0, secondLastColon);
+        const sepIdx = titleArtistPart.indexOf("::");
+        if (sepIdx === -1) return;
+        const titleKey = titleArtistPart.slice(0, sepIdx);
+        const artistKey = titleArtistPart.slice(sepIdx + 2);
+        const mapKey = `${titleKey}::${artistKey}`;
+        if (!songs[mapKey]) {
+            songs[mapKey] = { titleKey, artistKey, up: 0, down: 0, commentCount: 0 };
+        }
+        songs[mapKey].commentCount += 1;
+    });
+
+    const result = Object.values(songs)
+        .filter((s) => s.up + s.down + s.commentCount > 0)
+        .sort((a, b) => (b.up + b.down + b.commentCount) - (a.up + a.down + a.commentCount))
+        .slice(0, 100);
+
+    return json({ songs: result });
+}
+
 // Comments on journal/photo pages. Key is namespaced per page so listing a
 // page's comments is a cheap prefix scan, same pattern as suggestions.
 function commentKey(page, timestamp, id) {
@@ -393,6 +452,9 @@ export default {
             }
             if (url.pathname === "/rate-song" && request.method === "POST") {
                 return await handleRateSong(request, env);
+            }
+            if (url.pathname === "/rated-songs" && request.method === "GET") {
+                return await handleListRatedSongs(env);
             }
             if (url.pathname === "/comments" && request.method === "GET") {
                 return await handleListComments(request, env);

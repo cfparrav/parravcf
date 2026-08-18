@@ -1695,6 +1695,49 @@ form.new-comment button:hover {
     background: var(--accent);
 }
 
+.ranked-songs-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ranked-song-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    padding: 10px 12px;
+}
+
+.ranked-song-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+}
+
+.ranked-song-title {
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.ranked-song-artist {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.ranked-song-votes {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
 .song-rating {
     display: flex;
     align-items: center;

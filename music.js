@@ -248,5 +248,110 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    async function loadRankedSongs() {
+        const listEl = document.getElementById("ranked-songs-list");
+        if (!listEl) return;
+
+        try {
+            const res = await fetch(`${RATING_API_BASE}/rated-songs`);
+            const data = await res.json();
+            const entries = data.songs || [];
+            if (!entries.length) {
+                listEl.innerHTML = `<p class="suggest-empty">No songs ranked yet — be the first.</p>`;
+                return;
+            }
+
+            const bySongKey = new Map();
+            SONGS.forEach((s) => {
+                bySongKey.set(`${s.title.trim().toLowerCase()}::${s.artist.trim().toLowerCase()}`, s);
+            });
+
+            listEl.innerHTML = entries
+                .map((entry) => {
+                    const mapKey = `${entry.titleKey}::${entry.artistKey}`;
+                    const song = bySongKey.get(mapKey);
+                    const title = song ? song.title : entry.titleKey;
+                    const artist = song ? song.artist : entry.artistKey;
+                    const commentLabel = `${entry.commentCount} comment${entry.commentCount === 1 ? "" : "s"}`;
+                    return `
+                        <li class="ranked-song-item" data-title="${escapeHtml(title)}" data-artist="${escapeHtml(artist)}">
+                            <div class="ranked-song-head">
+                                <span class="ranked-song-title">${escapeHtml(title)}</span>
+                                <span class="ranked-song-artist">${escapeHtml(artist)}</span>
+                                <span class="ranked-song-votes">👍 ${entry.up} · 👎 ${entry.down}</span>
+                            </div>
+                            <button type="button" class="comments-toggle ranked-song-comments-toggle">💬 ${commentLabel}</button>
+                            <div class="suggestion-comments-body ranked-song-comments-body" hidden>
+                                <div class="suggestion-comments-list ranked-song-comments-list"></div>
+                                <form class="suggestion-comment-form ranked-song-comment-form">
+                                    <input type="text" class="rsc-name" placeholder="name (optional)">
+                                    <input type="text" class="rsc-msg" placeholder="say something about this song...">
+                                    <button type="submit">Post</button>
+                                </form>
+                            </div>
+                        </li>
+                    `;
+                })
+                .join("");
+
+            listEl.addEventListener("click", (e) => {
+                const toggle = e.target.closest(".ranked-song-comments-toggle");
+                if (!toggle) return;
+                const item = toggle.closest(".ranked-song-item");
+                const body = item.querySelector(".ranked-song-comments-body");
+                const innerList = item.querySelector(".ranked-song-comments-list");
+                const key = songCommentsKey(item.dataset.title, item.dataset.artist);
+                if (body.hasAttribute("hidden")) {
+                    body.removeAttribute("hidden");
+                    if (!innerList.dataset.loaded) {
+                        innerList.dataset.loaded = "1";
+                        loadSongComments(key, innerList);
+                    }
+                } else {
+                    body.setAttribute("hidden", "");
+                }
+            });
+
+            listEl.addEventListener("submit", async (e) => {
+                const form = e.target.closest(".ranked-song-comment-form");
+                if (!form) return;
+                e.preventDefault();
+                const item = form.closest(".ranked-song-item");
+                const nameInput = form.querySelector(".rsc-name");
+                const msgInput = form.querySelector(".rsc-msg");
+                const message = msgInput.value.trim();
+                if (!message) return;
+                const key = songCommentsKey(item.dataset.title, item.dataset.artist);
+                const submitBtn = form.querySelector("button");
+                submitBtn.disabled = true;
+                try {
+                    const res = await fetch(`${RATING_API_BASE}/comment`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ page: key, name: nameInput.value, message }),
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        const innerList = item.querySelector(".ranked-song-comments-list");
+                        appendSongComment(innerList, {
+                            name: (nameInput.value && nameInput.value.trim()) || "Anonymous",
+                            message,
+                            posted_at: new Date().toISOString(),
+                        });
+                        nameInput.value = "";
+                        msgInput.value = "";
+                    }
+                } catch {
+                    // silently ignore -- form stays filled so the visitor can retry
+                } finally {
+                    submitBtn.disabled = false;
+                }
+            });
+        } catch {
+            listEl.innerHTML = `<p class="suggest-empty">Couldn't load ranked songs right now.</p>`;
+        }
+    }
+
     renderPrompt();
+    loadRankedSongs();
 });
