@@ -352,6 +352,28 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function initRankedSongsToggle() {
+        const toggle = document.getElementById("ranked-songs-toggle");
+        const listEl = document.getElementById("ranked-songs-list");
+        if (!toggle || !listEl) return;
+
+        let loaded = false;
+
+        toggle.addEventListener("click", () => {
+            if (listEl.hasAttribute("hidden")) {
+                listEl.removeAttribute("hidden");
+                toggle.textContent = "💬 Hide ranked songs";
+                if (!loaded) {
+                    loaded = true;
+                    loadRankedSongs();
+                }
+            } else {
+                listEl.setAttribute("hidden", "");
+                toggle.textContent = "💬 Show ranked songs";
+            }
+        });
+    }
+
     renderPrompt();
-    loadRankedSongs();
+    initRankedSongsToggle();
 });

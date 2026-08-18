@@ -1389,16 +1389,6 @@ form.new-comment button:hover {
     color: var(--muted);
 }
 
-.genre-stats-artists {
-    margin: 10px 0 0;
-    font-size: 0.85rem;
-    color: var(--body-text);
-}
-
-.genre-stats-artists strong {
-    color: var(--ink);
-}
-
 .suggest-note {
     font-family: "Inter", sans-serif;
     font-size: 0.9rem;
