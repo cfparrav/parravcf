@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-src="../data/translations.json">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        (function () {
+            var t = localStorage.getItem("site-theme");
+            if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why am I here? — Carlos Parra</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Bitter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a class="wordmark" href="../index.html">parravcf<span>.</span></a>
+        <nav class="top-nav">
+            <a href="../index.html" data-i18n="nav.home">Home</a>
+            <a href="projects.html" data-i18n="nav.projects">Projects</a>
+            <a href="journal.html" data-i18n="nav.journal">Journal</a>
+            <a href="travel.html" data-i18n="nav.travel">Travel</a>
+            <a href="now.html" data-i18n="nav.now">About Me</a>
+            <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+            <button type="button" id="lang-toggle" class="lang-toggle">ES</button>
+        </div>
+    </header>
+
+    <header class="page-header">
+
+        <a class="back-link" href="../index.html">← Home</a>
+
+        <h1>Why am I here?</h1>
+
+    </header>
+
+    <main>
+
+        <article>
+
+            <p>Thanks for clicking. Now that you're here...</p>
+
+            <figure class="post-image">
+                <img src="../images/tic-tac-toe/sheinbaum-six-seven-meme.jpeg" alt="Mexican president Claudia Sheinbaum doing the '6 7' hand gesture meme at a podium in front of a Gobierno de México backdrop">
+                <p class="gallery-caption">You've been six sevened. Sorry, you can close this window now.</p>
+            </figure>
+
+            <p class="pull">A big part of the inspiration for this website came from a guy I met while traveling in Spain this past March. Check out his site: <a href="https://sam-molyneux.com" target="_blank" rel="noopener">sam-molyneux.com →</a></p>
+
+            <p>I'd like to thank everyone who inspired me to create this project so far.</p>
+
+            <p class="section-label">Special thanks</p>
+
+            <p><strong>To my family:</strong> Mi abuela (my biggest fan), Angie, Andrea, mis padres, tia Myriam, Ozzy, Alex, Melissa, Marifer, Tia Tonya, Tia Vania, Tio Mauro, Papa Mauro y Mama Maurilia...</p>
+
+            <p><strong>And my friends 🗣️:</strong> Sur Lokotes (Pepe, Richi, Leyva, Charlie, Tadeo, Aaron, Chicle, Chapo y Toño), Erick Antonio, Wicho, mis cuñadas (Poly, Alheli y Andrea), Daniel (rocka), Anthony, Jaime, JP (@jewtaco on ig), Nina & Rodri, Pees (Arath, Rony y Adra), my close friends from ig y todos los demas que me hacen fw...</p>
+
+            <p><strong>Random things that caused me inspiration worth mentioning:</strong></p>
+
+            <figure class="post-image">
+                <img src="../images/tic-tac-toe/golden-statue-guy.png" alt="A surreal golden bust caricature meme, commonly forwarded around WhatsApp and Facebook">
+            </figure>
+
+            <ul>
+                <li>Anthony Bourdain</li>
+                <li>Indio Agave</li>
+                <li>Los delorean en el london pub los Viernes y Sabados</li>
+                <li>2016 soundcloud rap scene</li>
+                <li>Age of Empires 2 sound effects</li>
+                <li>Costco's hotdog having the same price after all these years</li>
+                <li>El Pirata de Culiacan</li>
+                <li>Twitter in the early 2010s</li>
+                <li>Christopher Moltisanti</li>
+                <li>Tony Soprano driving his car crying while listening to the Chi Lites</li>
+                <li>David Lynch's future looks so bright video</li>
+                <li>Ariel Camacho</li>
+                <li>early 2000s Britney Spears</li>
+                <li>2019 Climahillo (his prime)</li>
+                <li>El Rabbanito</li>
+                <li>Jaimico y Pityn Toys</li>
+                <li>Los Pikadientes de Caborca</li>
+                <li>Rafa Nadal playing in clay</li>
+                <li>Alta Consigna Desde La Oficina Vol. 2</li>
+            </ul>
+
+            <p><strong>A few places I recommend in Hermosillo:</strong></p>
+
+            <ul>
+                <li>London Pub</li>
+                <li>Meltbros Burgers</li>
+                <li>Casa di Soto</li>
+                <li>La Zona Perdida</li>
+                <li>Goyo Cafe</li>
+                <li>Los Campeones Percherones</li>
+                <li>Los dogos del Chema Plus</li>
+            </ul>
+
+            <figure class="post-image">
+                <img src="../images/tic-tac-toe/clash-royale-king-laughing.jpeg" alt="The Clash Royale king emote, laughing with a crown">
+            </figure>
+
+            <p>Thank you!</p>
+
+            <p>And now, since you've made it this far... I'd like to invite you to play tic-tac-toe with me.</p>
+
+        </article>
+
+        <section class="ttt-section">
+
+            <p class="ttt-status" id="ttt-status">Your move.</p>
+
+            <div class="ttt-board" id="ttt-board">
+                <button type="button" class="ttt-cell" data-index="0" aria-label="Row 1, column 1"></button>
+                <button type="button" class="ttt-cell" data-index="1" aria-label="Row 1, column 2"></button>
+                <button type="button" class="ttt-cell" data-index="2" aria-label="Row 1, column 3"></button>
+                <button type="button" class="ttt-cell" data-index="3" aria-label="Row 2, column 1"></button>
+                <button type="button" class="ttt-cell" data-index="4" aria-label="Row 2, column 2"></button>
+                <button type="button" class="ttt-cell" data-index="5" aria-label="Row 2, column 3"></button>
+                <button type="button" class="ttt-cell" data-index="6" aria-label="Row 3, column 1"></button>
+                <button type="button" class="ttt-cell" data-index="7" aria-label="Row 3, column 2"></button>
+                <button type="button" class="ttt-cell" data-index="8" aria-label="Row 3, column 3"></button>
+            </div>
+
+            <button type="button" class="ttt-restart" id="ttt-restart">Play again</button>
+
+        </section>
+
+    </main>
+
+    <script src="../tic-tac-toe.js" defer></script>
+
+    <script src="../i18n.js" defer></script>
+    <script src="../theme.js" defer></script>
+
+</body>
+
+</html>
