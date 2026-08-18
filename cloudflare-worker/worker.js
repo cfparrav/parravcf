@@ -152,12 +152,19 @@ async function handleSuggest(request, env) {
     }
 
     // Log the suggestion so the site can display who suggested what.
+    // delete_token is a private capability -- returned once, here, to the
+    // submitter only. It's stripped from the public listing (see
+    // handleListSuggestions) so it lets the original submitter delete their
+    // own mistaken suggestion without needing the admin key, while nobody
+    // else can use it since they never see it.
     const record = {
         name: (name && name.trim()) || "Anonymous",
         track_name,
         track_artist,
         track_image: track_image || null,
+        track_uri,
         added_at: new Date().toISOString(),
+        delete_token: crypto.randomUUID(),
     };
     const key = `suggestion:${Date.now()}:${crypto.randomUUID()}`;
     await env.SUGGESTIONS.put(key, JSON.stringify(record));
@@ -171,7 +178,12 @@ async function handleListSuggestions(env) {
         list.keys.map(async (k) => {
             const val = await env.SUGGESTIONS.get(k.name);
             if (!val) return null;
-            return { key: k.name, ...JSON.parse(val) };
+            // Strip delete_token -- it must never be visible to anyone but
+            // the original submitter (who already has it from the /suggest
+            // response), otherwise anyone could use it to delete any
+            // suggestion.
+            const { delete_token, ...record } = JSON.parse(val);
+            return { key: k.name, ...record };
         })
     );
     const cleaned = records
@@ -182,14 +194,32 @@ async function handleListSuggestions(env) {
     return json({ suggestions: cleaned });
 }
 
-// Admin-only: delete a suggestion by its KV key. Requires the X-Admin-Key
-// header to match the ADMIN_KEY secret.
-async function handleDeleteSuggestion(request, env) {
-    const adminKey = request.headers.get("X-Admin-Key");
-    if (!adminKey || adminKey !== env.ADMIN_KEY) {
-        return json({ error: "unauthorized" }, 401);
+// Best-effort removal from the actual Spotify playlist. Failures here don't
+// block the KV delete -- worst case the site owner still cleans it up
+// manually in Spotify, same as before this existed.
+async function removeFromSpotifyPlaylist(env, trackUri) {
+    if (!trackUri) return;
+    try {
+        const userToken = await getUserAccessToken(env);
+        await fetch(`https://api.spotify.com/v1/playlists/${env.SPOTIFY_PLAYLIST_ID}/tracks`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${userToken}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ tracks: [{ uri: trackUri }] }),
+        });
+    } catch {
+        // Swallow -- see comment above.
     }
+}
 
+// Delete a suggestion by its KV key, and best-effort remove it from the
+// Spotify playlist too. Two ways to authorize:
+//   - X-Admin-Key header matching the ADMIN_KEY secret (deletes anything)
+//   - delete_token in the body matching the record's own token (lets the
+//     original submitter remove only their own suggestion)
+async function handleDeleteSuggestion(request, env) {
     let body;
     try {
         body = await request.json();
@@ -201,6 +231,22 @@ async function handleDeleteSuggestion(request, env) {
         return json({ error: "invalid key" }, 400);
     }
 
+    const adminKey = request.headers.get("X-Admin-Key");
+    const isAdmin = adminKey && adminKey === env.ADMIN_KEY;
+
+    const raw = await env.SUGGESTIONS.get(body.key);
+    if (!raw) {
+        return json({ error: "not found" }, 404);
+    }
+    const record = JSON.parse(raw);
+
+    if (!isAdmin) {
+        if (!body.delete_token || body.delete_token !== record.delete_token) {
+            return json({ error: "unauthorized" }, 401);
+        }
+    }
+
+    await removeFromSpotifyPlaylist(env, record.track_uri);
     await env.SUGGESTIONS.delete(body.key);
     return json({ success: true });
 }

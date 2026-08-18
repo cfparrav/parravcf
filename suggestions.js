@@ -34,6 +34,38 @@ document.addEventListener("DOMContentLoaded", () => {
         return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
     }
 
+    // Lets a visitor delete their own just-submitted suggestion (e.g. picked
+    // the wrong song) without needing the admin key. The server only accepts
+    // a delete_token that matches the one it handed back at submit time, so
+    // this only ever works for suggestions made from this browser.
+    const MY_SUGGESTIONS_KEY = "my-suggestions";
+
+    function getMySuggestions() {
+        try {
+            return JSON.parse(localStorage.getItem(MY_SUGGESTIONS_KEY) || "[]");
+        } catch {
+            return [];
+        }
+    }
+
+    function rememberMySuggestion(key, deleteToken) {
+        const mine = getMySuggestions();
+        mine.push({ key, delete_token: deleteToken });
+        localStorage.setItem(MY_SUGGESTIONS_KEY, JSON.stringify(mine));
+    }
+
+    function forgetMySuggestion(key) {
+        localStorage.setItem(
+            MY_SUGGESTIONS_KEY,
+            JSON.stringify(getMySuggestions().filter((m) => m.key !== key))
+        );
+    }
+
+    function myDeleteToken(key) {
+        const match = getMySuggestions().find((m) => m.key === key);
+        return match ? match.delete_token : null;
+    }
+
     async function fetchRating(title, artist) {
         try {
             const res = await fetch(`${API_BASE}/rating?title=${encodeURIComponent(title)}&artist=${encodeURIComponent(artist)}`);
@@ -146,6 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function suggestionItemHtml(s, adminKey) {
+        const canDelete = adminKey || myDeleteToken(s.key);
         return `
             <li class="suggestion-item" data-key="${s.key}">
                 <div class="suggestion-main">
@@ -154,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <strong>${s.track_name}</strong> — ${s.track_artist}<br>
                         <span class="suggest-by">suggested by ${s.name}</span>
                     </span>
-                    ${adminKey ? `<button type="button" class="suggest-delete" data-key="${s.key}">×</button>` : ""}
+                    ${canDelete ? `<button type="button" class="suggest-delete" data-key="${s.key}" title="${adminKey ? "Delete" : "Delete your suggestion"}">×</button>` : ""}
                 </div>
                 <div class="suggestion-rating">
                     <button type="button" class="suggestion-rate-up" title="I like this one">👍</button>
@@ -205,20 +238,25 @@ document.addEventListener("DOMContentLoaded", () => {
         if (deleteBtn) {
             deleteBtn.addEventListener("click", async () => {
                 const key = deleteBtn.getAttribute("data-key");
+                const headers = { "Content-Type": "application/json" };
+                const body = { key };
+                if (adminKey) {
+                    headers["X-Admin-Key"] = adminKey;
+                } else {
+                    body.delete_token = myDeleteToken(key);
+                }
                 try {
                     const res = await fetch(`${API_BASE}/suggestions`, {
                         method: "DELETE",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Admin-Key": adminKey,
-                        },
-                        body: JSON.stringify({ key }),
+                        headers,
+                        body: JSON.stringify(body),
                     });
                     const data = await res.json();
                     if (data.success) {
                         li.remove();
+                        forgetMySuggestion(key);
                     } else {
-                        alert("Delete failed — wrong admin key?");
+                        alert(adminKey ? "Delete failed — wrong admin key?" : "Delete failed.");
                     }
                 } catch {
                     alert("Delete failed.");
@@ -305,6 +343,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     selectedTrack = null;
                     selectedEl.innerHTML = "";
                     nameInput.value = "";
+
+                    if (data.delete_token) {
+                        rememberMySuggestion(data.key, data.delete_token);
+                    }
 
                     // Insert locally instead of re-fetching -- see the comment
                     // note above about KV's eventual consistency.
