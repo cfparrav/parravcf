@@ -2,7 +2,7 @@
 // Click the overlay, hit Escape, or press the close button to dismiss.
 
 document.addEventListener("DOMContentLoaded", () => {
-    const thumbs = document.querySelectorAll(".meme-gallery img, .gallery-item img");
+    const thumbs = document.querySelectorAll(".gallery-item img");
     if (!thumbs.length) return;
 
     const overlay = document.createElement("div");

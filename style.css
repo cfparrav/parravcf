@@ -885,28 +885,31 @@ nav a:focus-visible,
     max-width: var(--max-width);
 }
 
+.now-item-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 6px;
+}
+
 .now-label {
     font-family: var(--font-accent);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: var(--muted);
-    margin: 0 0 6px;
+    margin: 0;
 }
 
 .now-item p:not(.now-label) {
     margin: 0;
 }
 
-.inline-logo {
-    float: left;
-    width: 30px;
-    height: 30px;
+.now-icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
     object-fit: contain;
-    margin: 2px 10px 4px 0;
-}
-
-.icon-glyph {
     color: var(--ink);
 }
 
@@ -1597,37 +1600,6 @@ form.new-comment button:hover {
 .song-rating-counts {
     font-size: 0.85rem;
     color: var(--muted);
-}
-
-.meme-gallery {
-    list-style: none;
-    padding: 0;
-    margin: var(--space-md) 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 14px;
-}
-
-.meme-gallery li {
-    border: 1px solid var(--line);
-    background: var(--paper);
-    padding: 6px;
-}
-
-.meme-gallery li:nth-child(odd) {
-    transform: rotate(-0.4deg);
-}
-
-.meme-gallery li:nth-child(even) {
-    transform: rotate(0.4deg);
-}
-
-.meme-gallery img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    display: block;
-    cursor: zoom-in;
 }
 
 .gallery-item img {
