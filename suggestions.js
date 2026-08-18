@@ -34,6 +34,30 @@ document.addEventListener("DOMContentLoaded", () => {
         return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
     }
 
+    async function fetchRating(title, artist) {
+        try {
+            const res = await fetch(`${API_BASE}/rating?title=${encodeURIComponent(title)}&artist=${encodeURIComponent(artist)}`);
+            if (!res.ok) return { up: 0, down: 0 };
+            return await res.json();
+        } catch {
+            return { up: 0, down: 0 };
+        }
+    }
+
+    async function submitRating(title, artist, rating) {
+        try {
+            const res = await fetch(`${API_BASE}/rate-song`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title, artist, rating }),
+            });
+            if (!res.ok) return null;
+            return await res.json();
+        } catch {
+            return null;
+        }
+    }
+
     // Appends locally rather than re-fetching -- KV writes take a few seconds
     // to become visible to reads, so a re-fetch right after posting often
     // shows the comment as missing even though it saved.
@@ -132,6 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     </span>
                     ${adminKey ? `<button type="button" class="suggest-delete" data-key="${s.key}">×</button>` : ""}
                 </div>
+                <div class="suggestion-rating">
+                    <button type="button" class="suggestion-rate-up" title="I like this one">👍</button>
+                    <button type="button" class="suggestion-rate-down" title="Not for me">👎</button>
+                    <span class="suggestion-rating-counts"></span>
+                </div>
                 <div class="suggestion-comments">
                     <button type="button" class="comments-toggle" data-key="${s.key}">💬 comments</button>
                     <div class="suggestion-comments-body" hidden>
@@ -146,9 +175,32 @@ document.addEventListener("DOMContentLoaded", () => {
             </li>`;
     }
 
-    // Wires up delete/comments behavior for a single suggestion <li>. Used both
-    // for the initial batch render and for a freshly-inserted optimistic item.
-    function wireSuggestionItem(li, adminKey) {
+    // Wires up rating/delete/comments behavior for a single suggestion <li>.
+    // Used both for the initial batch render and for a freshly-inserted
+    // optimistic item.
+    function wireSuggestionItem(li, adminKey, s) {
+        const upBtn = li.querySelector(".suggestion-rate-up");
+        const downBtn = li.querySelector(".suggestion-rate-down");
+        const countsEl = li.querySelector(".suggestion-rating-counts");
+        let voted = false;
+
+        fetchRating(s.track_name, s.track_artist).then((counts) => {
+            countsEl.textContent = `👍 ${counts.up} · 👎 ${counts.down}`;
+        });
+
+        function castVote(rating) {
+            if (voted) return;
+            voted = true;
+            upBtn.disabled = true;
+            downBtn.disabled = true;
+            submitRating(s.track_name, s.track_artist, rating).then((counts) => {
+                if (counts) countsEl.textContent = `👍 ${counts.up} · 👎 ${counts.down}`;
+            });
+        }
+
+        upBtn.addEventListener("click", () => castVote("up"));
+        downBtn.addEventListener("click", () => castVote("down"));
+
         const deleteBtn = li.querySelector(".suggest-delete");
         if (deleteBtn) {
             deleteBtn.addEventListener("click", async () => {
@@ -261,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (emptyMsg) listEl.innerHTML = "";
                         const adminKey = localStorage.getItem("admin-key");
                         listEl.insertAdjacentHTML("afterbegin", suggestionItemHtml(data, adminKey));
-                        wireSuggestionItem(listEl.firstElementChild, adminKey);
+                        wireSuggestionItem(listEl.firstElementChild, adminKey, data);
                     }
                 } else {
                     statusEl.textContent = "Something went wrong — try again?";
@@ -284,7 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
             listEl.innerHTML = suggestions.map((s) => suggestionItemHtml(s, adminKey)).join("");
-            listEl.querySelectorAll(".suggestion-item").forEach((li) => wireSuggestionItem(li, adminKey));
+            listEl.querySelectorAll(".suggestion-item").forEach((li, i) => wireSuggestionItem(li, adminKey, suggestions[i]));
         } catch {
             listEl.innerHTML = "";
         }

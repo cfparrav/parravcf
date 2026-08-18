@@ -1426,6 +1426,37 @@ form.new-comment button:hover {
     border-color: var(--accent);
 }
 
+.suggestion-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.suggestion-rating button {
+    font-size: 0.9rem;
+    background: none;
+    border: 1px solid var(--line);
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    border-radius: 0;
+}
+
+.suggestion-rating button:hover:not(:disabled) {
+    border-color: var(--accent);
+}
+
+.suggestion-rating button:disabled {
+    cursor: default;
+    opacity: 0.6;
+}
+
+.suggestion-rating-counts {
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
 .comments-toggle {
     align-self: flex-start;
     font-family: "Inter", sans-serif;
