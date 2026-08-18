@@ -595,6 +595,25 @@ nav a:focus-visible,
     outline-offset: 4px;
 }
 
+.song-actions .get-song-btn {
+    display: inline-block;
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--bg);
+    background: var(--ink);
+    border: none;
+    border-bottom: none;
+    padding: 12px 28px;
+    cursor: pointer;
+}
+
+.song-actions .get-song-btn:hover,
+.song-actions .get-song-btn:focus-visible {
+    color: var(--bg);
+    background: var(--accent);
+}
+
 .why {
     margin-top: var(--space-md);
     padding-top: var(--space-md);
@@ -1368,6 +1387,16 @@ form.new-comment button:hover {
     margin: 12px 0 0;
     font-size: 0.8rem;
     color: var(--muted);
+}
+
+.genre-stats-artists {
+    margin: 10px 0 0;
+    font-size: 0.85rem;
+    color: var(--body-text);
+}
+
+.genre-stats-artists strong {
+    color: var(--ink);
 }
 
 .suggest-note {

@@ -18,9 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderPrompt() {
         card.innerHTML = `
-            <p class="song-prompt">What should I listen to?</p>
+            <p class="song-prompt">Want a random song from my likes?</p>
             <div class="song-actions">
-                <button type="button" id="get-song">Give me a song</button>
+                <button type="button" id="get-song" class="get-song-btn">Give me a song</button>
             </div>
         `;
         document.getElementById("get-song").addEventListener("click", () => {
