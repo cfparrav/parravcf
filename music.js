@@ -1,19 +1,75 @@
 const RATING_API_BASE = "https://cfparrav-song-suggestions.carlitosfer6.workers.dev";
 
+// Same broad-genre grouping used for the "What's in my likes" stats, reused
+// here so the filter dropdown can narrow the random pick to one of them.
+const GENRE_BUCKETS = {
+    "Hip Hop": ["Cloud Rap", "Rap", "Rage Rap", "Experimental Hip Hop", "Chicago Drill", "Melodic Rap", "Trap",
+        "Drill", "Alternative Hip Hop", "Southern Hip Hop", "Underground Hip Hop", "Hip Hop", "Jazz Rap", "Emo Rap",
+        "East Coast Hip Hop", "Crunk", "West Coast Hip Hop", "Boom Bap", "Old School Hip Hop", "Gangster Rap",
+        "Horrorcore", "Brooklyn Drill", "New York Drill", "Argentine Trap", "Trap Latino", "Mexican Hip Hop",
+        "Hyphy", "G-Funk", "New Orleans Bounce", "Latin Hip Hop", "Sexy Drill", "Trap Soul", "Afroswing", "Alté",
+        "Brazilian Hip Hop", "Brazilian Trap", "Bounce", "Grime", "Uk Grime", "Rap Rock", "Rap Metal", "Trap Metal",
+        "Jersey Club"],
+    "Rock": ["Shoegaze", "Post-Grunge", "Rock", "Alternative Rock", "Classic Rock", "Grunge", "Funk Rock",
+        "New Wave", "Art Rock", "Glam Rock", "Hard Rock", "Jangle Pop", "Psychedelic Rock", "Soft Rock", "Math Rock",
+        "Indie Rock", "Neo-Psychedelic", "Progressive Rock", "Space Rock", "Stoner Rock", "Britpop", "Latin Rock",
+        "Folk Rock", "Southern Rock", "Garage Rock", "Gothic Rock", "Industrial Rock", "Celtic Rock", "Reggae Rock",
+        "Acid Rock", "Blues Rock", "Christian Rock", "Christian Alternative Rock", "Argentine Rock",
+        "Country Rock", "Mexican Rock", "Surf Rock", "Yacht Rock", "Madchester", "Aor", "Indie", "Rock En Español"],
+    "Metal": ["Alternative Metal", "Nu Metal", "Metal", "Glam Metal", "Sludge Metal", "Stoner Metal",
+        "Progressive Metal", "Thrash Metal", "Groove Metal", "Metalcore", "Black Metal", "Heavy Metal", "Folk Metal",
+        "Doom Metal", "Industrial Metal", "Melodic Death Metal", "Mathcore", "Djent"],
+    "Punk / Emo": ["Post-Hardcore", "Pop Punk", "Hardcore Punk", "Hardcore", "Punk", "Screamo",
+        "Skate Punk", "Folk Punk", "Indie Punk", "Egg Punk", "Horror Punk", "Riot Grrrl", "Psychobilly", "Proto-Punk",
+        "Emo", "Midwest Emo", "Melodic Hardcore", "Slowcore"],
+    "Electronic": ["Darkwave", "Witch House", "Electroclash", "New Rave", "Plunderphonics", "Idm",
+        "Alternative Dance", "Trance", "Eurodance", "Indie Electronic", "French House", "Electronic", "Electro",
+        "Big Beat", "Electronica", "Hard House", "House", "Uk Garage", "Progressive House", "Downtempo", "Ambient",
+        "Electro House", "Edm", "Glitch", "Electrocumbia", "Vaporwave", "Chillwave", "Synthpop", "Cold Wave",
+        "Trip Hop", "Hyperpop"],
+    "Pop": ["Dream Pop", "New Wave", "Art Pop", "Baroque Pop", "Synthpop", "Power Pop", "Bubblegum Pop",
+        "Acoustic Pop", "Soft Pop", "Europop", "Latin Pop", "German Pop", "German Indie Pop", "Dansk Pop", "Pop",
+        "Flamenco Pop"],
+    "R&B / Soul": ["Classic Soul", "Motown", "R&B", "Philly Soul", "Alternative R&B", "Neo Soul", "Indie Soul",
+        "New Jack Swing", "Quiet Storm", "Soul", "Northern Soul"],
+    "Latin": ["Neoperreo", "Rock En Español", "Corrido", "Mexican Rock", "Mexican Indie", "Corridos Tumbados",
+        "Norteño", "Reggaeton Mexa", "Trap Latino", "Corridos Bélicos", "Latin Pop", "Mexican Hip Hop", "Bolero",
+        "Cumbia", "Cumbia Norteña", "Reggaeton", "Latin", "Banda", "Ranchera", "Tejano", "Flamenco", "Flamenco Urbano",
+        "Argentine Trap", "Latin Indie", "Latin Alternative"],
+    "Reggae": ["Reggae", "Reggae Rock", "Rocksteady", "Dancehall", "Ragga"],
+    "Folk / Country": ["Anti-Folk", "Singer-Songwriter", "Folk Rock", "Alt Country", "Country", "Folk", "Neofolk",
+        "Indie Folk", "Pop Country", "Red Dirt", "Texas Country"],
+    "Jazz": ["Jazz Rap", "Brazilian Jazz", "Acid Jazz", "Jazz Fusion", "French Jazz", "Ethiopian Jazz", "Jazz Funk"],
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     const card = document.getElementById("song-card");
     if (!card || typeof SONGS === "undefined" || SONGS.length === 0) return;
 
-    let lastIndex = -1;
+    function getSelectedGenre() {
+        const select = document.getElementById("genre-filter");
+        return select ? select.value : "any";
+    }
 
-    function pickSong() {
-        if (SONGS.length === 1) return SONGS[0];
-        let index;
+    function songMatchesGenre(song, genre) {
+        if (!genre || genre === "any") return true;
+        const tags = GENRE_BUCKETS[genre];
+        if (!tags) return true;
+        return !!(song.tags && song.tags.some((t) => tags.includes(t)));
+    }
+
+    let lastSong = null;
+
+    function pickSong(genre) {
+        const pool = genre && genre !== "any" ? SONGS.filter((s) => songMatchesGenre(s, genre)) : SONGS;
+        if (pool.length === 0) return null;
+        if (pool.length === 1) return pool[0];
+        let song;
         do {
-            index = Math.floor(Math.random() * SONGS.length);
-        } while (index === lastIndex);
-        lastIndex = index;
-        return SONGS[index];
+            song = pool[Math.floor(Math.random() * pool.length)];
+        } while (song === lastSong);
+        lastSong = song;
+        return song;
     }
 
     function renderPrompt() {
@@ -24,7 +80,18 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
         document.getElementById("get-song").addEventListener("click", () => {
-            renderSong(pickSong());
+            const song = pickSong(getSelectedGenre());
+            if (song) {
+                renderSong(song);
+            } else {
+                card.innerHTML = `
+                    <p class="song-prompt">No songs in that genre yet — try another one.</p>
+                    <div class="song-actions">
+                        <button type="button" id="get-song" class="get-song-btn">Give me a song</button>
+                    </div>
+                `;
+                document.getElementById("get-song").addEventListener("click", () => renderPrompt());
+            }
         });
     }
 
@@ -163,7 +230,8 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
 
         document.getElementById("another-song").addEventListener("click", () => {
-            renderSong(pickSong());
+            const next = pickSong(getSelectedGenre());
+            if (next) renderSong(next);
         });
 
         // Fill in artwork once it arrives, without blocking the rest of the card.
