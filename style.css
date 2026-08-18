@@ -1725,6 +1725,10 @@ form.new-comment button:hover {
     gap: 10px;
 }
 
+.ranked-songs-list[hidden] {
+    display: none;
+}
+
 .ranked-song-item {
     display: flex;
     flex-direction: column;
