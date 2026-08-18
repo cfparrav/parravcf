@@ -907,6 +907,13 @@ nav a:focus-visible,
     flex-shrink: 0;
 }
 
+.spotify-icon {
+    width: 16px;
+    height: 16px;
+    vertical-align: -3px;
+    margin-right: 6px;
+}
+
 .contact-item a:hover .contact-icon {
     color: var(--accent);
 }

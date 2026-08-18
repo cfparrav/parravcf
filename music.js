@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span id="song-rating-counts" class="song-rating-counts"></span>
             </div>
             <div class="song-actions">
-                <a href="https://open.spotify.com/search/${encodeURIComponent(song.title + " " + song.artist)}" target="_blank" rel="noopener">Listen →</a>
+                <a href="https://open.spotify.com/search/${encodeURIComponent(song.title + " " + song.artist)}" target="_blank" rel="noopener"><img src="../images/spotify-icon.png" alt="" class="spotify-icon">Listen →</a>
                 <button type="button" id="another-song">Another one</button>
             </div>
             <div class="suggestion-comments">
