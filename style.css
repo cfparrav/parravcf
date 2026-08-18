@@ -211,6 +211,14 @@ a:hover {
     margin-top: var(--space-md);
 }
 
+.home-header h1 {
+    margin-bottom: 4px;
+}
+
+.home-header .intro {
+    margin-top: 60px;
+}
+
 header {
     margin-bottom: var(--space-xl);
 }
@@ -378,7 +386,7 @@ nav a:focus-visible,
     margin-top: 10px;
     line-height: 2.2;
     font-family: "Inter", sans-serif;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
 }
 
 .site-links a {
@@ -526,7 +534,13 @@ nav a:focus-visible,
 .why p:first-child {
     margin-bottom: 6px;
     font-family: "Bitter", Georgia, serif;
-    font-size: 0.95rem;
+    font-size: 1.15rem;
+}
+
+.corner p:first-child {
+    margin-bottom: 6px;
+    font-family: "Bitter", Georgia, serif;
+    font-size: 1.15rem;
 }
 
 .hero-image {
