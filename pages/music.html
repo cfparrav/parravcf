@@ -17,7 +17,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://parravcf.vercel.app/pages/music.html">
     <meta property="og:title" content="Song Swap — Carlos Parra">
-    <meta property="og:description" content="About 1700 songs from my Spotify likes, picked one at a time at random. Suggest your own too.">
+    <meta property="og:description" content="My whole Spotify likes library, about 1,700 songs. Grab one at random and leave me a recommendation back.">
     <meta property="og:image" content="https://parravcf.vercel.app/images/hero/carlos-8bit.png">
     <meta name="twitter:card" content="summary_large_image">
 
@@ -55,12 +55,44 @@
         <h1 data-i18n="music.h1">Song Swap</h1>
 
         <p class="intro" data-i18n="music.intro">
-            Imported from my likes library. Around 1700 random songs, that I added with time. Some of them I don't listen that much... one reason I made this is because Spotify kept playing the same songs whenever I clicked the shuffle button on my likes.
+            This is a small tool with my whole Spotify likes library imported into it, about 1,700 songs. Grab one at random from what I actually listen to, then leave me a recommendation of your own. That's the swap.
         </p>
 
         <p class="intro" data-i18n="music.intro2">
-            Don't be afraid to share what you like to listen too. Use the suggestion section and if you'd like to listen to what others recommend you can click on the playlist link below.
+            Not interested in my likes? No problem, just skip straight to the suggestion section below and send me something you think I'd be into.
         </p>
+
+        <div class="genre-stats reveal">
+            <p class="suggest-label">What's in my likes</p>
+            <ul class="genre-bar-list">
+                <li class="genre-bar-row">
+                    <span class="genre-bar-label">Hip Hop</span>
+                    <span class="genre-bar-track"><span class="genre-bar-fill" style="width: 45%"></span></span>
+                    <span class="genre-bar-pct">45%</span>
+                </li>
+                <li class="genre-bar-row">
+                    <span class="genre-bar-label">Rock</span>
+                    <span class="genre-bar-track"><span class="genre-bar-fill" style="width: 33%"></span></span>
+                    <span class="genre-bar-pct">33%</span>
+                </li>
+                <li class="genre-bar-row">
+                    <span class="genre-bar-label">Punk / Emo</span>
+                    <span class="genre-bar-track"><span class="genre-bar-fill" style="width: 15%"></span></span>
+                    <span class="genre-bar-pct">15%</span>
+                </li>
+                <li class="genre-bar-row">
+                    <span class="genre-bar-label">Metal</span>
+                    <span class="genre-bar-track"><span class="genre-bar-fill" style="width: 14%"></span></span>
+                    <span class="genre-bar-pct">14%</span>
+                </li>
+                <li class="genre-bar-row">
+                    <span class="genre-bar-label">Pop</span>
+                    <span class="genre-bar-track"><span class="genre-bar-fill" style="width: 9%"></span></span>
+                    <span class="genre-bar-pct">9%</span>
+                </li>
+            </ul>
+            <p class="genre-stats-note">Based on Spotify's own genre tags across the ~1,700 songs (about 78% of them are tagged). Genres overlap a lot, so these won't add up to 100%.</p>
+        </div>
 
         <figure class="post-image">
             <img src="../images/music/penguin-listening-headphones.gif" alt="Claymation penguin sitting by a toy record player, listening with headphones">
@@ -76,7 +108,7 @@
 
         <section class="suggest-section reveal">
             <p class="suggest-label">Suggest a song</p>
-            <p class="suggest-note" id="suggest-status">Search for a song, confirm it's the right one, then send it my way. Confirmed songs get added straight to my playlist.</p>
+            <p class="suggest-note" id="suggest-status">Think of a song you just listened to, one that matches the vibe of what you got from my likes, or just something you think I'd like. Search for it below, confirm it's the right one, then send it my way. Confirmed songs get added straight to my playlist.</p>
             <p class="playlist-link"><a href="https://open.spotify.com/playlist/5RtJXPeFsVEqWzCp5kPwbd" target="_blank" rel="noopener"><img src="../images/spotify-icon.png" alt="" class="spotify-icon"><span data-i18n="music.playlist_link">Listen to the playlist on Spotify →</span></a></p>
 
             <input type="text" id="suggest-search" placeholder="Search a song or artist...">
