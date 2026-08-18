@@ -877,6 +877,20 @@ nav a:focus-visible,
     margin: 0;
 }
 
+.post-tag {
+    display: inline-block;
+    font-family: var(--font-accent);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 2px 8px;
+    margin-left: 6px;
+    background: var(--paper);
+    vertical-align: middle;
+}
+
 .journal-entry h2,
 .photo-entry h2 {
     margin-top: 15px;
