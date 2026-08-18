@@ -43,6 +43,21 @@ document.addEventListener("DOMContentLoaded", () => {
             .join("");
     }
 
+    // Appends locally rather than re-fetching from the backend -- KV writes
+    // take a few seconds to become visible to reads, so a re-fetch right
+    // after posting often shows the comment as missing even though it saved.
+    function appendComment(comment) {
+        if (!listEl) return;
+        listEl.insertAdjacentHTML(
+            "beforeend",
+            `<div class="comment">
+                <span class="who">${escapeHtml(comment.name)}</span>
+                <span class="when">${formatWhen(comment.posted_at)}</span>
+                <p>${escapeHtml(comment.message)}</p>
+            </div>`
+        );
+    }
+
     async function loadComments() {
         if (!listEl) return;
         try {
@@ -76,9 +91,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = await res.json();
                 if (data.success) {
                     if (statusEl) statusEl.textContent = "Posted. Thanks!";
+                    appendComment({
+                        name: (nameInput.value && nameInput.value.trim()) || "Anonymous",
+                        message,
+                        posted_at: new Date().toISOString(),
+                    });
                     nameInput.value = "";
                     msgInput.value = "";
-                    loadComments();
                 } else if (statusEl) {
                     statusEl.textContent = "Something went wrong — try again?";
                 }

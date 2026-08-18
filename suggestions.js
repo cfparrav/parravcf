@@ -34,6 +34,21 @@ document.addEventListener("DOMContentLoaded", () => {
         return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
     }
 
+    // Appends locally rather than re-fetching -- KV writes take a few seconds
+    // to become visible to reads, so a re-fetch right after posting often
+    // shows the comment as missing even though it saved.
+    function appendItemComment(listInner, comment) {
+        if (listInner.querySelector(".suggest-empty")) listInner.innerHTML = "";
+        listInner.insertAdjacentHTML(
+            "beforeend",
+            `<div class="comment">
+                <span class="who">${escapeHtml(comment.name)}</span>
+                <span class="when">${formatWhen(comment.posted_at)}</span>
+                <p>${escapeHtml(comment.message)}</p>
+            </div>`
+        );
+    }
+
     async function loadItemComments(key, listInner) {
         try {
             const res = await fetch(`${API_BASE}/comments?page=${encodeURIComponent(key)}`);
@@ -106,6 +121,112 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 350);
     });
 
+    function suggestionItemHtml(s, adminKey) {
+        return `
+            <li class="suggestion-item" data-key="${s.key}">
+                <div class="suggestion-main">
+                    ${s.track_image ? `<img src="${s.track_image}" alt="">` : ""}
+                    <span>
+                        <strong>${s.track_name}</strong> — ${s.track_artist}<br>
+                        <span class="suggest-by">suggested by ${s.name}</span>
+                    </span>
+                    ${adminKey ? `<button type="button" class="suggest-delete" data-key="${s.key}">×</button>` : ""}
+                </div>
+                <div class="suggestion-comments">
+                    <button type="button" class="comments-toggle" data-key="${s.key}">💬 comments</button>
+                    <div class="suggestion-comments-body" hidden>
+                        <div class="suggestion-comments-list"></div>
+                        <form class="suggestion-comment-form" data-key="${s.key}">
+                            <input type="text" class="sc-name" placeholder="name (optional)">
+                            <input type="text" class="sc-msg" placeholder="say something about this pick...">
+                            <button type="submit">Post</button>
+                        </form>
+                    </div>
+                </div>
+            </li>`;
+    }
+
+    // Wires up delete/comments behavior for a single suggestion <li>. Used both
+    // for the initial batch render and for a freshly-inserted optimistic item.
+    function wireSuggestionItem(li, adminKey) {
+        const deleteBtn = li.querySelector(".suggest-delete");
+        if (deleteBtn) {
+            deleteBtn.addEventListener("click", async () => {
+                const key = deleteBtn.getAttribute("data-key");
+                try {
+                    const res = await fetch(`${API_BASE}/suggestions`, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Admin-Key": adminKey,
+                        },
+                        body: JSON.stringify({ key }),
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        li.remove();
+                    } else {
+                        alert("Delete failed — wrong admin key?");
+                    }
+                } catch {
+                    alert("Delete failed.");
+                }
+            });
+        }
+
+        const toggle = li.querySelector(".comments-toggle");
+        toggle.addEventListener("click", () => {
+            const body = toggle.nextElementSibling;
+            const listInner = body.querySelector(".suggestion-comments-list");
+            if (body.hasAttribute("hidden")) {
+                body.removeAttribute("hidden");
+                toggle.textContent = "💬 hide comments";
+                if (!listInner.dataset.loaded) {
+                    listInner.dataset.loaded = "1";
+                    loadItemComments(toggle.getAttribute("data-key"), listInner);
+                }
+            } else {
+                body.setAttribute("hidden", "");
+                toggle.textContent = "💬 comments";
+            }
+        });
+
+        const commentForm = li.querySelector(".suggestion-comment-form");
+        commentForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const key = commentForm.getAttribute("data-key");
+            const scNameInput = commentForm.querySelector(".sc-name");
+            const scMsgInput = commentForm.querySelector(".sc-msg");
+            const message = scMsgInput.value.trim();
+            if (!message) return;
+
+            const submitBtn = commentForm.querySelector("button");
+            submitBtn.disabled = true;
+            try {
+                const res = await fetch(`${API_BASE}/comment`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ page: key, name: scNameInput.value, message }),
+                });
+                const data = await res.json();
+                if (data.success) {
+                    const listInner = commentForm.closest(".suggestion-comments-body").querySelector(".suggestion-comments-list");
+                    appendItemComment(listInner, {
+                        name: (scNameInput.value && scNameInput.value.trim()) || "Anonymous",
+                        message,
+                        posted_at: new Date().toISOString(),
+                    });
+                    scNameInput.value = "";
+                    scMsgInput.value = "";
+                }
+            } catch {
+                // silently ignore — the form stays filled so the visitor can retry
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+    }
+
     if (form) {
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -132,7 +253,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     selectedTrack = null;
                     selectedEl.innerHTML = "";
                     nameInput.value = "";
-                    loadSuggestions();
+
+                    // Insert locally instead of re-fetching -- see the comment
+                    // note above about KV's eventual consistency.
+                    if (listEl) {
+                        const emptyMsg = listEl.querySelector(".suggest-empty");
+                        if (emptyMsg) listEl.innerHTML = "";
+                        const adminKey = localStorage.getItem("admin-key");
+                        listEl.insertAdjacentHTML("afterbegin", suggestionItemHtml(data, adminKey));
+                        wireSuggestionItem(listEl.firstElementChild, adminKey);
+                    }
                 } else {
                     statusEl.textContent = "Something went wrong — try again?";
                 }
@@ -153,108 +283,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 listEl.innerHTML = "<p class=\"suggest-empty\">No suggestions yet — be the first.</p>";
                 return;
             }
-            listEl.innerHTML = suggestions
-                .map(
-                    (s) => `
-                    <li class="suggestion-item">
-                        <div class="suggestion-main">
-                            ${s.track_image ? `<img src="${s.track_image}" alt="">` : ""}
-                            <span>
-                                <strong>${s.track_name}</strong> — ${s.track_artist}<br>
-                                <span class="suggest-by">suggested by ${s.name}</span>
-                            </span>
-                            ${adminKey ? `<button type="button" class="suggest-delete" data-key="${s.key}">×</button>` : ""}
-                        </div>
-                        <div class="suggestion-comments">
-                            <button type="button" class="comments-toggle" data-key="${s.key}">💬 comments</button>
-                            <div class="suggestion-comments-body" hidden>
-                                <div class="suggestion-comments-list"></div>
-                                <form class="suggestion-comment-form" data-key="${s.key}">
-                                    <input type="text" class="sc-name" placeholder="name (optional)">
-                                    <input type="text" class="sc-msg" placeholder="say something about this pick...">
-                                    <button type="submit">Post</button>
-                                </form>
-                            </div>
-                        </div>
-                    </li>`
-                )
-                .join("");
-
-            if (adminKey) {
-                listEl.querySelectorAll(".suggest-delete").forEach((btn) => {
-                    btn.addEventListener("click", async () => {
-                        const key = btn.getAttribute("data-key");
-                        try {
-                            const res = await fetch(`${API_BASE}/suggestions`, {
-                                method: "DELETE",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                    "X-Admin-Key": adminKey,
-                                },
-                                body: JSON.stringify({ key }),
-                            });
-                            const data = await res.json();
-                            if (data.success) {
-                                loadSuggestions();
-                            } else {
-                                alert("Delete failed — wrong admin key?");
-                            }
-                        } catch {
-                            alert("Delete failed.");
-                        }
-                    });
-                });
-            }
-
-            listEl.querySelectorAll(".comments-toggle").forEach((btn) => {
-                btn.addEventListener("click", () => {
-                    const body = btn.nextElementSibling;
-                    const listInner = body.querySelector(".suggestion-comments-list");
-                    if (body.hasAttribute("hidden")) {
-                        body.removeAttribute("hidden");
-                        btn.textContent = "💬 hide comments";
-                        if (!listInner.dataset.loaded) {
-                            listInner.dataset.loaded = "1";
-                            loadItemComments(btn.getAttribute("data-key"), listInner);
-                        }
-                    } else {
-                        body.setAttribute("hidden", "");
-                        btn.textContent = "💬 comments";
-                    }
-                });
-            });
-
-            listEl.querySelectorAll(".suggestion-comment-form").forEach((form) => {
-                form.addEventListener("submit", async (e) => {
-                    e.preventDefault();
-                    const key = form.getAttribute("data-key");
-                    const nameInput = form.querySelector(".sc-name");
-                    const msgInput = form.querySelector(".sc-msg");
-                    const message = msgInput.value.trim();
-                    if (!message) return;
-
-                    const submitBtn = form.querySelector("button");
-                    submitBtn.disabled = true;
-                    try {
-                        const res = await fetch(`${API_BASE}/comment`, {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ page: key, name: nameInput.value, message }),
-                        });
-                        const data = await res.json();
-                        if (data.success) {
-                            nameInput.value = "";
-                            msgInput.value = "";
-                            const listInner = form.closest(".suggestion-comments-body").querySelector(".suggestion-comments-list");
-                            loadItemComments(key, listInner);
-                        }
-                    } catch {
-                        // silently ignore — the form stays filled so the visitor can retry
-                    } finally {
-                        submitBtn.disabled = false;
-                    }
-                });
-            });
+            listEl.innerHTML = suggestions.map((s) => suggestionItemHtml(s, adminKey)).join("");
+            listEl.querySelectorAll(".suggestion-item").forEach((li) => wireSuggestionItem(li, adminKey));
         } catch {
             listEl.innerHTML = "";
         }

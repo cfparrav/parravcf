@@ -162,7 +162,7 @@ async function handleSuggest(request, env) {
     const key = `suggestion:${Date.now()}:${crypto.randomUUID()}`;
     await env.SUGGESTIONS.put(key, JSON.stringify(record));
 
-    return json({ success: true });
+    return json({ success: true, key, ...record });
 }
 
 async function handleListSuggestions(env) {
