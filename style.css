@@ -1586,6 +1586,13 @@ form.new-comment button:hover {
     color: var(--muted);
 }
 
+.suggest-count {
+    font-family: "Inter", sans-serif;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0 0 16px;
+}
+
 .admin-toggle {
     font-family: "Inter", sans-serif;
     font-size: 0.7rem;

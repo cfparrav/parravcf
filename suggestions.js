@@ -369,10 +369,15 @@ document.addEventListener("DOMContentLoaded", () => {
     async function loadSuggestions() {
         if (!listEl) return;
         const adminKey = localStorage.getItem("admin-key");
+        const countEl = document.getElementById("suggest-count");
         try {
             const res = await fetch(`${API_BASE}/suggestions`);
             const data = await res.json();
             const suggestions = data.suggestions || [];
+            if (countEl) {
+                const total = typeof data.total === "number" ? data.total : suggestions.length;
+                countEl.textContent = total === 1 ? "1 song suggested so far" : `${total} songs suggested so far`;
+            }
             if (!suggestions.length) {
                 listEl.innerHTML = "<p class=\"suggest-empty\">No suggestions yet — be the first.</p>";
                 return;

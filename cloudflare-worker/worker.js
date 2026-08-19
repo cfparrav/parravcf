@@ -187,12 +187,12 @@ async function handleListSuggestions(env) {
             return { key: k.name, ...record };
         })
     );
-    const cleaned = records
-        .filter(Boolean)
+    const all = records.filter(Boolean);
+    const cleaned = all
         .sort((a, b) => new Date(b.added_at) - new Date(a.added_at))
         .slice(0, 100);
 
-    return json({ suggestions: cleaned });
+    return json({ suggestions: cleaned, total: all.length });
 }
 
 // Best-effort removal from the actual Spotify playlist. Failures here don't
