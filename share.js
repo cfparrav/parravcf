@@ -51,8 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             await Promise.all([
-                document.fonts.load('700 58px Bitter'),
-                document.fonts.load('italic 400 36px Bitter'),
+                document.fonts.load('700 58px Besley'),
+                document.fonts.load('italic 400 36px Besley'),
             ]);
 
             const img = new Image();
@@ -84,11 +84,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             ctx.fillStyle = ink;
             ctx.textBaseline = "top";
-            ctx.font = "700 58px Bitter, Georgia, serif";
+            ctx.font = "700 58px Besley, Georgia, serif";
             const titleHeight = wrapText(ctx, title, 60, PHOTO_H + 55, CARD_W - 120, 68, 3);
 
             ctx.fillStyle = muted;
-            ctx.font = "italic 400 36px Bitter, Georgia, serif";
+            ctx.font = "italic 400 36px Besley, Georgia, serif";
             ctx.fillText(SITE_DOMAIN, 60, PHOTO_H + 55 + titleHeight + 20);
 
             return await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
@@ -123,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", async () => {
         const shareData = {
             title: document.title,
-            text: document.querySelector('meta[property="og:description"]')?.content || "",
             url: window.location.href,
         };
 
