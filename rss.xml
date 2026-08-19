@@ -2,30 +2,30 @@
 <rss version="2.0">
     <channel>
         <title>parravcf. — Journal</title>
-        <link>https://parravcf.vercel.app/pages/journal.html</link>
+        <link>https://www.parravcf.com/pages/journal.html</link>
         <description>Notes from Carlos Parra's journal — trips, thoughts, and whatever else doesn't fit anywhere else.</description>
         <language>en</language>
 
         <item>
             <title>Life Lately</title>
-            <link>https://parravcf.vercel.app/pages/life-lately.html</link>
-            <guid>https://parravcf.vercel.app/pages/life-lately.html</guid>
+            <link>https://www.parravcf.com/pages/life-lately.html</link>
+            <guid>https://www.parravcf.com/pages/life-lately.html</guid>
             <pubDate>Mon, 17 Aug 2026 00:00:00 GMT</pubDate>
             <description>Here's what's been happening with me lately, and apparently I've learned a few things along the way.</description>
         </item>
 
         <item>
             <title>Random Stuff</title>
-            <link>https://parravcf.vercel.app/pages/photos-i-think-they-go-hard.html</link>
-            <guid>https://parravcf.vercel.app/pages/photos-i-think-they-go-hard.html</guid>
+            <link>https://www.parravcf.com/pages/photos-i-think-they-go-hard.html</link>
+            <guid>https://www.parravcf.com/pages/photos-i-think-they-go-hard.html</guid>
             <pubDate>Thu, 13 Aug 2026 00:00:00 GMT</pubDate>
             <description>Here's some random stuff, plus a few names that inspired me to make this whole thing.</description>
         </item>
 
         <item>
             <title>Why did I make this website?</title>
-            <link>https://parravcf.vercel.app/pages/why-did-i-make-this.html</link>
-            <guid>https://parravcf.vercel.app/pages/why-did-i-make-this.html</guid>
+            <link>https://www.parravcf.com/pages/why-did-i-make-this.html</link>
+            <guid>https://www.parravcf.com/pages/why-did-i-make-this.html</guid>
             <pubDate>Wed, 12 Aug 2026 00:00:00 GMT</pubDate>
             <description>Like every personal website I can think of, this might sound cliché... but I wanted a space that feels like mine, while also being able to share it with everyone else.</description>
         </item>
