@@ -60,6 +60,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let lastSong = null;
 
+    let i18nDict = {};
+    let cardState = "prompt";
+    document.addEventListener("i18n:change", (e) => {
+        i18nDict = (e.detail && e.detail.dict) || {};
+        if (cardState === "prompt") renderPrompt();
+    });
+    function t(key, fallback) {
+        return i18nDict[key] || fallback;
+    }
+
     function pickSong(genre) {
         const pool = genre && genre !== "any" ? SONGS.filter((s) => songMatchesGenre(s, genre)) : SONGS;
         if (pool.length === 0) return null;
@@ -73,10 +83,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderPrompt() {
+        cardState = "prompt";
         card.innerHTML = `
-            <p class="song-prompt">Want a random song from my likes?</p>
+            <p class="song-prompt">${t("music.prompt", "Want a random song from my likes?")}</p>
             <div class="song-actions">
-                <button type="button" id="get-song" class="get-song-btn">Give me a song</button>
+                <button type="button" id="get-song" class="get-song-btn">${t("music.give_song", "Give me a song")}</button>
             </div>
         `;
         document.getElementById("get-song").addEventListener("click", () => {
@@ -85,9 +96,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 renderSong(song);
             } else {
                 card.innerHTML = `
-                    <p class="song-prompt">No songs in that genre yet — try another one.</p>
+                    <p class="song-prompt">${t("music.no_songs_genre", "No songs in that genre yet — try another one.")}</p>
                     <div class="song-actions">
-                        <button type="button" id="get-song" class="get-song-btn">Give me a song</button>
+                        <button type="button" id="get-song" class="get-song-btn">${t("music.give_song", "Give me a song")}</button>
                     </div>
                 `;
                 document.getElementById("get-song").addEventListener("click", () => renderPrompt());
@@ -198,6 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderSong(song) {
+        cardState = "song";
         const tagsHtml = song.tags.map((tag) => `<li>${tag}</li>`).join("");
 
         card.innerHTML = `
@@ -213,8 +225,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span id="song-rating-counts" class="song-rating-counts"></span>
             </div>
             <div class="song-actions">
-                <a href="https://open.spotify.com/search/${encodeURIComponent(song.title + " " + song.artist)}" target="_blank" rel="noopener"><img src="../images/spotify-icon.png" alt="" class="spotify-icon">Listen →</a>
-                <button type="button" id="another-song">Another one</button>
+                <a href="https://open.spotify.com/search/${encodeURIComponent(song.title + " " + song.artist)}" target="_blank" rel="noopener"><img src="../images/spotify-icon.png" alt="" class="spotify-icon">${t("music.listen", "Listen →")}</a>
+                <button type="button" id="another-song">${t("music.another_song", "Another one")}</button>
             </div>
             <div class="suggestion-comments">
                 <button type="button" class="comments-toggle" id="song-comments-toggle">💬 comments</button>
@@ -430,14 +442,14 @@ document.addEventListener("DOMContentLoaded", () => {
         toggle.addEventListener("click", () => {
             if (listEl.hasAttribute("hidden")) {
                 listEl.removeAttribute("hidden");
-                toggle.textContent = "💬 Hide ranked songs";
+                toggle.textContent = t("music.hide_ranked", "💬 Hide ranked songs");
                 if (!loaded) {
                     loaded = true;
                     loadRankedSongs();
                 }
             } else {
                 listEl.setAttribute("hidden", "");
-                toggle.textContent = "💬 Show ranked songs";
+                toggle.textContent = t("music.show_ranked", "💬 Show ranked songs");
             }
         });
     }

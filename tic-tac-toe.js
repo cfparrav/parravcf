@@ -16,6 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
     let board = Array(9).fill(null);
     let active = true;
 
+    let i18nDict = {};
+    document.addEventListener("i18n:change", (e) => {
+        i18nDict = (e.detail && e.detail.dict) || {};
+    });
+    function t(key, fallback) {
+        return i18nDict[key] || fallback;
+    }
+
     function checkWinner(b) {
         for (const [a, c, d] of WINS) {
             if (b[a] && b[a] === b[c] && b[a] === b[d]) return b[a];
@@ -76,16 +84,16 @@ document.addEventListener("DOMContentLoaded", () => {
         active = false;
         render();
         if (winner === "O") {
-            statusEl.textContent = "Called it. I don't lose 😏";
+            statusEl.textContent = t("ttt.status.win", "Called it. I don't lose 😏");
         } else if (winner === "X") {
-            statusEl.textContent = "Wait... how?! Well played.";
+            statusEl.textContent = t("ttt.status.lose", "Wait... how?! Well played.");
         } else {
-            statusEl.textContent = "A draw. Respectable.";
+            statusEl.textContent = t("ttt.status.draw", "A draw. Respectable.");
         }
     }
 
     function botMove() {
-        statusEl.textContent = "Thinking...";
+        statusEl.textContent = t("ttt.status.thinking", "Thinking...");
         setTimeout(() => {
             const move = bestMove(board);
             if (move === null) return;
@@ -94,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (winner) {
                 endGame(winner);
             } else {
-                statusEl.textContent = "Your move.";
+                statusEl.textContent = t("ttt.status.your_move", "Your move.");
                 render();
             }
         }, 400);
@@ -117,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function restart() {
         board = Array(9).fill(null);
         active = true;
-        statusEl.textContent = "Your move.";
+        statusEl.textContent = t("ttt.status.your_move", "Your move.");
         render();
     }
 

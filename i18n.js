@@ -36,6 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
             toggleBtn.textContent = lang === "en" ? "ES" : "EN";
         }
         root.setAttribute("lang", lang === "en" ? "en" : "es");
+
+        // Lets page-specific scripts (e.g. tic-tac-toe.js, music.js) translate
+        // text they set dynamically at runtime, which this generic pass can't reach.
+        document.dispatchEvent(new CustomEvent("i18n:change", { detail: { lang, dict } }));
     }
 
     function showLangModal(onChoose) {

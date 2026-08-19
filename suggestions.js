@@ -23,6 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
     let selectedTrack = null;
     let debounceTimer = null;
 
+    let i18nDict = {};
+    document.addEventListener("i18n:change", (e) => {
+        i18nDict = (e.detail && e.detail.dict) || {};
+    });
+    function t(key, fallback) {
+        return i18nDict[key] || fallback;
+    }
+
     function escapeHtml(str) {
         const div = document.createElement("div");
         div.textContent = str;
@@ -321,10 +329,10 @@ document.addEventListener("DOMContentLoaded", () => {
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
             if (!selectedTrack) {
-                statusEl.textContent = "Pick a song from the search results first.";
+                statusEl.textContent = t("music.status.pick_first", "Pick a song from the search results first.");
                 return;
             }
-            statusEl.textContent = "Sending...";
+            statusEl.textContent = t("music.status.sending", "Sending...");
             try {
                 const res = await fetch(`${API_BASE}/suggest`, {
                     method: "POST",
@@ -339,7 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 const data = await res.json();
                 if (data.success) {
-                    statusEl.textContent = "Added! Thanks for the suggestion.";
+                    statusEl.textContent = t("music.status.added", "Added! Thanks for the suggestion.");
                     selectedTrack = null;
                     selectedEl.innerHTML = "";
                     nameInput.value = "";
@@ -358,10 +366,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         wireSuggestionItem(listEl.firstElementChild, adminKey, data);
                     }
                 } else {
-                    statusEl.textContent = "Something went wrong — try again?";
+                    statusEl.textContent = t("music.status.error", "Something went wrong — try again?");
                 }
             } catch {
-                statusEl.textContent = "Something went wrong — try again?";
+                statusEl.textContent = t("music.status.error", "Something went wrong — try again?");
             }
         });
     }

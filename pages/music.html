@@ -64,7 +64,7 @@
         </p>
 
         <div class="genre-stats reveal">
-            <p class="suggest-label">What's in my likes</p>
+            <p class="suggest-label" data-i18n="music.stats_label">What's in my likes</p>
             <ul class="genre-bar-list">
                 <li class="genre-bar-row">
                     <span class="genre-bar-label">Hip Hop</span>
@@ -92,7 +92,7 @@
                     <span class="genre-bar-pct">9%</span>
                 </li>
             </ul>
-            <p class="genre-stats-note">Based on Spotify's own genre tags across the ~1,700 songs (about 78% of them are tagged). Genres overlap a lot, so these won't add up to 100%.</p>
+            <p class="genre-stats-note" data-i18n="music.stats_note">Based on Spotify's own genre tags across the ~1,700 songs (about 78% of them are tagged). Genres overlap a lot, so these won't add up to 100%.</p>
         </div>
 
         <figure class="post-image">
@@ -104,9 +104,9 @@
     <main>
 
         <div class="genre-filter-row">
-            <label for="genre-filter">Filter by genre</label>
+            <label for="genre-filter" data-i18n="music.filter_label">Filter by genre</label>
             <select id="genre-filter">
-                <option value="any">Any genre</option>
+                <option value="any" data-i18n="music.filter_any">Any genre</option>
                 <option value="Hip Hop">Hip Hop</option>
                 <option value="Rock">Rock</option>
                 <option value="Metal">Metal</option>
@@ -126,8 +126,8 @@
         </div>
 
         <section class="suggest-section reveal">
-            <p class="suggest-label">Suggest a song</p>
-            <p class="suggest-note" id="suggest-status">Think of a song you just listened to, one that matches the vibe of what you got from my likes, or just something you think I'd like. Search for it below, confirm it's the right one, then send it my way. Confirmed songs get added straight to my playlist.</p>
+            <p class="suggest-label" data-i18n="music.suggest_label">Suggest a song</p>
+            <p class="suggest-note" id="suggest-status" data-i18n="music.suggest_note">Think of a song you just listened to, one that matches the vibe of what you got from my likes, or just something you think I'd like. Search for it below, confirm it's the right one, then send it my way. Confirmed songs get added straight to my playlist.</p>
             <p class="playlist-link"><a href="https://open.spotify.com/playlist/5RtJXPeFsVEqWzCp5kPwbd" target="_blank" rel="noopener"><img src="../images/spotify-icon.png" alt="" class="spotify-icon"><span data-i18n="music.playlist_link">Listen to the playlist on Spotify →</span></a></p>
 
             <input type="text" id="suggest-search" placeholder="Search a song or artist...">
@@ -135,14 +135,14 @@
             <p id="suggest-selected" class="suggest-selected"></p>
 
             <form id="suggest-form" class="suggest-form">
-                <label for="suggest-name">Your name (optional)</label>
+                <label for="suggest-name" data-i18n="music.name_label">Your name (optional)</label>
                 <input type="text" id="suggest-name" placeholder="who's suggesting this?">
-                <button type="submit">Send it</button>
+                <button type="submit" data-i18n="music.send">Send it</button>
             </form>
         </section>
 
         <section class="suggestions-log reveal">
-            <p class="suggest-label">Recent suggestions <button type="button" id="admin-toggle" class="admin-toggle">admin</button></p>
+            <p class="suggest-label"><span data-i18n="music.recent_label">Recent suggestions</span> <button type="button" id="admin-toggle" class="admin-toggle">admin</button></p>
             <p class="suggest-count" id="suggest-count"></p>
 
             <figure class="post-image">
@@ -153,9 +153,9 @@
         </section>
 
         <section class="ranked-songs-section reveal">
-            <p class="suggest-label">Already ranked by visitors</p>
-            <p class="suggest-note">Songs from my likes library that other visitors have already rated or commented on using the random picker above (not the suggestions people have sent in). Add your own take.</p>
-            <button type="button" id="ranked-songs-toggle" class="comments-toggle">💬 Show ranked songs</button>
+            <p class="suggest-label" data-i18n="music.ranked_label">Already ranked by visitors</p>
+            <p class="suggest-note" data-i18n="music.ranked_note">Songs from my likes library that other visitors have already rated or commented on using the random picker above (not the suggestions people have sent in). Add your own take.</p>
+            <button type="button" id="ranked-songs-toggle" class="comments-toggle" data-i18n="music.show_ranked">💬 Show ranked songs</button>
             <ul id="ranked-songs-list" class="ranked-songs-list" hidden></ul>
         </section>
 
