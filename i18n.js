@@ -6,6 +6,12 @@
 // On a visitor's very first page load (no stored preference yet), a modal
 // asks them to pick English or Spanish before anything renders in a
 // specific language.
+//
+// For long-form post bodies (too much prose to key line-by-line), a pair
+// of parallel elements marked data-i18n-lang="en" / data-i18n-lang="es"
+// gets shown/hidden instead of text-swapped -- lets an English paragraph
+// and its Spanish translation sit right next to each other in the
+// markup, with only the matching one visible.
 
 document.addEventListener("DOMContentLoaded", () => {
     const toggleBtn = document.getElementById("lang-toggle");
@@ -22,6 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (dict[key]) {
                 el.textContent = dict[key];
             }
+        });
+        document.querySelectorAll("[data-i18n-lang]").forEach((el) => {
+            el.hidden = el.getAttribute("data-i18n-lang") !== lang;
         });
         if (toggleBtn) {
             toggleBtn.textContent = lang === "en" ? "ES" : "EN";
