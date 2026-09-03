@@ -9,6 +9,7 @@
  *   GET    /rating            -> get up/down counts for a song (?title=...&artist=...)
  *   POST   /rate-song         -> submit an up/down vote for a song
  *   GET    /rated-songs       -> list songs that have any rating or comment activity
+ *   GET    /now-playing       -> your current (or most recent) Spotify track, for the homepage widget
  *   GET    /comments          -> list comments for a page (?page=...)
  *   POST   /comment           -> post a comment on a page
  *   DELETE /comments          -> (admin) delete a comment by its KV key
@@ -349,6 +350,56 @@ async function handleListRatedSongs(env) {
     return json({ songs: result });
 }
 
+// "Now playing" widget for the homepage. Tries the currently-playing
+// endpoint first; if nothing's actively playing (204, or no item), falls
+// back to the most recently played track so the widget is never empty.
+//
+// Requires the stored refresh token to include the user-read-currently-playing
+// and user-read-recently-played scopes -- the original token from SETUP.md
+// only has playlist-modify scopes, so this needs a fresh one-time
+// re-authorization with the expanded scope list. See NOW_PLAYING_SETUP.md.
+function formatTrack(item, extra) {
+    return {
+        track_name: item.name,
+        artist: item.artists.map((a) => a.name).join(", "),
+        album_image: item.album?.images?.[1]?.url || item.album?.images?.[0]?.url || null,
+        spotify_url: item.external_urls?.spotify || null,
+        ...extra,
+    };
+}
+
+async function handleNowPlaying(env) {
+    const token = await getUserAccessToken(env);
+
+    const curRes = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
+        headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (curRes.status === 200) {
+        const data = await curRes.json();
+        if (data && data.item && data.is_playing) {
+            return json({ is_playing: true, ...formatTrack(data.item) });
+        }
+    }
+    // 204 = nothing playing right now; anything else falls through to the
+    // recently-played lookup too, so a transient error never breaks the widget.
+
+    const recentRes = await fetch(
+        "https://api.spotify.com/v1/me/player/recently-played?limit=1",
+        { headers: { Authorization: `Bearer ${token}` } }
+    );
+    if (!recentRes.ok) return json({ is_playing: false, track_name: null });
+
+    const recentData = await recentRes.json();
+    const item = recentData.items?.[0];
+    if (!item) return json({ is_playing: false, track_name: null });
+
+    return json({
+        is_playing: false,
+        ...formatTrack(item.track, { played_at: item.played_at }),
+    });
+}
+
 // Comments on journal/photo pages. Key is namespaced per page so listing a
 // page's comments is a cheap prefix scan, same pattern as suggestions.
 function commentKey(page, timestamp, id) {
@@ -455,6 +506,9 @@ export default {
             }
             if (url.pathname === "/rated-songs" && request.method === "GET") {
                 return await handleListRatedSongs(env);
+            }
+            if (url.pathname === "/now-playing" && request.method === "GET") {
+                return await handleNowPlaying(env);
             }
             if (url.pathname === "/comments" && request.method === "GET") {
                 return await handleListComments(request, env);
