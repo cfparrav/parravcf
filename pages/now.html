@@ -59,12 +59,6 @@
             What I'm up to this month, updated whenever I remember to.
         </p>
 
-        <div class="hero-image">
-            <a href="https://instagram.com/easydrooo" target="_blank" rel="noopener">
-                <img src="../images/hero/carlos-8bit.png" alt="8-bit pixel art avatar of Carlos">
-            </a>
-        </div>
-
     </header>
 
     <main>
@@ -103,6 +97,14 @@
                 <p data-i18n="now.thinking.body">Liverpool's new signings, the NFL season, and running my first fantasy football league with my friends.</p>
             </li>
 
+            <li class="now-item" id="now-playing-item" hidden>
+                <div class="now-item-head">
+                    <svg class="now-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                    <p class="now-label" id="now-playing-label">Listening to</p>
+                </div>
+                <p id="now-playing-body"></p>
+            </li>
+
             <li class="now-item">
                 <div class="now-item-head">
                     <svg class="now-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="10" r="4"></circle><line x1="12" y1="2" x2="12" y2="4"></line><line x1="5" y1="8" x2="6.5" y2="9"></line><line x1="19" y1="8" x2="17.5" y2="9"></line><path d="M2 20c2-4 5-7 10-7s8 3 10 7"></path></svg>
@@ -119,6 +121,7 @@
         Last updated September 2026.
     </footer>
 
+    <script src="../now-playing.js" defer></script>
     <script src="../script.js" defer></script>
     <script src="../i18n.js" defer></script>
     <script src="../theme.js" defer></script>

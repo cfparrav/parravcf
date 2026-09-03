@@ -1,13 +1,15 @@
-// Homepage "now playing" widget. Fetches the worker's /now-playing route and
-// fills in the placeholder from index.html. Fails silently (hides the whole
-// line) if the worker errors or nothing has ever been played, rather than
-// showing a broken or empty-looking widget.
+// "Listening to" widget for the Now page. Fetches the worker's /now-playing
+// route and fills in the now-item placeholder from now.html. Fails silently
+// (hides the whole list item) if the worker errors or nothing has ever been
+// played, so it never shows broken or empty-looking content.
 
 const API_BASE = "https://cfparrav-song-suggestions.carlitosfer6.workers.dev";
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const el = document.getElementById("now-playing");
-    if (!el) return;
+    const item = document.getElementById("now-playing-item");
+    const label = document.getElementById("now-playing-label");
+    const body = document.getElementById("now-playing-body");
+    if (!item || !label || !body) return;
 
     try {
         const res = await fetch(`${API_BASE}/now-playing`);
@@ -15,11 +17,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         const data = await res.json();
 
         if (!data.track_name) {
-            el.remove();
+            item.remove();
             return;
         }
 
-        const label = data.is_playing ? "Now playing" : "Last played";
+        label.textContent = data.is_playing ? "Listening to" : "Last listened to";
+
         const link = document.createElement(data.spotify_url ? "a" : "span");
         if (data.spotify_url) {
             link.href = data.spotify_url;
@@ -28,12 +31,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         link.textContent = `${data.track_name} — ${data.artist}`;
 
-        el.textContent = `${label}: `;
-        el.appendChild(link);
-        el.hidden = false;
+        body.textContent = "";
+        body.appendChild(link);
+        item.hidden = false;
     } catch (err) {
-        // Spotify/worker hiccup -- just hide the line instead of showing
-        // broken or stale text.
-        el.remove();
+        // Spotify/worker hiccup -- just hide the item instead of showing
+        // broken or stale content.
+        item.remove();
     }
 });
