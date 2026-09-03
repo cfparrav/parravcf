@@ -27,9 +27,9 @@
  *   KV namespace bound as SUGGESTIONS
  */
 
-const ALLOWED_ORIGIN = "*"; // domain is decided (parravcf.com) but not live yet —
-// switch this to "https://parravcf.com" once the site is actually deployed there,
-// otherwise local testing (file:// or localhost) will get blocked by CORS
+const ALLOWED_ORIGIN = "https://www.parravcf.com"; // site is live at this domain now.
+// Set back to "*" temporarily if you need to test from file:// or localhost,
+// since those origins will otherwise get blocked by CORS.
 
 function corsHeaders() {
     return {

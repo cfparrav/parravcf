@@ -91,9 +91,29 @@
 
         </ul>
 
+        <hr class="sep">
+
+        <section class="comments reveal" data-page-id="guestbook">
+            <h2 data-i18n="guestbook.h2">Guestbook</h2>
+            <p class="comments-sub" data-i18n="guestbook.sub">Leave a note, say hi, or just let me know you stopped by.</p>
+
+            <div id="comments-list" class="comments-list"></div>
+
+            <form class="new-comment">
+                <label for="name" data-i18n="guestbook.name_label">Name</label>
+                <input type="text" id="name" placeholder="what should we call you?">
+                <label for="msg" data-i18n="guestbook.msg_label">Your message</label>
+                <textarea id="msg" placeholder="say hello..."></textarea>
+                <br>
+                <button type="button" id="post-comment" data-i18n="guestbook.post">Sign the guestbook</button>
+                <p id="comment-status" class="comment-status"></p>
+            </form>
+        </section>
+
     </main>
 
     <script src="../script.js" defer></script>
+    <script src="../comments.js" defer></script>
     <script src="../i18n.js" defer></script>
     <script src="../theme.js" defer></script>
 

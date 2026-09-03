@@ -1,10 +1,10 @@
 :root {
-    --bg: #f6f3ec;
-    --paper: #fbf9f4;
-    --ink: #262420;
-    --body-text: #4a453d;
-    --muted: #8a8478;
-    --line: #ddd6c4;
+    --bg: #eaf1f8;
+    --paper: #f7fbfe;
+    --ink: #1e2c3a;
+    --body-text: #435667;
+    --muted: #7c93a8;
+    --line: #cddce8;
     --accent: #b1442e;
     --link: #2a4d6e;
     --max-width: 700px;
@@ -18,12 +18,12 @@
 }
 
 html[data-theme="dark"] {
-    --bg: #1c1a17;
-    --paper: #242220;
-    --ink: #f0ede6;
-    --body-text: #cfc9bd;
-    --muted: #8a8478;
-    --line: #3a362f;
+    --bg: #0f161e;
+    --paper: #18222c;
+    --ink: #eaf2f8;
+    --body-text: #c3d2df;
+    --muted: #7c93a8;
+    --line: #293b4a;
     --accent: #e07a5f;
     --link: #7ea9d8;
 }
@@ -145,7 +145,7 @@ body {
 .lang-modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(38, 36, 32, 0.55);
+    background: rgba(15, 22, 30, 0.55);
     display: flex;
     align-items: center;
     justify-content: center;
