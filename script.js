@@ -69,20 +69,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// "Fantasy" nav link: injected into .top-nav on every inner page (same
+// "Sports" nav link: injected into .top-nav on every inner page (same
 // approach as the random button above) instead of hand-added to every
-// page's markup. Points to the interactive fantasy football recap.
+// page's markup. Points to the sports hub (fantasy leagues, survivor, picks).
 document.addEventListener("DOMContentLoaded", () => {
     const nav = document.querySelector(".top-nav");
     if (!nav) return;
 
     const inPagesDir = window.location.pathname.includes("/pages/");
-    const href = (inPagesDir ? "" : "pages/") + "rayos-x-liga-cfparra.html";
+    const href = (inPagesDir ? "" : "pages/") + "deportes.html";
 
     const link = document.createElement("a");
     link.href = href;
     link.innerHTML =
-        '<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="12" rx="9" ry="6"></ellipse><path d="M6 12h12M9.5 9.5l1 1M9.5 14.5l1-1M14.5 9.5l-1 1M14.5 14.5l-1-1"></path></svg><span>Fantasy</span>';
+        '<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="12" rx="9" ry="6"></ellipse><path d="M6 12h12M9.5 9.5l1 1M9.5 14.5l1-1M14.5 9.5l-1 1M14.5 14.5l-1-1"></path></svg><span>Sports</span>';
 
     const contactLink = nav.querySelector('a[href$="contact.html"]');
     if (contactLink) {
