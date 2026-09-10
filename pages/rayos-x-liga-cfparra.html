@@ -1,4 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<script>
+    (function () {
+        var t = localStorage.getItem("site-theme");
+        if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) {
+            document.documentElement.setAttribute("data-theme", "dark");
+        }
+    })();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <title>Rayos X: Liga Cfparra</title>
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.parravcf.com/pages/rayos-x-liga-cfparra.html">
+<meta property="og:title" content="Rayos X: Liga Cfparra">
+<meta property="og:description" content="Análisis interactivo del draft de mi liga de fantasy football: equipos, jugadas y quién armó el mejor roster.">
+<meta property="og:image" content="https://www.parravcf.com/images/hero/carlos-8bit.png">
+<meta name="twitter:card" content="summary_large_image">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -285,6 +308,9 @@
   footer{padding:34px 0 10px; color:var(--text-3); font-size:12.5px;}
   footer a{color:var(--text-3);}
 </style>
+</head>
+
+<body>
 
 <header class="hero">
   <div class="hero-inner">
@@ -846,3 +872,6 @@ function esc(s){
   });
 })();
 </script>
+
+</body>
+</html>
