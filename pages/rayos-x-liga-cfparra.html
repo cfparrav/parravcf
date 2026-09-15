@@ -18,7 +18,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.parravcf.com/pages/rayos-x-liga-cfparra.html">
 <meta property="og:title" content="Rayos X: Liga Cfparra">
-<meta property="og:description" content="Análisis interactivo del draft de mi liga de fantasy football: equipos, jugadas y quién armó el mejor roster.">
+<meta property="og:description" content="Resultados, la previa de la semana que viene y a quién ir a buscar en agentes libres, con datos reales de ESPN.">
 <meta property="og:image" content="https://www.parravcf.com/images/hero/carlos-8bit.png">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -318,24 +318,20 @@
   <div class="hero-inner">
     <a class="back-home" href="../index.html">🏠 parravcf.</a>
     <span class="eyebrow"><span class="dot"></span>Liga Cfparra &middot; 10 equipos &middot; Temporada 2026</span>
-    <h1 class="title">Rayos X<br><em>al Draft</em> de la Liga</h1>
-    <p class="subtitle">El draft se hizo el 9 de septiembre a las 4:00 PM, y la Semana 1 ya cerró. Aquí está todo lo que le pasó a las 10 plantillas: quién se salió del guion en el draft, quién le atinó a la Semana 1, quién no, y qué se puede ir a buscar en agentes libres de cara a la Semana 2. Todo con datos reales de ESPN, no puro rumor del chat.</p>
+    <h1 class="title">Rayos X<br><em>a la Liga</em> Cfparra</h1>
+    <p class="subtitle">Cómo va la temporada, semana a semana: resultados reales, la previa de lo que viene y a quién ir a buscar en agentes libres. Todo con datos reales de ESPN, no puro rumor del chat.</p>
     <div class="stat-row">
       <div class="stat"><div class="n">10</div><div class="l">Equipos</div></div>
-      <div class="stat"><div class="n">16</div><div class="l">Rondas / plantel</div></div>
+      <div class="stat"><div class="n">16</div><div class="l">Jugadores / plantel</div></div>
       <div class="stat"><div class="n">PPR</div><div class="l">1 pt x recepción</div></div>
-      <div class="stat"><div class="n">160</div><div class="l">Jugadores draftados</div></div>
       <div class="stat"><div class="n">6</div><div class="l">Clasifican a playoffs</div></div>
     </div>
     <div class="quick-nav">
       <a href="#novatos" class="qn-btn">📖 Guía para novatos</a>
-      <a href="#equipos" class="qn-btn">🏈 Tu equipo</a>
-      <a href="#predicciones" class="qn-btn">🔮 Predicciones Sem. 1</a>
-      <a href="#envivo" class="qn-btn">✅ Resultados Sem. 1</a>
+      <a href="#envivo" class="qn-btn">✅ Resultados</a>
       <a href="#semana2" class="qn-btn">📅 Previa Semana 2</a>
       <a href="#waivers" class="qn-btn">🧲 Waivers de la semana</a>
       <a href="deportes.html" class="qn-btn">🏟️ Ir a Deportes (Survivor y Picks)</a>
-      <a href="#poll-card" class="qn-btn qn-btn--accent">🗳️ ¿Mejor equipo?</a>
     </div>
   </div>
 </header>
@@ -349,66 +345,11 @@
     <div class="guide-grid" id="guide-grid"></div>
   </section>
 
-  <section id="metodo">
-    <div class="method">
-      <div class="ico">i</div>
-      <p><b>Antes de que alguien diga que esto es puro favoritismo:</b> nada de esto es opinión suelta. Se sacó en vivo de ESPN Fantasy (configuración de la liga, draft recap ronda por ronda, rosters finales y el scoreboard de Semana&nbsp;1) y se cruzó cada pick contra el <b>ranking en vivo</b> que ESPN mostraba durante el draft mismo. Un pick tomado varias posiciones antes de su ranking se marca como <b>reach</b>; uno que cayó bastante después, como <b>valor</b>. El draft fue el 9 de septiembre y la Semana 1 ya empezó, así que "el mejor equipo" aquí abajo sigue midiendo <em>qué tan bien armado está el plantel sobre el papel</em> según el draft, no quién va ganando ahorita (para eso está la sección de Semana 1 en vivo más abajo).</p>
-    </div>
-  </section>
-
   <section id="config">
     <div class="kicker">Configuración</div>
     <h2 class="h">Cómo se juega en esta liga</h2>
     <p class="lede">Las reglas que definen qué draft es "correcto". Válelo la pena tenerlas presentes antes de juzgar cualquier pick.</p>
     <div class="settings-grid" id="settings-grid"></div>
-  </section>
-
-  <section id="draft">
-    <div class="kicker">El Draft</div>
-    <h2 class="h">Los picks que se salieron del guion</h2>
-    <p class="lede">Comparando cada selección contra su ranking en vivo de ESPN. A la izquierda, los reaches más caros; a la derecha, los robos de la noche.</p>
-    <div class="two-col">
-      <div>
-        <div class="col-title reach-c">🚩 Mayores reaches</div>
-        <div class="table-scroll"><table class="picks" id="reach-table"></table></div>
-      </div>
-      <div>
-        <div class="col-title value-c">💰 Mayores robos</div>
-        <div class="table-scroll"><table class="picks" id="value-table"></table></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="equipos">
-    <div class="kicker">Plantillas</div>
-    <h2 class="h">Los 10 equipos, uno por uno</h2>
-    <p class="lede">Dale clic a tu equipo, o al de tu rival para espiar. Cada tab trae el core, el puntaje de draft, y una sugerencia concreta de qué mover.</p>
-    <div class="tabs-bar" id="team-tabs"></div>
-    <div id="team-panels"></div>
-  </section>
-
-  <section id="graficos">
-    <div class="kicker">Los números</div>
-    <h2 class="h">Semana 1 vs. eficiencia de draft</h2>
-    <div style="display:flex; flex-direction:column; gap:18px;">
-      <div class="chart-card">
-        <div class="chart-title">Proyección oficial ESPN, Semana 1</div>
-        <div class="chart-sub">Puntos proyectados por la alineación titular de cada equipo</div>
-        <div id="chart-proj"></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Puntaje de valor de draft (rondas 1–6)</div>
-        <div class="chart-sub">Suma de (ranking en vivo − pick real) en rondas 1–6 · izquierda = se reachó, derecha = se robó valor</div>
-        <div id="chart-value"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="predicciones">
-    <div class="kicker">Semana 1</div>
-    <h2 class="h">Predicciones de los cruces de esta semana</h2>
-    <p class="lede">Con la proyección oficial de ESPN para cada alineación titular. 10 equipos, 5 duelos, nadie descansa.</p>
-    <div class="matchup-grid" id="matchup-grid"></div>
   </section>
 
   <section id="envivo">
@@ -458,22 +399,10 @@
     <h2 class="h">A quién ir a buscar esta semana</h2>
     <p class="lede">Waivers de orden inverso: el que va peor en la tabla agarra primero. Esto es lo que hay disponible ahora mismo en la liga Cfparra, real y en vivo, según cuántos equipos ya lo tienen rosterado.</p>
     <div class="sugg-list" id="waiver-list"></div>
-  </section>
 
-  <section id="veredicto">
-    <div class="kicker">Veredicto</div>
-    <h2 class="h">¿Quién la armó bien y quién no?</h2>
-    <div class="verdict-grid" id="verdict-grid"></div>
-  </section>
-
-  <section id="ganador">
-    <div class="kicker">La pregunta grande</div>
-    <h2 class="h">¿Quién va a ganar la liga?</h2>
-    <p class="lede">Esto ya es lectura de 14 semanas, no un dato duro. Con solo el draft y la Semana&nbsp;1 sobre la mesa:</p>
-    <div class="method">
-      <div class="ico" style="font-size:19px;">🥇</div>
-      <p><b>Carlos's Cool Team</b> sale como el plantel mejor armado de la liga: 3° mejor proyección de Semana&nbsp;1 (125.4 pts) y, sin ningún reach grande, el mejor puntaje de valor de draft de las 10 (+24, rondas 1–6), con Puka Nacua justo en su lugar y una seguidilla de robos en receptores y corredores. El chiste es que ese equipo lo maneja Carlos Parra Sr., el papá de Carlos, no Carlos. <b>Rompetotos</b> (Jonathan Taylor + De'Von Achane de arranque, valor +19) y <b>Puro Power Ranking</b> de Luis (2ª mejor proyección de la semana, 125.5 pts, media docena de corredores rosterados) completan el podio de favoritos reales. <b>Adelphianos</b>, el equipo de Carlos (Jr.), entra con la proyección más alta de todas (127.5) pese al reach en Jalen Hurts; nada mal, aunque el draft de su papá haya sido más limpio (sí, se lo vamos a recordar toda la temporada). En el otro extremo, <b>Liga de la Injusticia</b> necesita resolver su plantel casi por completo antes de que el calendario lo entierre.</p>
-    </div>
+    <h3 style="font-family:'Oswald',sans-serif; font-size:19px; margin:30px 0 6px; color:var(--text-1);">🔥 Los agentes libres que más puntos metieron en Semana 1</h3>
+    <p class="lede" style="margin-bottom:16px;">Sin importar cuántos equipos ya los tienen, esto es lo que de verdad anotaron los agentes libres de la liga la semana pasada. Algunos son flier real, otros son puro dato curioso de un partidazo aislado.</p>
+    <div class="sugg-list" id="breakout-list"></div>
   </section>
 
   <section id="sugerencias">
@@ -488,21 +417,6 @@
     <div class="watch-box">
       <p style="margin:0; font-size:14px; color:var(--text-2);">Según el reporte de lesiones que ESPN mostraba al momento de este análisis, estos jugadores draftados cargaban alguna etiqueta de riesgo. Vale la pena confirmar su estatus antes de que cierren las alineaciones:</p>
       <div class="chips" id="watch-chips"></div>
-    </div>
-  </section>
-
-  <section id="premio">
-    <div class="kicker">Encuesta de la semana</div>
-    <h2 class="h">¿Quién tuvo el mejor equipo?</h2>
-    <p class="lede">Solo con el draft sobre la mesa, cada quien vota una vez desde su navegador. Puedes cambiar tu voto cuando quieras.</p>
-
-    <div class="poll-card" id="poll-card">
-      <div class="poll-head">
-        <div class="poll-title">🗳️ ¿Quién armó el mejor equipo en el draft?</div>
-        <div class="poll-sub" id="poll-sub">Votos en vivo de todo el grupo.</div>
-      </div>
-      <div id="poll-options"></div>
-      <div id="poll-status" class="poll-status"></div>
     </div>
   </section>
 
@@ -572,210 +486,6 @@ const settings = [
 ];
 document.getElementById("settings-grid").innerHTML = settings.map(s => `
   <div class="setting"><div class="k">${s.k}</div><div class="v">${s.v}<small>${s.s}</small></div></div>`).join("");
-
-const reaches = [
-  ["Liga de la Injusticia","Tucker Kraft","TE (FLEX)","P49 (R5)","Ranking #91","−42"],
-  ["Jerry Jones Farm","Kyle Pitts Sr.","TE","P33 (R4)","Ranking #70","−37"],
-  ["Liga de la Injusticia","Caleb Williams","QB","P52 (R6)","Ranking #87","−35"],
-  ["Liga de la Injusticia","Trevor Lawrence","QB (banca)","P69 (R7)","Ranking #94","−25"],
-  ["Liga de la Injusticia","Jake Ferguson","TE (banca)","P89 (R9)","Ranking #113","−24"],
-  ["Balls Destroyers","Drake Maye","QB (banca)","P38 (R4)","Ranking #56","−18"],
-  ["Liga de la Injusticia","Kenneth Walker III","RB","P12 (R2)","Ranking #28","−16"],
-  ["Jerry Jones Farm","Joe Burrow","QB","P48 (R5)","Ranking #64","−16"],
-];
-const values = [
-  ["Balls Destroyers","TreVeyon Henderson","RB (banca)","P83 (R9)","Ranking #60","+23"],
-  ["Balls Destroyers","Jadarian Price","RB","P78 (R8)","Ranking #58","+20"],
-  ["Carlos's Cool Team","Kyle Monangai","RB (banca)","P117 (R12)","Ranking #100","+17"],
-  ["Carlos's Cool Team","Tony Pollard","RB (banca)","P84 (R9)","Ranking #68","+16"],
-  ["Yourgrandma's Team","MarShawn Lloyd","RB (banca)","P102 (R11)","Ranking #86","+16"],
-  ["Puro Power Ranking","Josh Downs","WR (banca)","P121 (R13)","Ranking #105","+16"],
-  ["Yourgrandma's Team","Chris Godwin Jr.","WR (banca)","P119 (R12)","Ranking #103","+16"],
-  ["Liga de la Injusticia","David Montgomery","RB (banca)","P72 (R8)","Ranking #57","+15"],
-];
-function buildPicksTable(el, rows, kind){
-  const badgeClass = kind === "reach" ? "reach" : "value";
-  const label = kind === "reach" ? "Reach" : "Valor";
-  el.innerHTML = `<thead><tr><th>Equipo</th><th>Jugador</th><th>Pick</th><th>${label}</th></tr></thead><tbody>` +
-    rows.map(r => `<tr>
-        <td>${r[0]}</td>
-        <td>${r[1]} <span class="muted" style="font-size:12px;">(${r[2]})</span></td>
-        <td class="num">${r[3]}<br><span class="muted" style="font-size:11.5px;">${r[4]}</span></td>
-        <td><span class="badge ${badgeClass}">${r[5]}</span></td>
-      </tr>`).join("") + "</tbody>";
-}
-buildPicksTable(document.getElementById("reach-table"), reaches, "reach");
-buildPicksTable(document.getElementById("value-table"), values, "value");
-
-// ---- Team data ----
-const teams = [
-  {name:"Adelphianos", owner:"Carlos Parra Jr.", proj:127.5, value:-6, tag:"",
-   core:[["QB","Jalen Hurts"],["RB","Saquon Barkley"],["RB","Travis Etienne Jr."],["WR","Jaxon Smith-Njigba"],["WR","Nico Collins"],["TE","George Kittle","Q"]],
-   note:"La proyección de Semana 1 más alta de toda la liga (127.5), aunque el draft se pagó caro en la Ronda 6 con Jalen Hurts (reach de 10 lugares).",
-   sugerencia:"Tres TE en el plantel (Kittle, Isaiah Likely, Juwan Johnson), con Kittle marcado <b>Questionable</b>, Likely ya está ahí como el seguro obvio, no hace falta ir a agentes libres. Con tres WR de banca (Pittman, Golden, Addison), es buen momento para vender uno alto a Liga de la Injusticia o a Jerry Jones Farm, los dos equipos más flojos de receptores.",
-   full:[[1,"Jaxon Smith-Njigba (WR)"],[2,"Saquon Barkley (RB)"],[3,"Nico Collins (WR)"],[4,"Travis Etienne Jr. (RB)"],[5,"Davante Adams (WR)"],[6,"Jalen Hurts (QB)"],[7,"George Kittle (TE) Q"],[8,"Michael Pittman Jr. (WR)"],[9,"Rico Dowdle (RB)"],[10,"Matthew Golden (WR)"],[11,"Aaron Jones Sr. (RB)"],[12,"Jordan Addison (WR)"],[13,"Isaiah Likely (TE)"],[14,"Ravens D/ST"],[15,"Juwan Johnson (TE)"],[16,"Cameron Dicker (K)"]]},
-  {name:"Liga de la Injusticia", owner:"Petu Suarez", proj:87.3, value:-113, tag:"worst",
-   core:[["QB","Caleb Williams"],["RB","Kenneth Walker III"],["RB","Javonte Williams"],["WR","Zay Flowers","Q"],["WR","Marvin Mims Jr.","Q"],["TE","Brock Bowers","D"]],
-   note:"La proyección más baja de la liga por lejos (87.3, ~27% debajo del promedio) y el peor puntaje de valor de las 10 (−113 en rondas 1–6). Reach en casi cada pick de peso: Bowers, Walker, Kraft, Williams, Lawrence y Ferguson.",
-   sugerencia:"Literal se gastaron los dos últimos picks del draft en un <b>segundo y tercer D/ST de banca</b> (Chiefs, Buccaneers) que nunca van a jugar. Suéltenlos ya por RB o WR de agentes libres: cualquier cosa es mejor que un D/ST calentando banca. David Montgomery (Ronda 8) fue el único robo real de la noche; que sea titular ya, no banca.",
-   full:[[1,"Brock Bowers (TE) D"],[2,"Kenneth Walker III (RB)"],[3,"Javonte Williams (RB)"],[4,"Zay Flowers (WR) Q"],[5,"Tucker Kraft (TE)"],[6,"Caleb Williams (QB)"],[7,"Trevor Lawrence (QB)"],[8,"David Montgomery (RB)"],[9,"Jake Ferguson (TE)"],[10,"Marvin Mims Jr. (WR) Q"],[11,"Rashid Shaheed (WR)"],[12,"Dont'e Thornton Jr. (WR) IR"],[13,"Will Reichard (K)"],[14,"Packers D/ST"],[15,"Chiefs D/ST"],[16,"Buccaneers D/ST"]]},
-  {name:"Jerry Jones Farm", owner:"Miguel Ramos", proj:118.9, value:-51, tag:"",
-   core:[["QB","Joe Burrow"],["RB","Kyren Williams"],["RB","Bucky Irving"],["WR","Amon-Ra St. Brown"],["WR","Justin Jefferson"],["TE","Kyle Pitts Sr."]],
-   note:"Núcleo de WR de elite (St. Brown + Jefferson) hundido por dos reaches grandes de rondas tempranas: Kyle Pitts en la Ronda 4 y Joe Burrow en la Ronda 5.",
-   sugerencia:"Cargan <b>dos kickers</b> (Jason Myers titular, Harrison Mevis de banca): suelten a Mevis ya, ese cupo vale más como RB3 o WR3 de agentes libres. Con Kyren Williams + Bucky Irving de arranque pero poca profundidad detrás, Puro Power Ranking o Yourgrandma's Team andan sobrados de corredores: ahí hay trade.",
-   full:[[1,"Amon-Ra St. Brown (WR)"],[2,"Justin Jefferson (WR)"],[3,"Kyren Williams (RB)"],[4,"Kyle Pitts Sr. (TE)"],[5,"Joe Burrow (QB)"],[6,"Bucky Irving (RB)"],[7,"Mike Evans (WR)"],[8,"Courtland Sutton (WR)"],[9,"Seahawks D/ST"],[10,"Jason Myers (K)"],[11,"Texans D/ST"],[12,"Harrison Mevis (K)"],[13,"Makai Lemon (WR)"],[14,"De'Zhaun Stribling (WR)"],[15,"Tyler Shough (QB)"],[16,"Woody Marks (RB)"]]},
-  {name:"Rony Camacho", owner:"Francisco Camacho Enríquez", proj:119.2, value:18, tag:"",
-   core:[["QB","Josh Allen"],["RB","James Cook III"],["RB","D'Andre Swift"],["WR","CeeDee Lamb"],["WR","George Pickens"],["TE","Travis Kelce"]],
-   note:"3er mejor puntaje de valor de la liga (+18) sin ningún reach real en las primeras 6 rondas. Cook, Swift y Bhayshul Tuten dan una profundidad de RB envidiable.",
-   sugerencia:"El WR más profundo fuera del top-3 (Lamb, Pickens, Luther Burden III, Carnell Tate). Con Josh Jacobs marcado <b>Day-to-Day</b> en la banca, no hay urgencia, pero conviene ofrecer un WR de sobra a Jerry Jones Farm o a Liga de la Injusticia a cambio de ayuda en TE o QB2.",
-   full:[[1,"CeeDee Lamb (WR)"],[2,"George Pickens (WR)"],[3,"Josh Allen (QB)"],[4,"D'Andre Swift (RB)"],[5,"Bhayshul Tuten (RB)"],[6,"Luther Burden III (WR)"],[7,"Carnell Tate (WR)"],[8,"Josh Jacobs (RB) DTD"],[9,"Brock Purdy (QB)"],[10,"Rachaad White (RB)"],[11,"Quentin Johnston (WR)"],[12,"Jayden Reed (WR)"],[13,"James Cook III (RB)"],[14,"Travis Kelce (TE)"],[15,"Lions D/ST"],[16,"Ka'imi Fairbairn (K)"]]},
-  {name:"Puro Power Ranking", owner:"Luis Valenz", proj:125.5, value:6, tag:"",
-   core:[["QB","Lamar Jackson"],["RB","Jahmyr Gibbs"],["RB","Quinshon Judkins"],["WR","A.J. Brown"],["WR","Jameson Williams"],["TE","Trey McBride"]],
-   note:"2ª mejor proyección de Semana 1 (125.5) con Jahmyr Gibbs de ancla. Draft limpio, sin reaches que penalicen.",
-   sugerencia:"Cuentan <b>seis corredores</b> en el plantel (Gibbs, Judkins, Stevenson, Hubbard, RJ Harvey, Jordan Mason) contra un cuerpo de WR más delgado (Brown, Williams, Watson, Alec Pierce). Es el momento perfecto para vender un RB de sobra, Hubbard o Harvey, a Liga de la Injusticia o Jerry Jones Farm a cambio de un WR2 real. Ojo con Alec Pierce, marcado <b>Questionable</b>.",
-   full:[[1,"Jahmyr Gibbs (RB)"],[2,"A.J. Brown (WR)"],[3,"Trey McBride (TE)"],[4,"Lamar Jackson (QB)"],[5,"Quinshon Judkins (RB)"],[6,"Jameson Williams (WR)"],[7,"Rhamondre Stevenson (RB)"],[8,"Jaylen Warren (RB)"],[9,"Christian Watson (WR)"],[10,"Alec Pierce (WR) Q"],[11,"Chuba Hubbard (RB)"],[12,"RJ Harvey (RB)"],[13,"Josh Downs (WR)"],[14,"Steelers D/ST"],[15,"Eddy Pineiro (K)"],[16,"Jordan Mason (RB)"]]},
-  {name:"Balls Destroyers", owner:"Josue Montiel", proj:122.8, value:-10, tag:"",
-   core:[["QB","Drake Maye"],["RB","Derrick Henry"],["RB","Jadarian Price"],["WR","Ja'Marr Chase"],["WR","Emeka Egbuka"],["TE","Sam LaPorta"]],
-   note:"Los dos robos más grandes del draft están aquí: Jadarian Price (Ronda 8) y TreVeyon Henderson (Ronda 9), aunque el reach de Drake Maye en la Ronda 4 le resta puntos.",
-   sugerencia:"TreVeyon Henderson viene marcado <b>Out</b> de cara a la Semana 1: mételo a la banca y arranca con Derrick Henry, Jadarian Price y Breece Hall como el trío de RB titular. Con seis WR entre titulares y banca (Chase, Egbuka, McLaurin, Worthy, Deebo Samuel, Keenan Allen) hay margen de sobra para no forzar nada.",
-   full:[[1,"Ja'Marr Chase (WR)"],[2,"Derrick Henry (RB)"],[3,"Breece Hall (RB)"],[4,"Drake Maye (QB)"],[5,"Emeka Egbuka (WR)"],[6,"Terry McLaurin (WR)"],[7,"Sam LaPorta (TE)"],[8,"Jadarian Price (RB)"],[9,"TreVeyon Henderson (RB) O"],[10,"Rams D/ST"],[11,"Bo Nix (QB)"],[12,"Xavier Worthy (WR)"],[13,"Mark Andrews (TE)"],[14,"Deebo Samuel Sr. (WR)"],[15,"Chris Boswell (K)"],[16,"Keenan Allen (WR)"]]},
-  {name:"Rene's Reliable Team", owner:"Rene Sanchez", proj:119.7, value:6, tag:"",
-   core:[["QB","Jayden Daniels"],["RB","Christian McCaffrey"],["RB","Omarion Hampton"],["WR","Chris Olave"],["WR","Malik Nabers","Q"],["TE","Dallas Goedert"]],
-   note:"McCaffrey + Hampton es un dúo de RB sólido, sin reaches ni robos grandes, un draft parejo de principio a fin.",
-   sugerencia:"El plantel con <b>más banderas de lesión de la liga</b>: Nabers, Jonathon Brooks, Patrick Mahomes y Jacory Croskey-Merritt, los cuatro marcados Questionable. Revisa los cuatro reportes antes de que cierren las alineaciones del domingo. Cam Skattebo es la válvula de escape si Hampton o McCaffrey no pintan bien.",
-   full:[[1,"Christian McCaffrey (RB)"],[2,"Omarion Hampton (RB)"],[3,"Chris Olave (WR)"],[4,"Malik Nabers (WR) Q"],[5,"Cam Skattebo (RB)"],[6,"Jayden Daniels (QB)"],[7,"Marvin Harrison Jr. (WR)"],[8,"DK Metcalf (WR)"],[9,"Dallas Goedert (TE)"],[10,"Parker Washington (WR)"],[11,"Jonathon Brooks (RB) Q"],[12,"Patrick Mahomes (QB) Q"],[13,"Jacory Croskey-Merritt (RB) Q"],[14,"Romeo Doubs (WR)"],[15,"Browns D/ST"],[16,"Cam Little (K)"]]},
-  {name:"Yourgrandma's Team", owner:"Tadeo Tapia", proj:123.7, value:17, tag:"",
-   core:[["QB","Dak Prescott"],["RB","Bijan Robinson"],["RB","Ashton Jeanty"],["WR","Drake London"],["WR","Tetairoa McMillan"],["TE","Colston Loveland"]],
-   note:"Robinson + Jeanty de arranque, más dos robos de fondo de tabla (MarShawn Lloyd, Chris Godwin Jr.) empujan el 4° mejor puntaje de valor de la liga (+17).",
-   sugerencia:"Con Lloyd, Blake Corum y Tyjae Spears de banca, la profundidad de RB sobra. Rompetotos o Puro Power Ranking no tienen ese lujo: ofrece a Lloyd o Corum por ayuda en TE, ya que Colston Loveland es un rookie con riesgo y Dalton Kincaid en banca no es un TE1 real.",
-   full:[[1,"Bijan Robinson (RB)"],[2,"Drake London (WR)"],[3,"Ashton Jeanty (RB)"],[4,"Tetairoa McMillan (WR)"],[5,"Colston Loveland (TE)"],[6,"DJ Moore (WR)"],[7,"Dak Prescott (QB)"],[8,"Broncos D/ST"],[9,"Brandon Aubrey (K)"],[10,"Stefon Diggs (WR)"],[11,"MarShawn Lloyd (RB)"],[12,"Chris Godwin Jr. (WR)"],[13,"Blake Corum (RB)"],[14,"Dalton Kincaid (TE)"],[15,"Tyjae Spears (RB)"],[16,"Travis Hunter (WR/CB)"]]},
-  {name:"Rompetotos", owner:"Juan R", proj:122.0, value:19, tag:"",
-   core:[["QB","Jaxson Dart"],["RB","Jonathan Taylor"],["RB","De'Von Achane"],["WR","Rashee Rice"],["WR","Garrett Wilson"],["TE","Tyler Warren"]],
-   note:"2° mejor puntaje de valor de la liga (+19). Jonathan Taylor + De'Von Achane es de los mejores dúos de RB titular, sin ningún reach relevante en las primeras 6 rondas.",
-   sugerencia:"Tres QB en el plantel (Dart titular, Matthew Stafford y Kyler Murray de banca) es puro lujo desperdiciado. Suelta uno de los dos backups por ayuda en D/ST o un flier de WR, el resto del roster no necesita nada urgente.",
-   full:[[1,"Jonathan Taylor (RB)"],[2,"Rashee Rice (WR)"],[3,"De'Von Achane (RB)"],[4,"Garrett Wilson (WR)"],[5,"Tee Higgins (WR)"],[6,"Tyler Warren (TE)"],[7,"Rome Odunze (WR) Q"],[8,"Jaxson Dart (QB)"],[9,"Kenny Gainwell (RB)"],[10,"Wan'Dale Robinson (WR)"],[11,"Brian Thomas Jr. (WR)"],[12,"J.K. Dobbins (RB)"],[13,"Matthew Stafford (QB)"],[14,"Patriots D/ST"],[15,"Harrison Butker (K)"],[16,"Kyler Murray (QB)"]]},
-  {name:"Carlos's Cool Team", owner:"Carlos Parra Sr.", proj:125.4, value:24, tag:"best",
-   core:[["QB","Justin Herbert"],["RB","Chase Brown"],["RB","Jeremiyah Love","Q"],["WR","Puka Nacua"],["WR","DeVonta Smith"],["TE","Harold Fannin Jr."]],
-   note:"El mejor puntaje de valor de toda la liga (+24) y 3ª mejor proyección de Semana 1 (125.4). Puka Nacua cayó justo en su lugar, y Jaylen Waddle en la Ronda 6 fue puro robo. Cero reaches grandes.",
-   sugerencia:"Rostera <b>siete wide receivers</b> (Nacua, DeVonta Smith, Waddle, McConkey, Wilson, Shakir, Coker), un lujo que nadie más se puede dar. Vende uno alto (Shakir o Wilson) a Liga de la Injusticia o Jerry Jones Farm, los dos equipos más necesitados de la liga, a cambio de ayuda en RB o QB2.",
-   full:[[1,"Puka Nacua (WR)"],[2,"Chase Brown (RB)"],[3,"Jeremiyah Love (RB) Q"],[4,"DeVonta Smith (WR)"],[5,"Ladd McConkey (WR)"],[6,"Jaylen Waddle (WR)"],[7,"Harold Fannin Jr. (TE)"],[8,"Justin Herbert (QB)"],[9,"Tony Pollard (RB)"],[10,"Michael Wilson (WR)"],[11,"Jakobi Meyers (WR) Q"],[12,"Kyle Monangai (RB)"],[13,"Khalil Shakir (WR)"],[14,"Eagles D/ST"],[15,"Jalen Coker (WR)"],[16,"Jake Bates (K)"]]},
-];
-
-const sorted = [...teams].sort((a,b) => b.proj - a.proj);
-
-document.getElementById("team-tabs").innerHTML = sorted.map((t,i) => `
-  <button class="tab-btn${i===0 ? " active" : ""}" data-idx="${i}"><span class="rk">#${i+1}</span>${t.name}</button>
-`).join("");
-
-document.getElementById("team-panels").innerHTML = sorted.map((t,i) => {
-  const cardCls = t.tag === "best" ? "is-best" : t.tag === "worst" ? "is-worst" : "";
-  const tagHtml = t.tag === "best" ? '<span class="tc-tag best">Mejor draft de la liga</span>' :
-                  t.tag === "worst" ? '<span class="tc-tag worst">Peor draft de la liga</span>' : "";
-  const valCls = t.value > 0 ? "pos" : t.value < 0 ? "neg" : "";
-  const valTxt = (t.value > 0 ? "+" : "") + t.value;
-  return `<div class="team-card ${cardCls}" data-panel="${i}" ${i===0 ? "" : "hidden"}>
-    <div class="tc-head">
-      <div><div class="tc-name">${t.name}</div><div class="tc-owner">${t.owner}</div>${tagHtml}</div>
-      <div class="tc-rank">#${i+1}</div>
-    </div>
-    <div class="tc-stats">
-      <div class="tc-stat"><div class="l">Proy. Sem. 1</div><div class="v">${t.proj.toFixed(1)}</div></div>
-      <div class="tc-stat"><div class="l">Valor draft (R1–6)</div><div class="v ${valCls}">${valTxt}</div></div>
-    </div>
-    <ul class="core-list">
-      ${t.core.map(c => `<li><span class="pos">${c[0]}</span><span class="nm">${c[1]}</span>${c[2] ? `<span class="flag">${c[2]}</span>` : ""}</li>`).join("")}
-    </ul>
-    <div class="note-line">${t.note}</div>
-    <div class="sugg-box"><div class="sb-title">🔧 Sugerencia de la semana</div><p>${t.sugerencia}</p></div>
-    <details class="roster">
-      <summary>Ver plantel completo (16)</summary>
-      <div class="full">${t.full.map(f => `<div><span class="rd">R${f[0]}</span>${f[1]}</div>`).join("")}</div>
-    </details>
-  </div>`;
-}).join("");
-
-document.getElementById("team-tabs").addEventListener("click", (e) => {
-  const btn = e.target.closest(".tab-btn");
-  if(!btn) return;
-  const idx = btn.dataset.idx;
-  document.querySelectorAll("#team-tabs .tab-btn").forEach(b => b.classList.toggle("active", b === btn));
-  document.querySelectorAll("#team-panels [data-panel]").forEach(p => { p.hidden = p.dataset.panel !== idx; });
-});
-
-// ---- Chart: projections ----
-const projSorted = [...teams].sort((a,b) => b.proj - a.proj);
-const maxProj = Math.max(...projSorted.map(t => t.proj));
-document.getElementById("chart-proj").innerHTML = projSorted.map(t => `
-  <div class="bar-row">
-    <div class="lbl">${t.name}</div>
-    <div class="bar-track"><div class="bar-fill" style="width:${(t.proj/maxProj*100).toFixed(1)}%"></div></div>
-    <div class="val mono-num">${t.proj.toFixed(1)}</div>
-  </div>`).join("");
-
-// ---- Chart: draft value (diverging) ----
-const valSorted = [...teams].sort((a,b) => b.value - a.value);
-const maxAbs = Math.max(...valSorted.map(t => Math.abs(t.value)));
-document.getElementById("chart-value").innerHTML = valSorted.map(t => {
-  const pct = (Math.abs(t.value) / maxAbs * 50).toFixed(1);
-  const fill = t.value >= 0 ? `<div class="div-fill value" style="width:${pct}%"></div>` : `<div class="div-fill reach" style="width:${pct}%"></div>`;
-  const valTxt = (t.value > 0 ? "+" : "") + t.value;
-  return `<div class="bar-row">
-      <div class="lbl">${t.name}</div>
-      <div class="div-track">${fill}<div class="div-mid"></div></div>
-      <div class="val mono-num">${valTxt}</div>
-    </div>`;
-}).join("");
-
-// ---- Verdict ----
-const verdicts = [
-  {cls:"best", kicker:"🏆 Mejor draft de la liga", team:"Carlos's Cool Team",
-   body:"Carga con las dos métricas en la mano: el mejor puntaje de valor de draft (+24, rondas 1–6) y la 3ª mejor proyección de Semana&nbsp;1 (125.4). Puka Nacua cayó exacto en su ranking y Jaylen Waddle en la Ronda 6 fue puro regalo. Cero reaches grandes. Lo maneja el papá de Carlos, no Carlos, así que sí, va a haber que aguantarlo toda la temporada."},
-  {cls:"worst", kicker:"📉 Peor draft de la liga", team:"Liga de la Injusticia",
-   body:"La proyección más baja de la liga por lejos (87.3, ~27% debajo del promedio) y el peor puntaje de valor (−113). La causa: reach tras reach en las primeras 6 rondas (Brock Bowers, Kenneth Walker III, Tucker Kraft, Caleb Williams) y, para cerrar, dos picks finales gastados en D/ST de banca que nunca van a jugar. Petu necesita reconstruir esto por la vía del trade, no de waivers."},
-  {cls:"pick", kicker:"👀 Para vigilar", team:"Rony Camacho",
-   body:"Proyección de Semana&nbsp;1 apenas en la mitad de la tabla (119.2), pero el 3er mejor puntaje de valor de la liga (+18): Josh Allen, James Cook III, D'Andre Swift, CeeDee Lamb y Travis Kelce, todos cerca o por debajo de su ranking. Si Josh Jacobs (Day-to-Day) se recupera, este plantel tiene más techo del que su proyección actual sugiere."},
-];
-document.getElementById("verdict-grid").innerHTML = verdicts.map(v => `
-  <div class="verdict-card ${v.cls}">
-    <div class="v-kicker">${v.kicker}</div>
-    <div class="v-team">${v.team}</div>
-    <p>${v.body}</p>
-  </div>`).join("");
-
-// ---- Matchups (Week 1, real ESPN projections) ----
-const matchups = [
-  {a:"Carlos's Cool Team", pa:125.4, la:[["P. Nacua",21.04],["J. Herbert",18.97],["C. Brown",16.03]],
-   b:"Adelphianos", pb:127.5, lb:[["J. Hurts",21.07],["J. Smith-Njigba",18.92],["S. Barkley",17.66]]},
-  {a:"Liga de la Injusticia", pa:87.3, la:[["T. Lawrence",16.98],["C. Williams",16.35],["J. Williams",15.22]],
-   b:"Rompetotos", pb:122.0, lb:[["J. Dart",18.52],["D. Achane",18.21],["J. Taylor",17.77]]},
-  {a:"Balls Destroyers", pa:122.8, la:[["J. Chase",19.95],["B. Hall",16.49],["D. Henry",16.37]],
-   b:"Puro Power Ranking", pb:125.5, lb:[["J. Gibbs",22.41],["L. Jackson",19.13],["T. McBride",14.35]]},
-  {a:"Rene's Reliable Team", pa:119.7, la:[["C. McCaffrey",18.39],["O. Hampton",17.58],["J. Daniels",16.83]],
-   b:"Jerry Jones Farm", pb:118.9, lb:[["A. St. Brown",18.83],["J. Burrow",18.15],["J. Jefferson",17.08]]},
-  {a:"Rony Camacho", pa:119.2, la:[["J. Allen",19.32],["C. Lamb",17.25],["J. Cook III",15.89]],
-   b:"Yourgrandma's Team", pb:123.7, lb:[["B. Robinson",19.31],["A. Jeanty",18.3],["D. Prescott",16.73]]},
-];
-document.getElementById("matchup-grid").innerHTML = matchups.map(m => {
-  const total = m.pa + m.pb;
-  const pctA = (m.pa/total*100).toFixed(1);
-  const pctB = (100 - pctA).toFixed(1);
-  const favA = m.pa >= m.pb;
-  const margin = Math.abs(m.pa - m.pb).toFixed(1);
-  const badge = margin < 5 ? "Cerradísimo" : margin > 25 ? "Paliza anunciada" : "Favorito claro";
-  return `<div class="matchup-card">
-    <span class="mc-badge">${badge} · dif. ${margin} pts</span>
-    <div class="mc-sides">
-      <div class="mc-side ${favA ? "fav" : ""}"><div class="nm">${m.a}</div><div class="pj">${m.pa.toFixed(1)}</div></div>
-      <div class="mc-vs">VS</div>
-      <div class="mc-side ${!favA ? "fav" : ""}"><div class="nm">${m.b}</div><div class="pj">${m.pb.toFixed(1)}</div></div>
-    </div>
-    <div class="mc-bar"><div class="a" style="width:${pctA}%"></div><div class="b" style="width:${pctB}%"></div></div>
-    <div class="mc-leaders">
-      <div><div class="l-title">Líderes ${m.a}</div><ul>${m.la.map(l => `<li><span>${l[0]}</span><span class="mono-num">${l[1]}</span></li>`).join("")}</ul></div>
-      <div><div class="l-title">Líderes ${m.b}</div><ul>${m.lb.map(l => `<li><span>${l[0]}</span><span class="mono-num">${l[1]}</span></li>`).join("")}</ul></div>
-    </div>
-  </div>`;
-}).join("");
 
 // ---- Final scoreboard (Week 1, resultado real de ESPN, cerrado el 14 de septiembre de 2026) ----
 const liveMatchups = [
@@ -862,6 +572,18 @@ const waiverList = [
 document.getElementById("waiver-list").innerHTML = waiverList.map((w,i) => `
   <div class="sugg"><div class="idx">${String(i+1).padStart(2,"0")}</div><div class="body"><b>${w[0]}</b><p>${w[1]}</p></div></div>`).join("");
 
+// ---- Breakout free agents (más puntos reales en Semana 1, sin importar % rosterado) ----
+const breakoutList = [
+  ["Bryce Young (QB, CAR) · 31.44 pts", "El agente libre que más puntos metió en toda la liga, y ni cerca del segundo lugar. Ojo con el contexto: fue en una goleada 37-59 en contra, mucho volumen de garbage time. Sigue apenas 11.2% rosterado. Sirve como flier de emergencia para un bye, no como QB2 de verdad."],
+  ["Tyler Shough (QB, NO) · 23.2 pts", "El que combina puntos reales con una subida real en % rosterado (ya 46.7%). El mejor QB2 disponible ahora mismo para Carlos's Cool Team o para Rompetotos si quiere soltar a Kyler Murray."],
+  ["Bengals D/ST · 20.0 pts", "Apenas 2.1% rosterado. Buena opción de streaming de D/ST para cualquier equipo que traiga una defensa floja, como el Packers D/ST de Liga de la Injusticia (4.0 pts en Semana 1) o el Patriots D/ST de Rompetotos."],
+  ["Devaughn Vele (WR, NO) · 19.9 pts", "Apenas 12.9% rosterado. El flier de WR más interesante de la semana para Liga de la Injusticia o Jerry Jones Farm, los dos equipos con menos profundidad de receptores de la liga."],
+  ["Jordan Love (QB, GB) · 19.48 pts", "Titular real de la NFL y sigue solo 42.0% rosterado en esta liga. Buy-low obvio si algún QB1 de la liga se cae por lesión."],
+  ["Mike Gesicki (TE, CIN) · 18.8 pts", "Apenas 1.5% rosterado, casi nadie lo tiene. Vale la pena vigilarlo como streamer de TE si Jerry Jones Farm (Kyle Pitts) o Liga de la Injusticia (Jake Ferguson) siguen sin producir ahí."],
+];
+document.getElementById("breakout-list").innerHTML = breakoutList.map((w,i) => `
+  <div class="sugg"><div class="idx">${String(i+1).padStart(2,"0")}</div><div class="body"><b>${w[0]}</b><p>${w[1]}</p></div></div>`).join("");
+
 // ---- Top scorers league-wide (Week 1, marcador final) ----
 const topScorers = [
   ["C. Williams","Liga de la Injusticia",37.26],
@@ -882,9 +604,9 @@ document.getElementById("top-scorers").innerHTML = topScorers.map(s => `
 const suggestions = [
   ["6 de 10 clasifican a playoffs", "Más de la mitad de la liga llega a la postemporada, pero cada ronda dura solo 1 semana: nada de series a 2 semanas para amortiguar una mala noche. Empieza a jugar para el 6° lugar desde ya."],
   ["Los empates se quedan como empates", "La liga no tiene tiebreaker en temporada regular. Puede definir el 6° puesto en diciembre."],
-  ["Waivers de orden inverso, 1 día de espera", "El que va peor en la tabla agarra primero cada semana. Con 7 equipos por debajo del promedio de valor de draft, va a haber movimiento fuerte desde la Semana 1."],
-  ["4 votos para vetar un trade", "Con el mercado de RB (Puro Power Ranking, Yourgrandma's Team) y WR (Adelphianos, Carlos's Cool Team) tan desbalanceado, esta liga tiene trades obvias esperando, y suficiente gente para vetar una mala."],
-  ["Fecha límite de trades: 2 de diciembre", "Tarde en la temporada, así que hay margen amplio para corregir un draft flojo por la vía del trade en vez de solo esperar waivers."],
+  ["Waivers de orden inverso, 1 día de espera", "El que va peor en la tabla agarra primero cada semana. Después de reclamar a alguien hay 1 día de espera antes de que quede libre para cualquiera."],
+  ["4 votos para vetar un trade", "Sin límite de trades en toda la temporada. Si ves un roster sobrado de una posición y corto de otra, probablemente hay una trade esperando ahí, y hacen falta 4 managers de la liga para vetar una sospechosa."],
+  ["Fecha límite de trades: 2 de diciembre", "Después de esa fecha, lo que tengas en el roster es lo que tienes para playoffs. Resuelve los huecos de tu equipo antes, no cuando ya sea tarde."],
 ];
 document.getElementById("sugg-list").innerHTML = suggestions.map((s,i) => `
   <div class="sugg"><div class="idx">${String(i+1).padStart(2,"0")}</div><div class="body"><b>${s[0]}</b><p>${s[1]}</p></div></div>`).join("");
@@ -902,63 +624,6 @@ document.getElementById("watch-chips").innerHTML = watch.map(w => `<span class="
 function esc(s){
   return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
-
-// ---- Live poll: best-drafted team (db capability) ----
-(async () => {
-  const pollOptions = teams.map(t => ({id:t.name, label:t.name}));
-  const optionsEl = document.getElementById("poll-options");
-  const statusEl = document.getElementById("poll-status");
-  const subEl = document.getElementById("poll-sub");
-
-  function renderPoll(counts, myVote){
-    const total = Object.values(counts).reduce((a,b) => a+b, 0);
-    optionsEl.innerHTML = pollOptions.map(o => {
-      const n = counts[o.id] || 0;
-      const pct = total ? Math.round(n/total*100) : 0;
-      return `<div class="poll-opt${o.id===myVote ? " mine" : ""}" data-opt="${o.id}">
-        <div class="po-top"><span class="po-label">${o.label}</span><span class="po-count">${n} voto${n===1?"":"s"} · ${pct}%</span></div>
-        <div class="po-track"><div class="po-fill" style="width:${pct}%"></div></div>
-      </div>`;
-    }).join("");
-  }
-  renderPoll({}, null);
-
-  let voterId;
-  try{
-    voterId = localStorage.getItem("cfparra-poll-voter");
-    if(!voterId){ voterId = crypto.randomUUID(); localStorage.setItem("cfparra-poll-voter", voterId); }
-  }catch(e){ voterId = crypto.randomUUID(); }
-
-  const votesCol = collection(db, "pollVotes");
-  const voteRef = doc(votesCol, voterId);
-  let myVote = null;
-
-  onSnapshot(votesCol, (snap) => {
-    const counts = {};
-    snap.forEach(d => {
-      const opt = d.data().option;
-      counts[opt] = (counts[opt] || 0) + 1;
-      if(d.id === voterId) myVote = opt;
-    });
-    renderPoll(counts, myVote);
-    subEl.textContent = "Votos en vivo de todo el grupo. Puedes cambiar tu voto cuando quieras.";
-  }, (err) => {
-    statusEl.textContent = "No se pudo cargar la votación en vivo ahora mismo.";
-  });
-
-  optionsEl.addEventListener("click", async (e) => {
-    const opt = e.target.closest(".poll-opt");
-    if(!opt) return;
-    const choice = opt.dataset.opt;
-    statusEl.textContent = "Guardando tu voto…";
-    try{
-      await setDoc(voteRef, {option: choice, ts: Date.now()});
-      statusEl.textContent = "¡Voto registrado!";
-    }catch(err){
-      statusEl.textContent = "No se pudo guardar tu voto, intenta de nuevo.";
-    }
-  });
-})();
 
 // ---- Live comments (db capability) ----
 (async () => {
