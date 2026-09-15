@@ -319,7 +319,7 @@
     <a class="back-home" href="../index.html">🏠 parravcf.</a>
     <span class="eyebrow"><span class="dot"></span>Liga Cfparra &middot; 10 equipos &middot; Temporada 2026</span>
     <h1 class="title">Rayos X<br><em>al Draft</em> de la Liga</h1>
-    <p class="subtitle">El draft se hizo el 9 de septiembre a las 4:00 PM, y la Semana 1 ya arrancó. Aquí está todo lo que le pasó a las 10 plantillas: quién se salió del guion, quién se robó valor, y cómo va el marcador en vivo, con los datos reales de ESPN, no puro rumor del chat.</p>
+    <p class="subtitle">El draft se hizo el 9 de septiembre a las 4:00 PM, y la Semana 1 ya cerró. Aquí está todo lo que le pasó a las 10 plantillas: quién se salió del guion en el draft, quién le atinó a la Semana 1, quién no, y qué se puede ir a buscar en agentes libres de cara a la Semana 2. Todo con datos reales de ESPN, no puro rumor del chat.</p>
     <div class="stat-row">
       <div class="stat"><div class="n">10</div><div class="l">Equipos</div></div>
       <div class="stat"><div class="n">16</div><div class="l">Rondas / plantel</div></div>
@@ -331,7 +331,9 @@
       <a href="#novatos" class="qn-btn">📖 Guía para novatos</a>
       <a href="#equipos" class="qn-btn">🏈 Tu equipo</a>
       <a href="#predicciones" class="qn-btn">🔮 Predicciones Sem. 1</a>
-      <a href="#envivo" class="qn-btn">🔴 En vivo</a>
+      <a href="#envivo" class="qn-btn">✅ Resultados Sem. 1</a>
+      <a href="#semana2" class="qn-btn">📅 Previa Semana 2</a>
+      <a href="#waivers" class="qn-btn">🧲 Waivers de la semana</a>
       <a href="deportes.html" class="qn-btn">🏟️ Ir a Deportes (Survivor y Picks)</a>
       <a href="#poll-card" class="qn-btn qn-btn--accent">🗳️ ¿Mejor equipo?</a>
     </div>
@@ -410,16 +412,52 @@
   </section>
 
   <section id="envivo">
-    <div class="kicker">🔴 Semana 1 · en vivo</div>
-    <h2 class="h">Cómo va el marcador ahorita</h2>
-    <p class="lede">Snapshot del scoreboard real de ESPN, tomado el 10 de septiembre de 2026. La mayoría de los partidos de la NFL todavía no arrancan, así que esto se va a mover bastante en los próximos días. No se actualiza solo, así que revisa la fecha antes de creer el marcador a ciegas.</p>
+    <div class="kicker">✅ Semana 1 · cerrada</div>
+    <h2 class="h">Así quedó el marcador, de verdad</h2>
+    <p class="lede">Marcador final real de ESPN, ya con los 5 duelos terminados (Monday Night incluido). Debajo de cada tarjeta puedes comparar contra lo que la proyección de ESPN decía antes de que arrancara la semana.</p>
     <div class="matchup-grid" id="live-matchup-grid"></div>
 
+    <div class="two-col" style="margin-top:16px;">
+      <div class="verdict-card pick">
+        <div class="v-kicker" style="color:var(--value);">🤏 El cruce más cerrado</div>
+        <div class="v-team">Rene's Reliable Team vs. Jerry Jones Farm</div>
+        <p><b>133.96 a 124.76</b>, una diferencia de apenas <b>9.2 puntos</b>, la más chica de las 5 llaves. Era justo el duelo que la proyección de ESPN ya marcaba como toss-up (119.7 vs 118.9 antes de arrancar), así que por una vez la proyección le atinó al ambiente del partido, aunque Jerry Jones Farm terminó ganando en vez de Rene's Reliable Team. Justin Jefferson (31.2) y Amon-Ra St. Brown (28.7) le alcanzaron a Miguel para robarse el duelo más parejo de la semana.</p>
+      </div>
+      <div class="verdict-card best">
+        <div class="v-kicker">🎢 El cruce más entretenido</div>
+        <div class="v-team">Liga de la Injusticia vs. Rompetotos</div>
+        <p>Este era, según el draft, el plantel <b>peor armado de toda la liga</b> (87.3 de proyección, −113 de valor de draft). Salió y metió <b>168.76 puntos</b>, el marcador más alto de la Semana 1 completa, para aplastar 168.76 a 119.3. Caleb Williams (reach de Ronda 6) tiró para <b>37.26</b>, Kenneth Walker III metió 34.1 y David Montgomery, el único robo real del draft de Petu, sumó 28.9 desde el FLEX. De peor draft de la liga a mejor semana de la liga, en 6 días.</p>
+      </div>
+    </div>
+
+    <div class="method" style="margin-top:16px;">
+      <div class="ico" style="font-size:19px;">🔮</div>
+      <p><b>¿Qué tanto le atinamos con las predicciones de arriba?</b> De los 5 duelos, la proyección oficial de ESPN acertó el ganador en <b>2 de 5</b> (Adelphianos y Puro Power Ranking). Falló en los otros tres, y no por poco: tenía a Liga de la Injusticia perdiendo por 34.7 puntos y terminó ganando por 49.5; tenía a Rony Camacho abajo por 4.5 y terminó arriba por 14.1; y tenía a Rene's Reliable Team arriba por 0.8 en el duelo más cerrado de la semana, pero perdió. Moraleja de Semana 1: la proyección previa al draft dice algo sobre el papel, pero el domingo de verdad tiene la última palabra.</p>
+    </div>
+
     <div class="chart-card" style="margin-top:16px;">
-      <div class="chart-title">🔥 Los que más puntos han metido</div>
-      <div class="chart-sub">Jugadores draftados con más puntos reales acumulados en la liga hasta este corte</div>
+      <div class="chart-title">🔥 Los que más puntos metieron</div>
+      <div class="chart-sub">Titulares con más puntos reales de la Semana 1 en toda la liga</div>
       <div id="top-scorers"></div>
     </div>
+  </section>
+
+  <section id="semana2">
+    <div class="kicker">📅 Semana 2</div>
+    <h2 class="h">Lo que viene: la previa</h2>
+    <p class="lede">Proyección oficial de ESPN para la Semana 2, con las alineaciones que cada equipo tiene puestas ahora mismo (todavía pueden cambiar antes del domingo). Jahmyr Gibbs y Josh Allen ya juegan el jueves, así que esos dos duelos empiezan a definirse antes que el resto.</p>
+    <div class="matchup-grid" id="week2-matchup-grid"></div>
+    <div class="method" style="margin-top:16px;">
+      <div class="ico" style="font-size:19px;">👀</div>
+      <p><b>Para no perder de vista:</b> Puro Power Ranking trae a <b>A.J. Brown marcado IR</b> en un cupo titular de WR, con proyección de 0.0, hay que resolver esa alineación antes de que cierre. En Adelphianos, Isaiah Likely metió 27.8 en la banca la semana pasada contra los 3.2 de George Kittle en la titular, vale la pena revisar esa decisión antes del domingo. Y en Carlos's Cool Team, Jalen Coker sumó 33.8 puntos sin jugar un solo snap titular.</p>
+    </div>
+  </section>
+
+  <section id="waivers">
+    <div class="kicker">🧲 Mercado de agentes libres</div>
+    <h2 class="h">A quién ir a buscar esta semana</h2>
+    <p class="lede">Waivers de orden inverso: el que va peor en la tabla agarra primero. Esto es lo que hay disponible ahora mismo en la liga Cfparra, real y en vivo, según cuántos equipos ya lo tienen rosterado.</p>
+    <div class="sugg-list" id="waiver-list"></div>
   </section>
 
   <section id="veredicto">
@@ -485,7 +523,7 @@
   </section>
 
   <footer>
-    Datos: ESPN Fantasy Football (liga "Cfparra", ID 1590132743): configuración de liga, draft recap, rosters, League Schedule y Scoreboard, consultados en vivo. Draft realizado el 9 de septiembre de 2026 a las 4:00 PM. Marcador de Semana 1 actualizado el 10 de septiembre de 2026.
+    Datos: ESPN Fantasy Football (liga "Cfparra", ID 1590132743): configuración de liga, draft recap, rosters, League Schedule, Scoreboard y Agentes Libres, consultados en vivo. Draft realizado el 9 de septiembre de 2026 a las 4:00 PM. Semana 1 cerrada y Semana 2 actualizada el 15 de septiembre de 2026.
   </footer>
 </div>
 
@@ -739,36 +777,35 @@ document.getElementById("matchup-grid").innerHTML = matchups.map(m => {
   </div>`;
 }).join("");
 
-// ---- Live scoreboard (Week 1, real ESPN scores, snapshot del 10 de septiembre de 2026) ----
+// ---- Final scoreboard (Week 1, resultado real de ESPN, cerrado el 14 de septiembre de 2026) ----
 const liveMatchups = [
-  {a:"Carlos's Cool Team", pa:0.0, la:[],
-   b:"Adelphianos", pb:26.2, lb:[["J. Smith-Njigba",26.2]]},
-  {a:"Liga de la Injusticia", pa:0.0, la:[],
-   b:"Rompetotos", pb:7.0, lb:[["NE D/ST",7.0]]},
-  {a:"Balls Destroyers", pa:17.62, la:[["D. Maye",9.82],["J. Price",7.8]],
-   b:"Puro Power Ranking", pb:20.1, lb:[["R. Stevenson",14.5],["A. Brown",5.6]]},
-  {a:"Rene's Reliable Team", pa:0.0, la:[],
-   b:"Jerry Jones Farm", pb:21.0, lb:[["SEA D/ST",14.0],["J. Myers",7.0]]},
-  {a:"Rony Camacho", pa:0.0, la:[],
-   b:"Yourgrandma's Team", pb:0.0, lb:[]},
+  {a:"Carlos's Cool Team", pa:101.06, la:[["L. McConkey",19.2],["C. Brown",18.8],["J. Herbert",13.26]],
+   b:"Adelphianos", pb:114.72, lb:[["J. Smith-Njigba",26.2],["J. Hurts",24.72],["N. Collins",21.2]]},
+  {a:"Liga de la Injusticia", pa:168.76, la:[["C. Williams",37.26],["K. Walker III",34.1],["D. Montgomery",28.9]],
+   b:"Rompetotos", pb:119.3, lb:[["J. Dart",26.6],["J. Taylor",25.1],["G. Wilson",13.9]]},
+  {a:"Balls Destroyers", pa:105.42, la:[["D. Henry",35.3],["B. Hall",19.8],["E. Egbuka",11.3]],
+   b:"Puro Power Ranking", pb:147.66, lb:[["J. Gibbs",33.6],["L. Jackson",24.96],["T. McBride",24.5]]},
+  {a:"Rene's Reliable Team", pa:124.76, la:[["C. Olave",28.2],["D. Goedert",23.7],["J. Daniels",17.66]],
+   b:"Jerry Jones Farm", pb:133.96, lb:[["J. Jefferson",31.2],["A. St. Brown",28.7],["B. Irving",20.3]]},
+  {a:"Rony Camacho", pa:132.76, la:[["J. Allen",35.66],["D. Swift",32.4],["C. Lamb",15.4]],
+   b:"Yourgrandma's Team", pb:118.7, lb:[["A. Jeanty",32.7],["B. Robinson",31.3],["D. Prescott",14.4]]},
 ];
 document.getElementById("live-matchup-grid").innerHTML = liveMatchups.map(m => {
   const total = m.pa + m.pb;
-  const pctA = total > 0 ? (m.pa/total*100).toFixed(1) : 50;
-  const pctB = total > 0 ? (100 - pctA).toFixed(1) : 50;
-  const favA = m.pa > m.pb;
-  const favB = m.pb > m.pa;
+  const pctA = (m.pa/total*100).toFixed(1);
+  const pctB = (100 - pctA).toFixed(1);
+  const favA = m.pa >= m.pb;
   const margin = Math.abs(m.pa - m.pb).toFixed(1);
-  const badge = total === 0 ? "Sin arrancar" : margin == 0 ? "Empatados" : "Va ganando";
+  const badge = margin < 10 ? "Cerradísimo" : margin > 40 ? "Paliza total" : "Ganó con margen";
   const leadersHtml = (list) => list.length
     ? `<ul>${list.map(l => `<li><span>${l[0]}</span><span class="mono-num">${l[1]}</span></li>`).join("")}</ul>`
     : `<div class="muted" style="font-size:12.5px;">Sin anotaciones todavía</div>`;
   return `<div class="matchup-card">
-    <span class="mc-badge">${badge}${total > 0 ? ` · dif. ${margin} pts` : ""}</span>
+    <span class="mc-badge">${badge} · dif. ${margin} pts</span>
     <div class="mc-sides">
       <div class="mc-side ${favA ? "fav" : ""}"><div class="nm">${m.a}</div><div class="pj">${m.pa.toFixed(1)}</div></div>
       <div class="mc-vs">VS</div>
-      <div class="mc-side ${favB ? "fav" : ""}"><div class="nm">${m.b}</div><div class="pj">${m.pb.toFixed(1)}</div></div>
+      <div class="mc-side ${!favA ? "fav" : ""}"><div class="nm">${m.b}</div><div class="pj">${m.pb.toFixed(1)}</div></div>
     </div>
     <div class="mc-bar"><div class="a" style="width:${pctA}%"></div><div class="b" style="width:${pctB}%"></div></div>
     <div class="mc-leaders">
@@ -778,13 +815,60 @@ document.getElementById("live-matchup-grid").innerHTML = liveMatchups.map(m => {
   </div>`;
 }).join("");
 
-// ---- Top scorers league-wide (Week 1, puntos reales acumulados hasta el corte) ----
+// ---- Week 2 preview (proyección oficial ESPN, alineaciones actuales) ----
+const week2Matchups = [
+  {a:"Liga de la Injusticia", pa:115.4, la:[["C. Williams",18.6],["J. Williams",17.3],["K. Walker III",16.8]],
+   b:"Carlos's Cool Team", pb:122.2, lb:[["Puka Nacua",21.1],["J. Herbert",19.1],["Chase Brown",15.3]]},
+  {a:"Adelphianos", pa:123.9, la:[["J. Smith-Njigba",18.2],["Jalen Hurts",19.7],["Saquon Barkley",16.8]],
+   b:"Balls Destroyers", pb:117.3, lb:[["Ja'Marr Chase",18.9],["Drake Maye",18.1],["Derrick Henry",17.3]]},
+  {a:"Rompetotos", pa:123.3, la:[["Jaxson Dart",18.2],["Jonathan Taylor",17.7],["De'Von Achane",17.0]],
+   b:"Rene's Reliable Team", pb:119.9, lb:[["C. McCaffrey",21.5],["Jayden Daniels",19.4],["Omarion Hampton",16.0]]},
+  {a:"Puro Power Ranking", pa:111.6, la:[["Jahmyr Gibbs",23.7],["Lamar Jackson",20.3],["Trey McBride",14.3]],
+   b:"Rony Camacho", pb:123.4, lb:[["Josh Allen",22.9],["James Cook III",16.5],["CeeDee Lamb",18.4]]},
+  {a:"Jerry Jones Farm", pa:122.8, la:[["A. St. Brown",20.2],["Justin Jefferson",18.0],["Joe Burrow",16.6]],
+   b:"Yourgrandma's Team", pb:125.9, lb:[["Bijan Robinson",22.6],["Ashton Jeanty",17.5],["Dak Prescott",19.8]]},
+];
+document.getElementById("week2-matchup-grid").innerHTML = week2Matchups.map(m => {
+  const total = m.pa + m.pb;
+  const pctA = (m.pa/total*100).toFixed(1);
+  const pctB = (100 - pctA).toFixed(1);
+  const favA = m.pa >= m.pb;
+  const margin = Math.abs(m.pa - m.pb).toFixed(1);
+  const badge = margin < 5 ? "Cerradísimo" : margin > 25 ? "Paliza anunciada" : "Favorito claro";
+  return `<div class="matchup-card">
+    <span class="mc-badge">${badge} · dif. ${margin} pts</span>
+    <div class="mc-sides">
+      <div class="mc-side ${favA ? "fav" : ""}"><div class="nm">${m.a}</div><div class="pj">${m.pa.toFixed(1)}</div></div>
+      <div class="mc-vs">VS</div>
+      <div class="mc-side ${!favA ? "fav" : ""}"><div class="nm">${m.b}</div><div class="pj">${m.pb.toFixed(1)}</div></div>
+    </div>
+    <div class="mc-bar"><div class="a" style="width:${pctA}%"></div><div class="b" style="width:${pctB}%"></div></div>
+    <div class="mc-leaders">
+      <div><div class="l-title">Líderes proy. ${m.a}</div><ul>${m.la.map(l => `<li><span>${l[0]}</span><span class="mono-num">${l[1]}</span></li>`).join("")}</ul></div>
+      <div><div class="l-title">Líderes proy. ${m.b}</div><ul>${m.lb.map(l => `<li><span>${l[0]}</span><span class="mono-num">${l[1]}</span></li>`).join("")}</ul></div>
+    </div>
+  </div>`;
+}).join("");
+
+// ---- Waivers de la semana (agentes libres reales de la liga Cfparra) ----
+const waiverList = [
+  ["Jared Goff (QB, DET)", "69.6% rosterado en la liga y sigue libre. Tiró para 16.44 en Semana 1 y es el seguro obvio para Carlos's Cool Team, que solo carga a Justin Herbert de QB titular sin backup en el plantel."],
+  ["T.J. Hockenson (TE, MIN)", "60.1% rosterado. Metió 13.6 contra Green Bay y sigue disponible, buena opción de TE para cualquier equipo que no confíe en su titular (Jerry Jones Farm y Liga de la Injusticia andan flojos ahí)."],
+  ["Tyler Shough (QB, NO)", "46.7% rosterado, tiró para 23.2 puntos en su debut. Si Rompetotos quiere soltar uno de sus tres QB de banca (Stafford o Kyler Murray, que cerró la semana en −0.38), este es el reemplazo con más techo."],
+  ["KC Concepcion (WR, CLE) / Makai Lemon (WR, PHI)", "63.4% y 72.3% rosterados. Los dos son el flier de WR más obvio para Puro Power Ranking, que tiene a A.J. Brown marcado IR ocupando un cupo titular ahora mismo."],
+  ["Chargers D/ST", "60.4% rosterado. Buena opción de streaming para el equipo que quiera soltar un QB3 o TE3 de banca que no va a jugar nunca, como Rompetotos con Kyler Murray."],
+  ["Jordan Love (QB, GB)", "Solo 42.0% rosterado pese a tirar para 19.48 en Semana 1. Vale la pena vigilarlo si alguna alineación de QB se pone floja por lesión."],
+];
+document.getElementById("waiver-list").innerHTML = waiverList.map((w,i) => `
+  <div class="sugg"><div class="idx">${String(i+1).padStart(2,"0")}</div><div class="body"><b>${w[0]}</b><p>${w[1]}</p></div></div>`).join("");
+
+// ---- Top scorers league-wide (Week 1, marcador final) ----
 const topScorers = [
-  ["J. Smith-Njigba","Adelphianos",26.2],
-  ["R. Stevenson","Puro Power Ranking",14.5],
-  ["SEA D/ST","Jerry Jones Farm",14.0],
-  ["D. Maye","Balls Destroyers",9.82],
-  ["J. Price","Balls Destroyers",7.8],
+  ["C. Williams","Liga de la Injusticia",37.26],
+  ["J. Allen","Rony Camacho",35.66],
+  ["D. Henry","Balls Destroyers",35.3],
+  ["K. Walker III","Liga de la Injusticia",34.1],
+  ["J. Gibbs","Puro Power Ranking",33.6],
 ];
 const maxScore = Math.max(...topScorers.map(s => s[2]));
 document.getElementById("top-scorers").innerHTML = topScorers.map(s => `
@@ -805,13 +889,12 @@ const suggestions = [
 document.getElementById("sugg-list").innerHTML = suggestions.map((s,i) => `
   <div class="sugg"><div class="idx">${String(i+1).padStart(2,"0")}</div><div class="body"><b>${s[0]}</b><p>${s[1]}</p></div></div>`).join("");
 
-// ---- Watch list (injury tags from final rosters) ----
+// ---- Watch list (banderas de lesión de cara a la Semana 2) ----
 const watch = [
-  ["George Kittle","Adelphianos","Q"],["Zay Flowers","Liga de la Injusticia","Q"],["Marvin Mims Jr.","Liga de la Injusticia","Q"],
-  ["Brock Bowers","Liga de la Injusticia","D"],["Dont'e Thornton Jr.","Liga de la Injusticia","IR"],["Josh Jacobs","Rony Camacho","DTD"],
-  ["Alec Pierce","Puro Power Ranking","Q"],["TreVeyon Henderson","Balls Destroyers","O"],["Malik Nabers","Rene's Reliable Team","Q"],
-  ["Jonathon Brooks","Rene's Reliable Team","Q"],["Patrick Mahomes","Rene's Reliable Team","Q"],["Jacory Croskey-Merritt","Rene's Reliable Team","Q"],
-  ["Rome Odunze","Rompetotos","Q"],["Jeremiyah Love","Carlos's Cool Team","Q"],["Jakobi Meyers","Carlos's Cool Team","Q"],
+  ["A.J. Brown","Puro Power Ranking","IR"],["Zach Charbonnet","agente libre","O"],["Brock Bowers","Liga de la Injusticia","O"],
+  ["Zay Flowers","Liga de la Injusticia","Q"],["Jeremiyah Love","Carlos's Cool Team","Q"],["Ladd McConkey","Carlos's Cool Team","Q"],
+  ["Jalen Coker","Carlos's Cool Team","Q"],["Rome Odunze","Rompetotos","Q"],["Brian Thomas Jr.","Rompetotos","Q"],
+  ["Kyler Murray","Rompetotos","Q"],["Dont'e Thornton Jr.","Liga de la Injusticia","IR"],["Jordyn Tyson","agente libre","IR"],
 ];
 document.getElementById("watch-chips").innerHTML = watch.map(w => `<span class="watch-chip">${w[0]} <span class="muted" style="font-weight:400;">(${w[1]})</span> <span class="tag">${w[2]}</span></span>`).join("");
 

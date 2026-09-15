@@ -293,7 +293,7 @@
       <a href="../pages/deportes.html" class="qn-btn">🏟️ Volver a Deportes</a>
       <a href="#novatos" class="qn-btn">📖 Guía para novatos</a>
       <a href="#equipos" class="qn-btn">🏈 Tu equipo</a>
-      <a href="#envivo" class="qn-btn">🔴 En vivo</a>
+      <a href="#envivo" class="qn-btn">✅ Resultados Sem. 1</a>
       <a href="#poll-card" class="qn-btn qn-btn--accent">🗳️ ¿Mejor plantel?</a>
     </div>
   </div>
@@ -341,14 +341,19 @@
   </section>
 
   <section id="envivo">
-    <div class="kicker">🔴 Semana 1 · en vivo</div>
-    <h2 class="h">Cómo va el marcador ahorita</h2>
-    <p class="lede">Snapshot del scoreboard real de ESPN, tomado el 10 de septiembre de 2026. La mayoría de los partidos de la NFL todavía no arrancan, así que esto se va a mover bastante en los próximos días.</p>
+    <div class="kicker">✅ Semana 1 · cerrada</div>
+    <h2 class="h">Así quedó el marcador, de verdad</h2>
+    <p class="lede">Marcador final real de ESPN, ya con los 4 duelos terminados (Monday Night incluido). Rompetotos, mi equipo, arrancó con todo: 167.46 puntos, el segundo más alto de la liga, con Josh Allen (35.66), Bijan Robinson (31.3) y Justin Jefferson (31.2) cargando la ofensiva.</p>
     <div class="matchup-grid" id="live-matchup-grid"></div>
 
+    <div class="method" style="margin-top:16px;">
+      <div class="ico" style="font-size:19px;">🤏</div>
+      <p><b>El cruce más cerrado:</b> Los violadores de papantla venció a Elba lazo <b>94.4 a 91.56</b>, apenas <b>2.84 puntos</b> de diferencia. El duelo más ajustado entre las dos ligas esta semana (más cerrado incluso que cualquier cruce de Cfparra). Jaxson Dart (26.6) le alcanzó por muy poco a Los violadores para robarse el partido.</p>
+    </div>
+
     <div class="chart-card" style="margin-top:16px;">
-      <div class="chart-title">🔥 Los que más puntos han metido</div>
-      <div class="chart-sub">Jugadores draftados con más puntos reales acumulados en la liga hasta este corte</div>
+      <div class="chart-title">🔥 Los que más puntos metieron</div>
+      <div class="chart-sub">Titulares con más puntos reales de la Semana 1 en toda la liga</div>
       <div id="top-scorers"></div>
     </div>
   </section>
@@ -400,7 +405,7 @@
   </section>
 
   <footer>
-    Datos: ESPN Fantasy Football (liga "SL", ID 1800400786): configuración de liga, rosters y Scoreboard, consultados en vivo. Draft realizado el 6 de septiembre de 2026 a las 6:00 PM. Marcador de Semana 1 actualizado el 10 de septiembre de 2026.
+    Datos: ESPN Fantasy Football (liga "SL", ID 1800400786): configuración de liga, rosters y Scoreboard, consultados en vivo. Draft realizado el 6 de septiembre de 2026 a las 6:00 PM. Semana 1 cerrada el 15 de septiembre de 2026.
   </footer>
 </div>
 
@@ -546,34 +551,33 @@ document.getElementById("chart-proj").innerHTML = projSorted.map(t => `
     <div class="val mono-num">${t.proj.toFixed(1)}</div>
   </div>`).join("");
 
-// ---- Live scoreboard (Week 1, real ESPN scores, snapshot del 10 de septiembre de 2026) ----
+// ---- Final scoreboard (Week 1, resultado real de ESPN, cerrado el 14 de septiembre de 2026) ----
 const liveMatchups = [
-  {a:"Baseline Road", pa:0.0, la:[],
-   b:"Rompetotos", pb:0.0, lb:[]},
-  {a:"Falchi Carnivori", pa:34.0, la:[["J. Smith-Njigba",26.2],["J. Price",7.8]],
-   b:"Lo + Turbo", pb:0.0, lb:[]},
-  {a:"Mecoide", pa:12.6, la:[["J. Myers",7.0],["A. Brown",5.6]],
-   b:"Artes Negras de Onavas", pb:16.82, lb:[["D. Maye",9.82],["NE D/ST",7.0]]},
-  {a:"Los violadores de papantla", pa:0.0, la:[],
-   b:"Elba lazo", pb:14.0, lb:[["SEA D/ST",14.0]]},
+  {a:"Baseline Road", pa:128.72, la:[["J. Hurts",24.72],["T. McBride",24.5],["B. Irving",20.3]],
+   b:"Rompetotos", pb:167.46, lb:[["J. Allen",35.66],["B. Robinson",31.3],["J. Jefferson",31.2]]},
+  {a:"Falchi Carnivori", pa:132.46, la:[["J. Smith-Njigba",26.2],["L. Jackson",24.96],["N. Collins",21.2]],
+   b:"Lo + Turbo", pb:107.3, lb:[["A. St. Brown",28.7],["Z. Flowers",26.0],["D. Prescott",14.4]]},
+  {a:"Mecoide", pa:125.96, la:[["K. Walker III",34.1],["D. Montgomery",28.9],["C. Brown",18.8]],
+   b:"Artes Negras de Onavas", pb:143.52, lb:[["A. Jeanty",32.7],["C. Olave",28.2],["J. Taylor",25.1]]},
+  {a:"Los violadores de papantla", pa:94.4, la:[["J. Dart",26.6],["K. Monangai",20.4],["J. Love",13.0]],
+   b:"Elba lazo", pb:91.56, lb:[["K. Williams",15.5],["C. Lamb",15.4],["SEA D/ST",14.0]]},
 ];
 document.getElementById("live-matchup-grid").innerHTML = liveMatchups.map(m => {
   const total = m.pa + m.pb;
-  const pctA = total > 0 ? (m.pa/total*100).toFixed(1) : 50;
-  const pctB = total > 0 ? (100 - pctA).toFixed(1) : 50;
-  const favA = m.pa > m.pb;
-  const favB = m.pb > m.pa;
+  const pctA = (m.pa/total*100).toFixed(1);
+  const pctB = (100 - pctA).toFixed(1);
+  const favA = m.pa >= m.pb;
   const margin = Math.abs(m.pa - m.pb).toFixed(1);
-  const badge = total === 0 ? "Sin arrancar" : margin == 0 ? "Empatados" : "Va ganando";
+  const badge = margin < 10 ? "Cerradísimo" : margin > 40 ? "Paliza total" : "Ganó con margen";
   const leadersHtml = (list) => list.length
     ? `<ul>${list.map(l => `<li><span>${l[0]}</span><span class="mono-num">${l[1]}</span></li>`).join("")}</ul>`
     : `<div class="muted" style="font-size:12.5px;">Sin anotaciones todavía</div>`;
   return `<div class="matchup-card">
-    <span class="mc-badge">${badge}${total > 0 ? ` · dif. ${margin} pts` : ""}</span>
+    <span class="mc-badge">${badge} · dif. ${margin} pts</span>
     <div class="mc-sides">
       <div class="mc-side ${favA ? "fav" : ""}"><div class="nm">${m.a}</div><div class="pj">${m.pa.toFixed(1)}</div></div>
       <div class="mc-vs">VS</div>
-      <div class="mc-side ${favB ? "fav" : ""}"><div class="nm">${m.b}</div><div class="pj">${m.pb.toFixed(1)}</div></div>
+      <div class="mc-side ${!favA ? "fav" : ""}"><div class="nm">${m.b}</div><div class="pj">${m.pb.toFixed(1)}</div></div>
     </div>
     <div class="mc-bar"><div class="a" style="width:${pctA}%"></div><div class="b" style="width:${pctB}%"></div></div>
     <div class="mc-leaders">
@@ -581,15 +585,15 @@ document.getElementById("live-matchup-grid").innerHTML = liveMatchups.map(m => {
       <div><div class="l-title">Líderes ${m.b}</div>${leadersHtml(m.lb)}</div>
     </div>
   </div>`;
-}).join("") + `<div class="bye-card">💤 hammer head descansa esta semana (bye)</div>`;
+}).join("") + `<div class="bye-card">💤 hammer head descansó esta semana (bye) · 154.16 pts que no contaron</div>`;
 
-// ---- Top scorers league-wide (Week 1, puntos reales acumulados hasta el corte) ----
+// ---- Top scorers league-wide (Week 1, marcador final) ----
 const topScorers = [
-  ["J. Smith-Njigba","Falchi Carnivori",26.2],
-  ["SEA D/ST","Elba lazo",14.0],
-  ["D. Maye","Artes Negras de Onavas",9.82],
-  ["J. Price","Falchi Carnivori",7.8],
-  ["J. Myers","Mecoide",7.0],
+  ["J. Allen","Rompetotos",35.66],
+  ["K. Walker III","Mecoide",34.1],
+  ["A. Jeanty","Artes Negras de Onavas",32.7],
+  ["B. Robinson","Rompetotos",31.3],
+  ["J. Jefferson","Rompetotos",31.2],
 ];
 const maxScore = Math.max(...topScorers.map(s => s[2]));
 document.getElementById("top-scorers").innerHTML = topScorers.map(s => `
