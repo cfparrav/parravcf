@@ -673,7 +673,8 @@ function esc(s){
     if(!voterId){ voterId = crypto.randomUUID(); localStorage.setItem("cfparra-poll-voter", voterId); }
   }catch(e){ voterId = crypto.randomUUID(); }
 
-  const votesCol = collection(db, "cfparraPollVotesW2");
+  const validIds = new Set(pollOptions.map(o => o.id));
+  const votesCol = collection(db, "pollVotes");
   const voteRef = doc(votesCol, voterId);
   let myVote = null;
 
@@ -681,6 +682,7 @@ function esc(s){
     const counts = {};
     snap.forEach(d => {
       const opt = d.data().option;
+      if(!validIds.has(opt)) return;
       counts[opt] = (counts[opt] || 0) + 1;
       if(d.id === voterId) myVote = opt;
     });

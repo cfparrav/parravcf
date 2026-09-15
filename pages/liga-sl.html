@@ -294,6 +294,8 @@
       <a href="#novatos" class="qn-btn">📖 Guía para novatos</a>
       <a href="#equipos" class="qn-btn">🏈 Tu equipo</a>
       <a href="#envivo" class="qn-btn">✅ Resultados Sem. 1</a>
+      <a href="#semana2" class="qn-btn">📅 Previa Semana 2</a>
+      <a href="#waivers" class="qn-btn">🧲 Waivers de la semana</a>
       <a href="#poll-card" class="qn-btn qn-btn--accent">🗳️ ¿Quién anota más?</a>
     </div>
   </div>
@@ -356,6 +358,28 @@
       <div class="chart-sub">Titulares con más puntos reales de la Semana 1 en toda la liga</div>
       <div id="top-scorers"></div>
     </div>
+  </section>
+
+  <section id="semana2">
+    <div class="kicker">📅 Semana 2</div>
+    <h2 class="h">Lo que viene: la previa</h2>
+    <p class="lede">Proyección oficial de ESPN para la Semana 2, con las alineaciones que cada equipo tiene puestas ahora mismo (todavía pueden cambiar antes del domingo). Falchi Carnivori descansa esta semana (bye).</p>
+    <div class="matchup-grid" id="week2-matchup-grid"></div>
+    <div class="method" style="margin-top:16px;">
+      <div class="ico" style="font-size:19px;">👀</div>
+      <p><b>Para no perder de vista:</b> Rompetotos llega como favorito claro sobre Los violadores de papantla (dif. proyectada de 30.3 puntos), el equipo con más banderas de lesión en el backfield de toda la liga. En el otro extremo, Lo + Turbo vs. Mecoide y Artes Negras de Onavas vs. Elba lazo son los dos cruces más cerrados de la semana, ninguno se decide por más de 5 puntos en la proyección.</p>
+    </div>
+  </section>
+
+  <section id="waivers">
+    <div class="kicker">🧲 Mercado de agentes libres</div>
+    <h2 class="h">A quién ir a buscar esta semana</h2>
+    <p class="lede">Waivers de orden inverso: el que va peor en la tabla agarra primero. Esto es lo que hay disponible ahora mismo en la liga SL, real y en vivo, según cuántos equipos ya lo tienen rosterado.</p>
+    <div class="sugg-list" id="waiver-list"></div>
+
+    <h3 style="font-family:'Oswald',sans-serif; font-size:19px; margin:30px 0 6px; color:var(--text-1);">🔥 Los agentes libres que más puntos metieron en Semana 1</h3>
+    <p class="lede" style="margin-bottom:16px;">Sin importar cuántos equipos ya los tienen, esto es lo que de verdad anotaron los agentes libres de la liga la semana pasada. Algunos son flier real, otros son puro dato curioso de un partidazo aislado.</p>
+    <div class="sugg-list" id="breakout-list"></div>
   </section>
 
   <section id="sugerencias">
@@ -587,6 +611,63 @@ document.getElementById("live-matchup-grid").innerHTML = liveMatchups.map(m => {
   </div>`;
 }).join("") + `<div class="bye-card">💤 hammer head descansó esta semana (bye) · 154.16 pts que no contaron</div>`;
 
+// ---- Week 2 preview (proyección oficial ESPN, alineaciones actuales) ----
+const week2Matchups = [
+  {a:"Rompetotos", pa:134.7, la:[["Josh Allen",22.85],["Bijan Robinson",22.58],["Justin Jefferson",17.98]],
+   b:"Los violadores de papantla", pb:104.4, lb:[["Jaxson Dart",18.23],["Tyler Shough",15.43],["Davante Adams",13.84]]},
+  {a:"hammer head", pa:114.4, la:[["Jahmyr Gibbs",23.74],["Patrick Mahomes",18.52],["Matthew Stafford",18.14]],
+   b:"Baseline Road", pb:109.4, lb:[["Jalen Hurts",19.71],["Saquon Barkley",16.85],["Trey McBride",14.31]]},
+  {a:"Lo + Turbo", pa:109.4, la:[["Amon-Ra St. Brown",20.18],["Dak Prescott",19.76],["James Cook III",16.5]],
+   b:"Mecoide", pb:111.6, lb:[["Puka Nacua",21.09],["Kenneth Walker III",16.77],["Joe Burrow",16.63]]},
+  {a:"Artes Negras de Onavas", pa:131.4, la:[["Christian McCaffrey",21.46],["Drake Maye",18.06],["Jonathan Taylor",17.68]],
+   b:"Elba lazo", pb:127.1, lb:[["Jayden Daniels",19.4],["Justin Herbert",19.14],["Ja'Marr Chase",18.85]]},
+];
+document.getElementById("week2-matchup-grid").innerHTML = week2Matchups.map(m => {
+  const total = m.pa + m.pb;
+  const pctA = (m.pa/total*100).toFixed(1);
+  const pctB = (100 - pctA).toFixed(1);
+  const favA = m.pa >= m.pb;
+  const margin = Math.abs(m.pa - m.pb).toFixed(1);
+  const badge = margin < 5 ? "Cerradísimo" : margin > 25 ? "Paliza anunciada" : "Favorito claro";
+  return `<div class="matchup-card">
+    <span class="mc-badge">${badge} · dif. ${margin} pts</span>
+    <div class="mc-sides">
+      <div class="mc-side ${favA ? "fav" : ""}"><div class="nm">${m.a}</div><div class="pj">${m.pa.toFixed(1)}</div></div>
+      <div class="mc-vs">VS</div>
+      <div class="mc-side ${!favA ? "fav" : ""}"><div class="nm">${m.b}</div><div class="pj">${m.pb.toFixed(1)}</div></div>
+    </div>
+    <div class="mc-bar"><div class="a" style="width:${pctA}%"></div><div class="b" style="width:${pctB}%"></div></div>
+    <div class="mc-leaders">
+      <div><div class="l-title">Líderes proy. ${m.a}</div><ul>${m.la.map(l => `<li><span>${l[0]}</span><span class="mono-num">${l[1]}</span></li>`).join("")}</ul></div>
+      <div><div class="l-title">Líderes proy. ${m.b}</div><ul>${m.lb.map(l => `<li><span>${l[0]}</span><span class="mono-num">${l[1]}</span></li>`).join("")}</ul></div>
+    </div>
+  </div>`;
+}).join("");
+
+// ---- Waivers de la semana (agentes libres reales de la liga SL) ----
+const waiverList = [
+  ["Blake Corum (RB, LAR)", "77.1% rosterado en la liga y sigue libre. Metió apenas 5.4 en Semana 1, pero es la opción de mayor techo para Los violadores de papantla, el equipo con más banderas de lesión en su backfield (Jeremiyah Love, Keaton Mitchell y TreVeyon Henderson los tres tocados a la vez)."],
+  ["RJ Harvey (RB, DEN)", "75.0% rosterado. Otra opción de RB sano, buena para Los violadores de papantla o para Lo + Turbo, que solo carga dos corredores en todo el roster (James Cook III y Bhayshul Tuten)."],
+  ["Isaiah Likely (TE, NYG)", "82.3% rosterado. Metió 27.8 en Semana 1 y sigue disponible, el seguro obvio para Mecoide, que solo tiene a un TE rookie (Colston Loveland) sin backup en el plantel."],
+  ["Dalton Kincaid (TE, BUF)", "75.0% rosterado. Metió 18.0 puntos, otra opción de TE de techo alto para cualquier equipo con un solo titular ahí, como Mecoide o Artes Negras de Onavas."],
+  ["Jacory Croskey-Merritt (RB, WSH)", "70.1% rosterado, metió 12.6 en su debut. Profundidad real de RB para Lo + Turbo, que necesita un tercer corredor ya."],
+  ["Jared Goff (QB, DET)", "69.6% rosterado pese a tirar para 16.44 en Semana 1. Buena opción de QB2 para cualquier equipo de un solo QB titular (Rompetotos, Falchi Carnivori o Mecoide) que quiera cubrirse por bye o lesión."],
+];
+document.getElementById("waiver-list").innerHTML = waiverList.map((w,i) => `
+  <div class="sugg"><div class="idx">${String(i+1).padStart(2,"0")}</div><div class="body"><b>${w[0]}</b><p>${w[1]}</p></div></div>`).join("");
+
+// ---- Breakout free agents (más puntos reales en Semana 1, sin importar % rosterado) ----
+const breakoutList = [
+  ["Caleb Williams (QB, CHI) · 37.26 pts", "El que más puntos metió de toda la liga y sigue disponible, aunque ya 91.7% rosterado en ESPN en general. El pickup más obvio si algún QB titular de la liga se cae por lesión o bye."],
+  ["Bryce Young (QB, CAR) · 31.44 pts", "Segundo lugar entre agentes libres, aunque con contexto: fue en una goleada 37-59 en contra, mucho volumen de garbage time. Apenas 11.2% rosterado, sirve más como flier de emergencia que como QB2 de verdad."],
+  ["Isaiah Likely (TE, NYG) · 27.8 pts", "El TE que más puntos metió sin estar rosterado en la liga. Ya 82.3% rosterado en ESPN en general, el seguro obvio para Mecoide con Colston Loveland como único TE en el plantel."],
+  ["Devaughn Vele (WR, NO) · 19.9 pts", "Apenas 12.9% rosterado. Flier de WR interesante para cualquier equipo corto de receptores, como Los violadores de papantla."],
+  ["Jordan Love (QB, GB) · 19.48 pts", "Titular real de la NFL y sigue solo 42.0% rosterado en esta liga. Buy-low obvio si algún QB1 de la liga se cae por lesión."],
+  ["Mike Gesicki (TE, CIN) · 18.8 pts", "Apenas 1.5% rosterado, casi nadie lo tiene. Streamer de TE para Baseline Road (Elijah Higgins enterrado en la banca) o para cualquier equipo de un solo TE titular."],
+];
+document.getElementById("breakout-list").innerHTML = breakoutList.map((w,i) => `
+  <div class="sugg"><div class="idx">${String(i+1).padStart(2,"0")}</div><div class="body"><b>${w[0]}</b><p>${w[1]}</p></div></div>`).join("");
+
 // ---- Top scorers league-wide (Week 1, marcador final) ----
 const topScorers = [
   ["J. Allen","Rompetotos",35.66],
@@ -663,7 +744,8 @@ function esc(s){
     if(!voterId){ voterId = crypto.randomUUID(); localStorage.setItem("sl-poll-voter", voterId); }
   }catch(e){ voterId = crypto.randomUUID(); }
 
-  const votesCol = collection(db, "slPollVotesW2");
+  const validIds = new Set(pollOptions.map(o => o.id));
+  const votesCol = collection(db, "slPollVotes");
   const voteRef = doc(votesCol, voterId);
   let myVote = null;
 
@@ -671,6 +753,7 @@ function esc(s){
     const counts = {};
     snap.forEach(d => {
       const opt = d.data().option;
+      if(!validIds.has(opt)) return;
       counts[opt] = (counts[opt] || 0) + 1;
       if(d.id === voterId) myVote = opt;
     });
