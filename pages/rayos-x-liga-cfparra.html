@@ -331,6 +331,7 @@
       <a href="#envivo" class="qn-btn">✅ Resultados</a>
       <a href="#semana2" class="qn-btn">📅 Previa Semana 2</a>
       <a href="#waivers" class="qn-btn">🧲 Waivers de la semana</a>
+      <a href="#poll-card" class="qn-btn qn-btn--accent">🗳️ ¿Quién anota más?</a>
       <a href="deportes.html" class="qn-btn">🏟️ Ir a Deportes (Survivor y Picks)</a>
     </div>
   </div>
@@ -413,10 +414,25 @@
 
   <section id="vigilar">
     <div class="kicker">Antes de que cierren las alineaciones</div>
-    <h2 class="h">Reporte de lesiones de cara a la Semana 1</h2>
+    <h2 class="h">Reporte de lesiones de cara a la Semana 2</h2>
     <div class="watch-box">
       <p style="margin:0; font-size:14px; color:var(--text-2);">Según el reporte de lesiones que ESPN mostraba al momento de este análisis, estos jugadores draftados cargaban alguna etiqueta de riesgo. Vale la pena confirmar su estatus antes de que cierren las alineaciones:</p>
       <div class="chips" id="watch-chips"></div>
+    </div>
+  </section>
+
+  <section id="encuesta">
+    <div class="kicker">Encuesta de la semana</div>
+    <h2 class="h">¿Quién va a meter más puntos esta Semana 2?</h2>
+    <p class="lede">Entre los que más anotaron en la Semana 1, ¿quién repite como el más productivo? Cada quien vota una vez desde su navegador y puede cambiar su voto cuando quiera.</p>
+
+    <div class="poll-card" id="poll-card">
+      <div class="poll-head">
+        <div class="poll-title">🗳️ ¿Quién anota más puntos esta Semana 2?</div>
+        <div class="poll-sub" id="poll-sub">Votos en vivo de todo el grupo.</div>
+      </div>
+      <div id="poll-options"></div>
+      <div id="poll-status" class="poll-status"></div>
     </div>
   </section>
 
@@ -624,6 +640,69 @@ document.getElementById("watch-chips").innerHTML = watch.map(w => `<span class="
 function esc(s){
   return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
+
+// ---- Live poll: quién anota más en la Semana 2 (db capability) ----
+(async () => {
+  const pollOptions = [
+    {id:"Caleb Williams", label:"Caleb Williams (Liga de la Injusticia)"},
+    {id:"Josh Allen", label:"Josh Allen (Rony Camacho)"},
+    {id:"Derrick Henry", label:"Derrick Henry (Balls Destroyers)"},
+    {id:"Kenneth Walker III", label:"Kenneth Walker III (Liga de la Injusticia)"},
+    {id:"Jahmyr Gibbs", label:"Jahmyr Gibbs (Puro Power Ranking)"},
+  ];
+  const optionsEl = document.getElementById("poll-options");
+  const statusEl = document.getElementById("poll-status");
+  const subEl = document.getElementById("poll-sub");
+
+  function renderPoll(counts, myVote){
+    const total = Object.values(counts).reduce((a,b) => a+b, 0);
+    optionsEl.innerHTML = pollOptions.map(o => {
+      const n = counts[o.id] || 0;
+      const pct = total ? Math.round(n/total*100) : 0;
+      return `<div class="poll-opt${o.id===myVote ? " mine" : ""}" data-opt="${o.id}">
+        <div class="po-top"><span class="po-label">${o.label}</span><span class="po-count">${n} voto${n===1?"":"s"} · ${pct}%</span></div>
+        <div class="po-track"><div class="po-fill" style="width:${pct}%"></div></div>
+      </div>`;
+    }).join("");
+  }
+  renderPoll({}, null);
+
+  let voterId;
+  try{
+    voterId = localStorage.getItem("cfparra-poll-voter");
+    if(!voterId){ voterId = crypto.randomUUID(); localStorage.setItem("cfparra-poll-voter", voterId); }
+  }catch(e){ voterId = crypto.randomUUID(); }
+
+  const votesCol = collection(db, "cfparraPollVotesW2");
+  const voteRef = doc(votesCol, voterId);
+  let myVote = null;
+
+  onSnapshot(votesCol, (snap) => {
+    const counts = {};
+    snap.forEach(d => {
+      const opt = d.data().option;
+      counts[opt] = (counts[opt] || 0) + 1;
+      if(d.id === voterId) myVote = opt;
+    });
+    renderPoll(counts, myVote);
+    subEl.textContent = "Votos en vivo de todo el grupo. Puedes cambiar tu voto cuando quieras.";
+  }, (err) => {
+    statusEl.textContent = "No se pudo cargar la votación en vivo ahora mismo.";
+  });
+
+  optionsEl.addEventListener("click", async (e) => {
+    const opt = e.target.closest(".poll-opt");
+    if(!opt) return;
+    const choice = opt.dataset.opt;
+    statusEl.textContent = "Guardando tu voto…";
+    try{
+      await setDoc(voteRef, {option: choice, ts: Date.now()});
+      statusEl.textContent = "¡Voto registrado!";
+    }catch(err){
+      statusEl.textContent = "No se pudo guardar tu voto, intenta de nuevo.";
+    }
+  });
+})();
 
 // ---- Live comments (db capability) ----
 (async () => {

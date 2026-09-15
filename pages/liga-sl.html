@@ -294,7 +294,7 @@
       <a href="#novatos" class="qn-btn">📖 Guía para novatos</a>
       <a href="#equipos" class="qn-btn">🏈 Tu equipo</a>
       <a href="#envivo" class="qn-btn">✅ Resultados Sem. 1</a>
-      <a href="#poll-card" class="qn-btn qn-btn--accent">🗳️ ¿Mejor plantel?</a>
+      <a href="#poll-card" class="qn-btn qn-btn--accent">🗳️ ¿Quién anota más?</a>
     </div>
   </div>
 </header>
@@ -366,7 +366,7 @@
 
   <section id="vigilar">
     <div class="kicker">Antes de que cierren las alineaciones</div>
-    <h2 class="h">Reporte de lesiones de cara a la Semana 1</h2>
+    <h2 class="h">Reporte de lesiones de cara a la Semana 2</h2>
     <div class="watch-box">
       <p style="margin:0; font-size:14px; color:var(--text-2);">Según el reporte de lesiones que ESPN mostraba al momento de este corte, estos jugadores draftados cargaban alguna etiqueta de riesgo. Vale la pena confirmar su estatus antes de que cierren las alineaciones:</p>
       <div class="chips" id="watch-chips"></div>
@@ -375,12 +375,12 @@
 
   <section id="premio">
     <div class="kicker">Encuesta de la semana</div>
-    <h2 class="h">¿Quién tiene el mejor plantel ahorita?</h2>
-    <p class="lede">Con los rosters como están hoy, sin mirar draft ni nada. Cada quien vota una vez desde su navegador y puede cambiar su voto cuando quiera.</p>
+    <h2 class="h">¿Quién va a meter más puntos esta Semana 2?</h2>
+    <p class="lede">Entre los que más anotaron en la Semana 1, ¿quién repite como el más productivo? Cada quien vota una vez desde su navegador y puede cambiar su voto cuando quiera.</p>
 
     <div class="poll-card" id="poll-card">
       <div class="poll-head">
-        <div class="poll-title">🗳️ ¿Quién tiene el mejor plantel de la Liga SL?</div>
+        <div class="poll-title">🗳️ ¿Quién anota más puntos esta Semana 2?</div>
         <div class="poll-sub" id="poll-sub">Votos en vivo de todo el grupo.</div>
       </div>
       <div id="poll-options"></div>
@@ -631,9 +631,15 @@ function esc(s){
   return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
 
-// ---- Live poll: best current roster (db capability) ----
+// ---- Live poll: quién anota más en la Semana 2 (db capability) ----
 (async () => {
-  const pollOptions = teams.map(t => ({id:t.name, label:t.name}));
+  const pollOptions = [
+    {id:"Josh Allen", label:"Josh Allen (Rompetotos)"},
+    {id:"Kenneth Walker III", label:"Kenneth Walker III (Mecoide)"},
+    {id:"Ashton Jeanty", label:"Ashton Jeanty (Artes Negras de Onavas)"},
+    {id:"Bijan Robinson", label:"Bijan Robinson (Rompetotos)"},
+    {id:"Justin Jefferson", label:"Justin Jefferson (Rompetotos)"},
+  ];
   const optionsEl = document.getElementById("poll-options");
   const statusEl = document.getElementById("poll-status");
   const subEl = document.getElementById("poll-sub");
@@ -657,7 +663,7 @@ function esc(s){
     if(!voterId){ voterId = crypto.randomUUID(); localStorage.setItem("sl-poll-voter", voterId); }
   }catch(e){ voterId = crypto.randomUUID(); }
 
-  const votesCol = collection(db, "slPollVotes");
+  const votesCol = collection(db, "slPollVotesW2");
   const voteRef = doc(votesCol, voterId);
   let myVote = null;
 
