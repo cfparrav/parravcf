@@ -261,15 +261,16 @@
     <div class="settings-grid">
       <div class="setting"><div class="k">Entrada</div><div class="v">Carlos' 1st Entry</div></div>
       <div class="setting"><div class="k">Estatus</div><div class="v">Activo</div></div>
-      <div class="setting"><div class="k">Récord</div><div class="v">0-0</div></div>
-      <div class="setting"><div class="k">Pick Semana 1</div><div class="v">Jaguars<small>18.16% de la liga lo pickeó también</small></div></div>
+      <div class="setting"><div class="k">Récord</div><div class="v">1-0</div></div>
+      <div class="setting"><div class="k">Pick Semana 1</div><div class="v">Jaguars <span class="pick-tag hit">Acertó</span><small>17.36% de la liga lo pickeó también &middot; Final: Jaguars 34, Browns 10</small></div></div>
+      <div class="setting"><div class="k">Pick Semana 2</div><div class="v">Pendiente<small>Todavía no lo elijo en ESPN</small></div></div>
     </div>
   </section>
 
   <section id="quiniela">
     <div class="kicker">ESPN NFL Pick'em &middot; Semana 1</div>
     <h2 class="h">Mis picks de la quiniela</h2>
-    <p class="lede">Mis 15 picks reales de ESPN Pick'em para la Semana 1, modo Standard. El juego del jueves ya se jugó, lo demás sigue en pie.</p>
+    <p class="lede">Mis 16 picks reales de ESPN Pick'em para la Semana 1, modo Standard, ya con los resultados finales adentro. Terminé en el puesto 112K de la liga general (percentil 89.8), con 110 puntos. Semana 2 todavía sin picks hechos.</p>
     <div class="guide-grid" id="pickem-grid"></div>
   </section>
 
@@ -325,22 +326,22 @@ function esc(s){
 
 // ---- Mis picks reales de ESPN Pick'em, Semana 1 ----
 const pickem = [
-  {date:"Jue 10 sep &middot; 5:35 PM", away:"Patriots", home:"Seahawks", pick:"Patriots", pct:"20%", result:"miss", note:"Final: Seahawks 13, Patriots 10"},
-  {date:"Dom 13 sep &middot; 10:00 AM", away:"49ers", home:"Rams", pick:"49ers", pct:"12%"},
-  {date:"Dom 13 sep &middot; 10:00 AM", away:"Buccaneers", home:"Bengals", pick:"Bengals", pct:"76%"},
-  {date:"Dom 13 sep &middot; 10:00 AM", away:"Saints", home:"Lions", pick:"Lions", pct:"96%"},
-  {date:"Dom 13 sep &middot; 10:00 AM", away:"Jets", home:"Titans", pick:"Jets", pct:"21%"},
-  {date:"Dom 13 sep &middot; 10:00 AM", away:"Ravens", home:"Colts", pick:"Ravens", pct:"86%"},
-  {date:"Dom 13 sep &middot; 10:00 AM", away:"Falcons", home:"Steelers", pick:"Steelers", pct:"83%"},
-  {date:"Dom 13 sep &middot; 10:00 AM", away:"Bears", home:"Panthers", pick:"Bears", pct:"89%"},
-  {date:"Dom 13 sep &middot; 10:00 AM", away:"Browns", home:"Jaguars", pick:"Jaguars", pct:"95%"},
-  {date:"Dom 13 sep &middot; 1:25 PM", away:"Bills", home:"Texans", pick:"Bills", pct:"76%"},
-  {date:"Dom 13 sep &middot; 1:25 PM", away:"Dolphins", home:"Raiders", pick:"Dolphins", pct:"15%"},
-  {date:"Dom 13 sep &middot; 1:25 PM", away:"Packers", home:"Vikings", pick:"Packers", pct:"68%"},
-  {date:"Dom 13 sep &middot; 1:25 PM", away:"Commanders", home:"Eagles", pick:"Eagles", pct:"93%"},
-  {date:"Dom 13 sep &middot; 5:20 PM", away:"Cardinals", home:"Chargers", pick:"Chargers", pct:"97%"},
-  {date:"Lun 14 sep &middot; 5:15 PM", away:"Cowboys", home:"Giants", pick:"Giants", pct:"24%"},
-  {date:"Lun 14 sep &middot; 5:15 PM (desempate)", away:"Broncos", home:"Chiefs", pick:"Broncos", pct:"62%", note:"Desempate: 56 pts totales"},
+  {date:"Jue 10 sep &middot; 5:35 PM", away:"Patriots", home:"Seahawks", pick:"Seahawks", pct:"80%", result:"hit", note:"Final: Seahawks 13, Patriots 10"},
+  {date:"Dom 13 sep &middot; 10:00 AM", away:"49ers", home:"Rams", pick:"49ers", pct:"12%", result:"hit", note:"Final: 49ers 27, Rams 7"},
+  {date:"Dom 13 sep &middot; 10:00 AM", away:"Buccaneers", home:"Bengals", pick:"Bengals", pct:"76%", result:"hit", note:"Final: Bengals 33, Buccaneers 27"},
+  {date:"Dom 13 sep &middot; 10:00 AM", away:"Saints", home:"Lions", pick:"Lions", pct:"96%", result:"hit", note:"Final: Lions 31, Saints 30"},
+  {date:"Dom 13 sep &middot; 10:00 AM", away:"Jets", home:"Titans", pick:"Jets", pct:"22%", result:"hit", note:"Final: Jets 23, Titans 10"},
+  {date:"Dom 13 sep &middot; 10:00 AM", away:"Ravens", home:"Colts", pick:"Ravens", pct:"86%", result:"hit", note:"Final: Ravens 41, Colts 23"},
+  {date:"Dom 13 sep &middot; 10:00 AM", away:"Falcons", home:"Steelers", pick:"Steelers", pct:"85%", result:"hit", note:"Final: Steelers 20, Falcons 13"},
+  {date:"Dom 13 sep &middot; 10:00 AM", away:"Bears", home:"Panthers", pick:"Bears", pct:"88%", result:"hit", note:"Final: Bears 59, Panthers 37"},
+  {date:"Dom 13 sep &middot; 10:00 AM", away:"Browns", home:"Jaguars", pick:"Jaguars", pct:"95%", result:"hit", note:"Final: Jaguars 34, Browns 10"},
+  {date:"Dom 13 sep &middot; 1:25 PM", away:"Bills", home:"Texans", pick:"Bills", pct:"75%", result:"hit", note:"Final: Bills 36, Texans 31"},
+  {date:"Dom 13 sep &middot; 1:25 PM", away:"Dolphins", home:"Raiders", pick:"Dolphins", pct:"16%", result:"miss", note:"Final: Raiders 27, Dolphins 13"},
+  {date:"Dom 13 sep &middot; 1:25 PM", away:"Packers", home:"Vikings", pick:"Packers", pct:"66%", result:"miss", note:"Final: Vikings 39, Packers 22"},
+  {date:"Dom 13 sep &middot; 1:25 PM", away:"Commanders", home:"Eagles", pick:"Eagles", pct:"93%", result:"hit", note:"Final: Eagles 24, Commanders 22"},
+  {date:"Dom 13 sep &middot; 5:20 PM", away:"Cardinals", home:"Chargers", pick:"Chargers", pct:"97%", result:"miss", note:"Final: Cardinals 26, Chargers 14 (sorpresa grande)"},
+  {date:"Lun 14 sep &middot; 5:15 PM", away:"Cowboys", home:"Giants", pick:"Giants", pct:"24%", result:"hit", note:"Final: Giants 28, Cowboys 20"},
+  {date:"Lun 14 sep &middot; 5:15 PM (desempate)", away:"Broncos", home:"Chiefs", pick:"Broncos", pct:"62%", result:"miss", note:"Final: Chiefs 31, Broncos 10 · desempate: proyecté 56 pts totales, terminó en 41"},
 ];
 document.getElementById("pickem-grid").innerHTML = pickem.map(g => {
   const tagCls = g.result === "miss" ? "miss" : g.result === "hit" ? "hit" : "pend";

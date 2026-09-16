@@ -293,7 +293,7 @@
 
   .comment-form{display:flex; flex-direction:column; gap:8px; margin-bottom:6px;}
   .comment-form input, .comment-form textarea{font-family:"Inter",sans-serif; font-size:13.5px; color:var(--text-1); background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:9px 12px; resize:vertical; min-height:38px;}
-  .comment-form input{max-width:220px;}
+  .comment-form input{box-sizing:border-box; width:100%;}
   .comment-form input:focus, .comment-form textarea:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent);}
   .comment-submit{align-self:flex-end; font-family:"Inter",sans-serif; font-size:13px; font-weight:700; color:#fff; background:var(--accent); border:none; border-radius:100px; padding:8px 18px; cursor:pointer; transition:background .12s;}
   .comment-submit:hover{background:var(--accent-strong);}
@@ -439,7 +439,7 @@
   <section id="comentarios" style="border-bottom:none;">
     <div class="kicker">La liga opina</div>
     <h2 class="h">Comentarios</h2>
-    <p class="lede">Trash talk, predicciones, quejas por el draft, lo que sea. Se ve en vivo para todo el grupo.</p>
+    <p class="lede">Trash talk, predicciones, quejas por cómo va la temporada, lo que sea. Se ve en vivo para todo el grupo.</p>
 
     <div class="poll-card" id="comments-card">
       <form id="comment-form" class="comment-form">

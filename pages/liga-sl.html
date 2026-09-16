@@ -255,7 +255,7 @@
 
   .comment-form{display:flex; flex-direction:column; gap:8px; margin-bottom:6px;}
   .comment-form input, .comment-form textarea{font-family:"Inter",sans-serif; font-size:13.5px; color:var(--text-1); background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:9px 12px; resize:vertical; min-height:38px;}
-  .comment-form input{max-width:220px;}
+  .comment-form input{box-sizing:border-box; width:100%;}
   .comment-form input:focus, .comment-form textarea:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent);}
   .comment-submit{align-self:flex-end; font-family:"Inter",sans-serif; font-size:13px; font-weight:700; color:#fff; background:var(--accent); border:none; border-radius:100px; padding:8px 18px; cursor:pointer; transition:background .12s;}
   .comment-submit:hover{background:var(--accent-strong);}
@@ -330,16 +330,6 @@
     <p class="lede">Dale clic a Rompetotos (el mío) o al de cualquier rival. Cada tab trae el core titular, la proyección de la semana y una sugerencia concreta según lo que hay en la banca.</p>
     <div class="tabs-bar" id="team-tabs"></div>
     <div id="team-panels"></div>
-  </section>
-
-  <section id="graficos">
-    <div class="kicker">Los números</div>
-    <h2 class="h">Proyección oficial, Semana 1</h2>
-    <div class="chart-card">
-      <div class="chart-title">Proyección ESPN por equipo</div>
-      <div class="chart-sub">Puntos proyectados por la alineación titular de cada equipo (hammer head descansa esta semana)</div>
-      <div id="chart-proj"></div>
-    </div>
   </section>
 
   <section id="envivo">
@@ -563,17 +553,6 @@ document.getElementById("team-tabs").addEventListener("click", (e) => {
   document.querySelectorAll("#team-tabs .tab-btn").forEach(b => b.classList.toggle("active", b === btn));
   document.querySelectorAll("#team-panels [data-panel]").forEach(p => { p.hidden = p.dataset.panel !== idx; });
 });
-
-// ---- Chart: projections ----
-const projTeams = teams.filter(t => !t.bye);
-const projSorted = [...projTeams].sort((a,b) => b.proj - a.proj);
-const maxProj = Math.max(...projSorted.map(t => t.proj));
-document.getElementById("chart-proj").innerHTML = projSorted.map(t => `
-  <div class="bar-row">
-    <div class="lbl">${t.name}</div>
-    <div class="bar-track"><div class="bar-fill" style="width:${(t.proj/maxProj*100).toFixed(1)}%"></div></div>
-    <div class="val mono-num">${t.proj.toFixed(1)}</div>
-  </div>`).join("");
 
 // ---- Final scoreboard (Week 1, resultado real de ESPN, cerrado el 14 de septiembre de 2026) ----
 const liveMatchups = [
