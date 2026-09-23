@@ -18,7 +18,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.parravcf.com/pages/liga-sl.html">
 <meta property="og:title" content="Rayos X: Liga SL">
-<meta property="og:description" content="Mi segunda liga de fantasy football: equipos, plantillas completas y el marcador en vivo de la Semana 1, con datos reales de ESPN.">
+<meta property="og:description" content="Mi segunda liga de fantasy football: resultados, la previa de la semana que viene y a quién ir a buscar en agentes libres, con datos reales de ESPN.">
 <meta property="og:image" content="https://www.parravcf.com/images/hero/carlos-8bit.png">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -166,6 +166,26 @@
   .sugg-box p{margin:0; font-size:13.5px; color:var(--text-2); max-width:none;}
   .sugg-box b{color:var(--text-1);}
 
+  .table-scroll{overflow-x:auto; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);}
+  table.picks{width:100%; border-collapse:collapse; background:var(--surface); min-width:500px;}
+  table.picks th{text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-3); font-weight:600; padding:11px 14px; border-bottom:1px solid var(--line); background:var(--surface-2); position:sticky; top:0;}
+  table.picks td{padding:11px 14px; border-bottom:1px solid var(--line); font-size:14px; color:var(--text-1);}
+  table.picks tr:last-child td{border-bottom:none;}
+  table.picks td.num{font-variant-numeric:tabular-nums; color:var(--text-2);}
+  .badge{display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:700; padding:3px 9px 2px; border-radius:100px;}
+  .badge.reach{background:var(--reach-wash); color:var(--reach);}
+  .badge.value{background:var(--value-wash); color:var(--value);}
+
+  .two-col{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:22px;}
+  @media (max-width:760px){.two-col{grid-template-columns:minmax(0,1fr);}}
+  .verdict-card{border-radius:16px; padding:22px; box-shadow:var(--shadow); border:1px solid var(--line);}
+  .verdict-card.best{background:linear-gradient(180deg,var(--value-wash),var(--surface) 60%);}
+  .verdict-card.pick{background:var(--surface);}
+  .v-kicker{font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px;}
+  .verdict-card.best .v-kicker{color:var(--value);}
+  .v-team{font-family:"Oswald"; font-size:26px; margin-bottom:8px; color:var(--text-1);}
+  .verdict-card p{font-size:13.5px; color:var(--text-2); max-width:none;}
+
   .matchup-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px;}
   .matchup-card{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow:var(--shadow);}
   .mc-badge{display:inline-block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--value); background:var(--value-wash); border-radius:100px; padding:3px 10px; margin-bottom:12px;}
@@ -281,7 +301,7 @@
     <a class="back-home" href="../index.html">🏠 parravcf.</a>
     <span class="eyebrow"><span class="dot"></span>Liga SL &middot; 9 equipos &middot; Temporada 2026</span>
     <h1 class="title">Rayos X<br><em>a la Liga</em> SL</h1>
-    <p class="subtitle">Mi segunda liga de fantasy football. El draft fue el 6 de septiembre y la Semana 1 ya está en juego: aquí están las 9 plantillas completas, tal como están hoy, y cómo va el marcador en vivo, con datos reales de ESPN.</p>
+    <p class="subtitle">Mi segunda liga de fantasy football. Cómo va la temporada, semana a semana: resultados reales, la previa de lo que viene y a quién ir a buscar en agentes libres. Todo con datos reales de ESPN, no puro rumor del chat.</p>
     <div class="stat-row">
       <div class="stat"><div class="n">9</div><div class="l">Equipos</div></div>
       <div class="stat"><div class="n">16</div><div class="l">Rondas / plantel</div></div>
@@ -293,8 +313,8 @@
       <a href="../pages/deportes.html" class="qn-btn">🏟️ Volver a Deportes</a>
       <a href="#novatos" class="qn-btn">📖 Guía para novatos</a>
       <a href="#equipos" class="qn-btn">🏈 Tu equipo</a>
-      <a href="#envivo" class="qn-btn">✅ Resultados Sem. 1</a>
-      <a href="#semana2" class="qn-btn">📅 Previa Semana 2</a>
+      <a href="#envivo" class="qn-btn">✅ Resultados Sem. 2</a>
+      <a href="#semana2" class="qn-btn">📅 Previa Semana 3</a>
       <a href="#waivers" class="qn-btn">🧲 Waivers de la semana</a>
       <a href="#poll-card" class="qn-btn qn-btn--accent">🗳️ ¿Quién anota más?</a>
     </div>
@@ -313,7 +333,7 @@
   <section id="metodo">
     <div class="method">
       <div class="ico">i</div>
-      <p><b>Esta página no analiza el draft.</b> Esa comparación pick por pick contra el ranking en vivo se quedó para la Liga Cfparra. Aquí lo que importa es cómo están las 9 plantillas <em>ahora mismo</em>: rosters completos, marcador en vivo de la Semana&nbsp;1 y qué le conviene mover a cada quien esta semana, sacado directo de ESPN Fantasy (configuración de la liga, rosters y Scoreboard, consultados en vivo el 10 de septiembre de 2026).</p>
+      <p><b>Esta página no analiza el draft.</b> Esa comparación pick por pick contra el ranking en vivo se quedó para la Liga Cfparra. Aquí lo que importa es cómo van las 9 plantillas semana a semana: resultados reales, la previa de lo que viene y a quién ir a buscar en agentes libres, sacado directo de ESPN Fantasy. Los rosters de abajo son la foto del draft (6 de septiembre de 2026); para movimientos de waivers desde entonces, revisa las secciones de resultados y agentes libres.</p>
     </div>
   </section>
 
@@ -333,31 +353,48 @@
   </section>
 
   <section id="envivo">
-    <div class="kicker">✅ Semana 1 · cerrada</div>
+    <div class="kicker">✅ Semana 2 · cerrada</div>
     <h2 class="h">Así quedó el marcador, de verdad</h2>
-    <p class="lede">Marcador final real de ESPN, ya con los 4 duelos terminados (Monday Night incluido). Rompetotos, mi equipo, arrancó con todo: 167.46 puntos, el segundo más alto de la liga, con Josh Allen (35.66), Bijan Robinson (31.3) y Justin Jefferson (31.2) cargando la ofensiva.</p>
+    <p class="lede">Marcador final real de ESPN. Falchi Carnivori descansó esta semana (bye), así que solo hubo 4 duelos oficiales. Rompetotos, mi equipo, se llevó una paliza justo la semana en que le tocaba ser favorito claro: ojo abajo para el resumen completo.</p>
     <div class="matchup-grid" id="live-matchup-grid"></div>
 
-    <div class="method" style="margin-top:16px;">
-      <div class="ico" style="font-size:19px;">🤏</div>
-      <p><b>El cruce más cerrado:</b> Los violadores de papantla venció a Elba lazo <b>94.4 a 91.56</b>, apenas <b>2.84 puntos</b> de diferencia. El duelo más ajustado entre las dos ligas esta semana (más cerrado incluso que cualquier cruce de Cfparra). Jaxson Dart (26.6) le alcanzó por muy poco a Los violadores para robarse el partido.</p>
+    <div class="two-col" style="margin-top:16px;">
+      <div class="verdict-card pick">
+        <div class="v-kicker" style="color:var(--value);">🤏 El cruce más cerrado</div>
+        <div class="v-team">Los violadores de papantla vs. Rompetotos</div>
+        <p><b>121.9 a 106.82</b>, una diferencia de <b>15.08 puntos</b>, la más chica de las 4 llaves de la semana (hammer head y Lo + Turbo ganaron por goleada en los otros dos duelos). No es una diferencia mínima, pero sí fue el resultado más sorpresivo de la semana.</p>
+      </div>
+      <div class="verdict-card best">
+        <div class="v-kicker">🎢 El cruce más entretenido</div>
+        <div class="v-team">Los violadores de papantla vs. Rompetotos</div>
+        <p>El mismo duelo es también el más entretenido: la proyección tenía a <b>Rompetotos</b> (mi equipo) ganando por 30.3 puntos, y terminó perdiendo. Davante Adams metió 39.5 para Los violadores mientras Josh Allen (40.82, el más alto de toda la liga) no fue suficiente del otro lado. Lección de Semana 2: ni el favorito más claro está exento de un mal domingo.</p>
+      </div>
     </div>
 
     <div class="chart-card" style="margin-top:16px;">
       <div class="chart-title">🔥 Los que más puntos metieron</div>
-      <div class="chart-sub">Titulares con más puntos reales de la Semana 1 en toda la liga</div>
+      <div class="chart-sub">Titulares con más puntos reales de la Semana 2 en toda la liga</div>
       <div id="top-scorers"></div>
+    </div>
+
+    <h3 style="font-family:'Oswald',sans-serif; font-size:19px; margin:30px 0 6px; color:var(--text-1);">📊 Tabla después de la Semana 2</h3>
+    <p class="lede" style="margin-bottom:16px;">Ya con dos semanas jugadas (una de bye para hammer head y Falchi Carnivori), así va la clasificación real, sacada directo de ESPN. Los primeros 4 entran a playoffs.</p>
+    <div class="table-scroll">
+      <table class="picks">
+        <thead><tr><th>#</th><th>Equipo</th><th>Récord</th><th class="num">PF</th><th class="num">PA</th></tr></thead>
+        <tbody id="standings-body"></tbody>
+      </table>
     </div>
   </section>
 
   <section id="semana2">
-    <div class="kicker">📅 Semana 2</div>
+    <div class="kicker">📅 Semana 3</div>
     <h2 class="h">Lo que viene: la previa</h2>
-    <p class="lede">Proyección oficial de ESPN para la Semana 2, con las alineaciones que cada equipo tiene puestas ahora mismo (todavía pueden cambiar antes del domingo). Falchi Carnivori descansa esta semana (bye).</p>
+    <p class="lede">Proyección oficial de ESPN para la Semana 3, con las alineaciones que cada equipo tiene puestas ahora mismo (todavía pueden cambiar antes del domingo). Baseline Road descansa esta semana (bye).</p>
     <div class="matchup-grid" id="week2-matchup-grid"></div>
     <div class="method" style="margin-top:16px;">
       <div class="ico" style="font-size:19px;">👀</div>
-      <p><b>Para no perder de vista:</b> Rompetotos llega como favorito claro sobre Los violadores de papantla (dif. proyectada de 30.3 puntos), el equipo con más banderas de lesión en el backfield de toda la liga. En el otro extremo, Lo + Turbo vs. Mecoide y Artes Negras de Onavas vs. Elba lazo son los dos cruces más cerrados de la semana, ninguno se decide por más de 5 puntos en la proyección.</p>
+      <p><b>Para no perder de vista:</b> Lo + Turbo vs. Elba Ticano está prácticamente empatado en la proyección (dif. de apenas 0.56 puntos), el cruce más cerrado de la semana en el papel. Mecoide tiene un <b>hueco en el cupo de TE</b> ahora mismo (Colston Loveland está en la banca y no hay nadie más para titular ahí), hay que resolver eso antes de que cierren las alineaciones. Y Los violadores de papantla insisten con Jaxson Dart (Doubtful, 0.0 de proyección) como QB titular con Tyler Shough (18.83 proy.) esperando en la banca, otra vez.</p>
     </div>
   </section>
 
@@ -367,7 +404,7 @@
     <p class="lede">Waivers de orden inverso: el que va peor en la tabla agarra primero. Esto es lo que hay disponible ahora mismo en la liga SL, real y en vivo, según cuántos equipos ya lo tienen rosterado.</p>
     <div class="sugg-list" id="waiver-list"></div>
 
-    <h3 style="font-family:'Oswald',sans-serif; font-size:19px; margin:30px 0 6px; color:var(--text-1);">🔥 Los agentes libres que más puntos metieron en Semana 1</h3>
+    <h3 style="font-family:'Oswald',sans-serif; font-size:19px; margin:30px 0 6px; color:var(--text-1);">🔥 Los agentes libres que más puntos metieron en Semana 2</h3>
     <p class="lede" style="margin-bottom:16px;">Sin importar cuántos equipos ya los tienen, esto es lo que de verdad anotaron los agentes libres de la liga la semana pasada. Algunos son flier real, otros son puro dato curioso de un partidazo aislado.</p>
     <div class="sugg-list" id="breakout-list"></div>
   </section>
@@ -380,7 +417,7 @@
 
   <section id="vigilar">
     <div class="kicker">Antes de que cierren las alineaciones</div>
-    <h2 class="h">Reporte de lesiones de cara a la Semana 2</h2>
+    <h2 class="h">Reporte de lesiones de cara a la Semana 3</h2>
     <div class="watch-box">
       <p style="margin:0; font-size:14px; color:var(--text-2);">Según el reporte de lesiones que ESPN mostraba al momento de este corte, estos jugadores draftados cargaban alguna etiqueta de riesgo. Vale la pena confirmar su estatus antes de que cierren las alineaciones:</p>
       <div class="chips" id="watch-chips"></div>
@@ -419,7 +456,7 @@
   </section>
 
   <footer>
-    Datos: ESPN Fantasy Football (liga "SL", ID 1800400786): configuración de liga, rosters y Scoreboard, consultados en vivo. Draft realizado el 6 de septiembre de 2026 a las 6:00 PM. Semana 1 cerrada el 15 de septiembre de 2026.
+    Datos: ESPN Fantasy Football (liga "SL", ID 1800400786): configuración de liga, rosters, League Schedule, Scoreboard y Agentes Libres, consultados en vivo. Semana 2 cerrada y Semana 3 actualizada el 23 de septiembre de 2026.
   </footer>
 </div>
 
@@ -554,16 +591,16 @@ document.getElementById("team-tabs").addEventListener("click", (e) => {
   document.querySelectorAll("#team-panels [data-panel]").forEach(p => { p.hidden = p.dataset.panel !== idx; });
 });
 
-// ---- Final scoreboard (Week 1, resultado real de ESPN, cerrado el 14 de septiembre de 2026) ----
+// ---- Final scoreboard (Week 2, resultado real de ESPN, cerrado el 22 de septiembre de 2026) ----
 const liveMatchups = [
-  {a:"Baseline Road", pa:128.72, la:[["J. Hurts",24.72],["T. McBride",24.5],["B. Irving",20.3]],
-   b:"Rompetotos", pb:167.46, lb:[["J. Allen",35.66],["B. Robinson",31.3],["J. Jefferson",31.2]]},
-  {a:"Falchi Carnivori", pa:132.46, la:[["J. Smith-Njigba",26.2],["L. Jackson",24.96],["N. Collins",21.2]],
-   b:"Lo + Turbo", pb:107.3, lb:[["A. St. Brown",28.7],["Z. Flowers",26.0],["D. Prescott",14.4]]},
-  {a:"Mecoide", pa:125.96, la:[["K. Walker III",34.1],["D. Montgomery",28.9],["C. Brown",18.8]],
-   b:"Artes Negras de Onavas", pb:143.52, lb:[["A. Jeanty",32.7],["C. Olave",28.2],["J. Taylor",25.1]]},
-  {a:"Los violadores de papantla", pa:94.4, la:[["J. Dart",26.6],["K. Monangai",20.4],["J. Love",13.0]],
-   b:"Elba lazo", pb:91.56, lb:[["K. Williams",15.5],["C. Lamb",15.4],["SEA D/ST",14.0]]},
+  {a:"Baseline Road", pa:84.96, la:[["T. McBride",18.1],["J. Hurts",16.16],["B. Irving",13.0]],
+   b:"hammer head", pb:151.58, lb:[["P. Mahomes",28.98],["T. Kelce",25.1],["J. Gibbs",23.3]]},
+  {a:"Mecoide", pa:78.18, la:[["K. Walker III",23.8],["J. Burrow",16.18],["E. Egbuka",10.3]],
+   b:"Lo + Turbo", pb:142.16, lb:[["A. St. Brown",35.2],["D. Prescott",29.76],["J. Cook III",20.9]]},
+  {a:"Los violadores de papantla", pa:121.9, la:[["D. Adams",39.5],["S. Diggs",21.7],["T. Warren",14.4]],
+   b:"Rompetotos", pb:106.82, lb:[["J. Allen",40.82],["S. LaPorta",17.2],["B. Hall",14.2]]},
+  {a:"Elba Ticano", pa:123.12, la:[["C. Lamb",35.3],["D. Kincaid",22.5],["C. Watson",14.1]],
+   b:"Artes Negras de Onavas", pb:152.92, lb:[["J. Taylor",29.2],["C. Olave",22.6],["C. McCaffrey",22.6]]},
 ];
 document.getElementById("live-matchup-grid").innerHTML = liveMatchups.map(m => {
   const total = m.pa + m.pb;
@@ -588,18 +625,18 @@ document.getElementById("live-matchup-grid").innerHTML = liveMatchups.map(m => {
       <div><div class="l-title">Líderes ${m.b}</div>${leadersHtml(m.lb)}</div>
     </div>
   </div>`;
-}).join("") + `<div class="bye-card">💤 hammer head descansó esta semana (bye) · 154.16 pts que no contaron</div>`;
+}).join("") + `<div class="bye-card">💤 Falchi Carnivori descansó esta semana (bye) · 145.2 pts que no contaron</div>`;
 
-// ---- Week 2 preview (proyección oficial ESPN, alineaciones actuales) ----
+// ---- Week 3 preview (proyección oficial ESPN, alineaciones actuales; Baseline Road descansa) ----
 const week2Matchups = [
-  {a:"Rompetotos", pa:134.7, la:[["Josh Allen",22.85],["Bijan Robinson",22.58],["Justin Jefferson",17.98]],
-   b:"Los violadores de papantla", pb:104.4, lb:[["Jaxson Dart",18.23],["Tyler Shough",15.43],["Davante Adams",13.84]]},
-  {a:"hammer head", pa:114.4, la:[["Jahmyr Gibbs",23.74],["Patrick Mahomes",18.52],["Matthew Stafford",18.14]],
-   b:"Baseline Road", pb:109.4, lb:[["Jalen Hurts",19.71],["Saquon Barkley",16.85],["Trey McBride",14.31]]},
-  {a:"Lo + Turbo", pa:109.4, la:[["Amon-Ra St. Brown",20.18],["Dak Prescott",19.76],["James Cook III",16.5]],
-   b:"Mecoide", pb:111.6, lb:[["Puka Nacua",21.09],["Kenneth Walker III",16.77],["Joe Burrow",16.63]]},
-  {a:"Artes Negras de Onavas", pa:131.4, la:[["Christian McCaffrey",21.46],["Drake Maye",18.06],["Jonathan Taylor",17.68]],
-   b:"Elba lazo", pb:127.1, lb:[["Jayden Daniels",19.4],["Justin Herbert",19.14],["Ja'Marr Chase",18.85]]},
+  {a:"hammer head", pa:138.11, la:[["Jahmyr Gibbs",25.34],["Patrick Mahomes",19.63],["De'Von Achane",19.4]],
+   b:"Los violadores de papantla", pb:83.74, lb:[["Davante Adams",13.82],["Jeremiyah Love",12.75],["Tyler Warren",12.3]]},
+  {a:"Rompetotos", pa:129.32, la:[["Josh Allen",23.56],["Justin Jefferson",18.26],["Breece Hall",16.2]],
+   b:"Artes Negras de Onavas", pb:124.59, lb:[["Christian McCaffrey",20.9],["Jonathan Taylor",20.61],["Chris Olave",17.76]]},
+  {a:"Falchi Carnivori", pa:124.67, la:[["Lamar Jackson",21.07],["Jaxon Smith-Njigba",20.8],["Ja'Marr Chase",19.03]],
+   b:"Mecoide", pb:106.94, lb:[["Kenneth Walker III",21.0],["Chase Brown",16.61],["Joe Burrow",16.42]]},
+  {a:"Lo + Turbo", pa:121.9, la:[["Amon-Ra St. Brown",19.86],["Dak Prescott",17.11],["James Cook III",16.95]],
+   b:"Elba Ticano", pb:121.34, lb:[["Brock Purdy",20.8],["CeeDee Lamb",17.32],["Omarion Hampton",15.02]]},
 ];
 document.getElementById("week2-matchup-grid").innerHTML = week2Matchups.map(m => {
   const total = m.pa + m.pb;
@@ -621,39 +658,38 @@ document.getElementById("week2-matchup-grid").innerHTML = week2Matchups.map(m =>
       <div><div class="l-title">Líderes proy. ${m.b}</div><ul>${m.lb.map(l => `<li><span>${l[0]}</span><span class="mono-num">${l[1]}</span></li>`).join("")}</ul></div>
     </div>
   </div>`;
-}).join("");
+}).join("") + `<div class="bye-card">💤 Baseline Road descansa esta Semana 3 (bye)</div>`;
 
 // ---- Waivers de la semana (agentes libres reales de la liga SL) ----
 const waiverList = [
-  ["Blake Corum (RB, LAR)", "77.1% rosterado en la liga y sigue libre. Metió apenas 5.4 en Semana 1, pero es la opción de mayor techo para Los violadores de papantla, el equipo con más banderas de lesión en su backfield (Jeremiyah Love, Keaton Mitchell y TreVeyon Henderson los tres tocados a la vez)."],
-  ["RJ Harvey (RB, DEN)", "75.0% rosterado. Otra opción de RB sano, buena para Los violadores de papantla o para Lo + Turbo, que solo carga dos corredores en todo el roster (James Cook III y Bhayshul Tuten)."],
-  ["Isaiah Likely (TE, NYG)", "82.3% rosterado. Metió 27.8 en Semana 1 y sigue disponible, el seguro obvio para Mecoide, que solo tiene a un TE rookie (Colston Loveland) sin backup en el plantel."],
-  ["Dalton Kincaid (TE, BUF)", "75.0% rosterado. Metió 18.0 puntos, otra opción de TE de techo alto para cualquier equipo con un solo titular ahí, como Mecoide o Artes Negras de Onavas."],
-  ["Jacory Croskey-Merritt (RB, WSH)", "70.1% rosterado, metió 12.6 en su debut. Profundidad real de RB para Lo + Turbo, que necesita un tercer corredor ya."],
-  ["Jared Goff (QB, DET)", "69.6% rosterado pese a tirar para 16.44 en Semana 1. Buena opción de QB2 para cualquier equipo de un solo QB titular (Rompetotos, Falchi Carnivori o Mecoide) que quiera cubrirse por bye o lesión."],
+  ["Harold Fannin Jr. (TE, CLE)", "91.8% rosterado en la liga y sigue libre. El seguro obvio para Mecoide, que ahora mismo tiene un hueco literal en el cupo de TE titular (Colston Loveland está en la banca sin nadie que lo reemplace)."],
+  ["Justin Herbert (QB, LAC)", "90.3% rosterado. Upgrade real para Elba Ticano, que carga tres QB en el roster (Caleb Williams Doubtful, Brock Purdy y Bo Nix) y podría soltar dos por un titular de verdad."],
+  ["Jayden Daniels (QB, WSH)", "97.7% rosterado, marcado Doubtful esta semana con 0.0 de proyección. Buy-low de temporada completa para el que tenga paciencia y un cupo de banca libre."],
+  ["Matthew Golden (WR, GB)", "84.5% rosterado. Profundidad real de WR para cualquier equipo que quiera cubrirse ante una baja."],
+  ["Rico Dowdle (RB, PIT)", "84.9% rosterado, marcado Questionable. Opción de RB de techo medio para el que necesite profundidad ahí."],
+  ["Seahawks D/ST", "98.1% rosterado. Streaming obvio de D/ST para Falchi Carnivori, cuyo Jaguars D/ST metió apenas 1.0 punto en Semana 2."],
 ];
 document.getElementById("waiver-list").innerHTML = waiverList.map((w,i) => `
   <div class="sugg"><div class="idx">${String(i+1).padStart(2,"0")}</div><div class="body"><b>${w[0]}</b><p>${w[1]}</p></div></div>`).join("");
 
-// ---- Breakout free agents (más puntos reales en Semana 1, sin importar % rosterado) ----
+// ---- Breakout free agents (más puntos reales en Semana 2, sin importar % rosterado) ----
 const breakoutList = [
-  ["Caleb Williams (QB, CHI) · 37.26 pts", "El que más puntos metió de toda la liga y sigue disponible, aunque ya 91.7% rosterado en ESPN en general. El pickup más obvio si algún QB titular de la liga se cae por lesión o bye."],
-  ["Bryce Young (QB, CAR) · 31.44 pts", "Segundo lugar entre agentes libres, aunque con contexto: fue en una goleada 37-59 en contra, mucho volumen de garbage time. Apenas 11.2% rosterado, sirve más como flier de emergencia que como QB2 de verdad."],
-  ["Isaiah Likely (TE, NYG) · 27.8 pts", "El TE que más puntos metió sin estar rosterado en la liga. Ya 82.3% rosterado en ESPN en general, el seguro obvio para Mecoide con Colston Loveland como único TE en el plantel."],
-  ["Devaughn Vele (WR, NO) · 19.9 pts", "Apenas 12.9% rosterado. Flier de WR interesante para cualquier equipo corto de receptores, como Los violadores de papantla."],
-  ["Jordan Love (QB, GB) · 19.48 pts", "Titular real de la NFL y sigue solo 42.0% rosterado en esta liga. Buy-low obvio si algún QB1 de la liga se cae por lesión."],
-  ["Mike Gesicki (TE, CIN) · 18.8 pts", "Apenas 1.5% rosterado, casi nadie lo tiene. Streamer de TE para Baseline Road (Elijah Higgins enterrado en la banca) o para cualquier equipo de un solo TE titular."],
+  ["Jared Goff (QB, DET) · 29.78 pts", "El que más puntos metió de toda la liga entre agentes libres, y sigue subiendo: ya 69.3% rosterado. El pickup más obvio si algún QB titular de la liga se cae por lesión o bye."],
+  ["Dalton Schultz (TE, HOU) · 26.0 pts", "Apenas 21.6% rosterado. La opción de TE más productiva de la semana, perfecta para el hueco de Mecoide en ese puesto."],
+  ["Bryce Young (QB, CAR) · 24.08 pts", "Ya 34.5% rosterado y subiendo dos semanas seguidas. Sigue siendo más flier que QB2 de verdad, pero el techo está ahí."],
+  ["Rashod Bateman (WR, BAL) · 21.8 pts", "Apenas 24.2% rosterado. Flier de WR real para cualquier equipo corto de receptores, como Los violadores de papantla."],
+  ["Denzel Boston (WR, CLE) · 20.5 pts", "Apenas 26.7% rosterado. Otro flier de WR con volumen creciente en un ataque de Cleveland corto de opciones."],
 ];
 document.getElementById("breakout-list").innerHTML = breakoutList.map((w,i) => `
   <div class="sugg"><div class="idx">${String(i+1).padStart(2,"0")}</div><div class="body"><b>${w[0]}</b><p>${w[1]}</p></div></div>`).join("");
 
-// ---- Top scorers league-wide (Week 1, marcador final) ----
+// ---- Top scorers league-wide (Week 2, marcador final, incluye al equipo de bye) ----
 const topScorers = [
-  ["J. Allen","Rompetotos",35.66],
-  ["K. Walker III","Mecoide",34.1],
-  ["A. Jeanty","Artes Negras de Onavas",32.7],
-  ["B. Robinson","Rompetotos",31.3],
-  ["J. Jefferson","Rompetotos",31.2],
+  ["J. Smith-Njigba","Falchi Carnivori",42.5],
+  ["J. Allen","Rompetotos",40.82],
+  ["D. Adams","Los violadores de papantla",39.5],
+  ["C. Lamb","Elba Ticano",35.3],
+  ["A. St. Brown","Lo + Turbo",35.2],
 ];
 const maxScore = Math.max(...topScorers.map(s => s[2]));
 document.getElementById("top-scorers").innerHTML = topScorers.map(s => `
@@ -662,6 +698,27 @@ document.getElementById("top-scorers").innerHTML = topScorers.map(s => `
     <div class="bar-track"><div class="bar-fill" style="width:${(s[2]/maxScore*100).toFixed(1)}%"></div></div>
     <div class="val mono-num">${s[2]}</div>
   </div>`).join("");
+
+// ---- Standings after Week 2 (real de ESPN: record, PF, PA) ----
+const standings = [
+  {team:"Artes Negras de Onavas", w:2, l:0, pf:296.44, pa:249.08},
+  {team:"Los violadores de papantla", w:2, l:0, pf:216.30, pa:198.38},
+  {team:"hammer head", w:1, l:0, pf:151.58, pa:84.96},
+  {team:"Falchi Carnivori", w:1, l:0, pf:132.46, pa:107.30},
+  {team:"Rompetotos", w:1, l:1, pf:274.28, pa:250.62},
+  {team:"Lo + Turbo", w:1, l:1, pf:249.46, pa:210.64},
+  {team:"Elba Ticano", w:0, l:2, pf:214.68, pa:247.32},
+  {team:"Baseline Road", w:0, l:2, pf:213.68, pa:319.04},
+  {team:"Mecoide", w:0, l:2, pf:204.14, pa:285.68},
+];
+document.getElementById("standings-body").innerHTML = standings.map((t,i) => `
+  <tr>
+    <td class="num">${i+1}</td>
+    <td>${t.team}${i===3 ? ` <span class="badge value">último playoff</span>` : ""}</td>
+    <td>${t.w}-${t.l}</td>
+    <td class="num">${t.pf.toFixed(2)}</td>
+    <td class="num">${t.pa.toFixed(2)}</td>
+  </tr>${i===3 ? `<tr><td colspan="5" style="text-align:center; padding:5px 14px; font-size:11px; color:var(--text-3); border-bottom:1px dashed var(--line-strong);">— línea de playoffs —</td></tr>` : ""}`).join("");
 
 // ---- Suggestions ----
 const suggestions = [
@@ -674,15 +731,16 @@ const suggestions = [
 document.getElementById("sugg-list").innerHTML = suggestions.map((s,i) => `
   <div class="sugg"><div class="idx">${String(i+1).padStart(2,"0")}</div><div class="body"><b>${s[0]}</b><p>${s[1]}</p></div></div>`).join("");
 
-// ---- Watch list (injury tags from current rosters) ----
+// ---- Watch list (banderas de lesión de cara a la Semana 3, titulares primero) ----
 const watch = [
-  ["Malik Nabers","Rompetotos","Q"],["Jonathon Brooks","Rompetotos","Q"],
-  ["Zay Flowers","Lo + Turbo","Q"],["Brock Bowers","Lo + Turbo","Dou"],["Rome Odunze","Lo + Turbo","Q"],["Jakobi Meyers","Lo + Turbo","Q"],
-  ["A.J. Brown","Mecoide","Q"],
-  ["Jeremiyah Love","Los violadores de papantla","Q"],["Jalen McMillan","Los violadores de papantla","Q"],["Keaton Mitchell","Los violadores de papantla","Q"],["TreVeyon Henderson","Los violadores de papantla","O"],
-  ["Alec Pierce","Artes Negras de Onavas","Q"],
-  ["Patrick Mahomes","hammer head","Q"],["Jermar Jefferson","hammer head","IR"],
-  ["James Conner","Baseline Road","IR"],
+  ["Malik Nabers","Rompetotos","Q"],["DJ Moore","Rompetotos","Q"],
+  ["Brock Bowers","Lo + Turbo","Q"],["Zay Flowers","Lo + Turbo","Q"],
+  ["Caleb Williams","Elba Ticano","D"],
+  ["Jaxson Dart","Los violadores de papantla","D"],
+  ["Puka Nacua","Mecoide","Q"],["A.J. Brown","Mecoide","IR"],
+  ["Dallas Goedert","Artes Negras de Onavas","D"],
+  ["Jadarian Price","Falchi Carnivori","Q"],
+  ["Saquon Barkley","Baseline Road","Q"],["Mike Evans","Baseline Road","Q"],
 ];
 document.getElementById("watch-chips").innerHTML = watch.map(w => `<span class="watch-chip">${w[0]} <span class="muted" style="font-weight:400;">(${w[1]})</span> <span class="tag">${w[2]}</span></span>`).join("");
 
