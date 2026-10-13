@@ -128,7 +128,10 @@
         "music.status.error": "Something went wrong — try again?",
         "post.lifelately.title": "Life Lately",
         "journal.entry.lifelately.body": "Here's what's been happening with me lately, and apparently I've learned a few things along the way.",
-        "date.social-media": "September 4, 2026"
+        "date.social-media": "September 4, 2026",
+        "date.life-lately-oct-2026": "October 13, 2026",
+        "journal.entry.lifelately-oct.body": "A new job, a new routine, football season, and why this rollercoaster doesn't scare me as much anymore.",
+        "post.lifelately2.title": "Life Lately 2: Finding My Rhythm"
     },
     "es": {
         "nav.home": "Inicio",
@@ -259,6 +262,9 @@
         "music.status.error": "Algo salió mal — ¿intentas de nuevo?",
         "post.lifelately.title": "Life Lately",
         "journal.entry.lifelately.body": "Aquí está lo que ha pasado conmigo últimamente, y al parecer aprendí algunas cosas en el camino.",
-        "date.social-media": "4 de septiembre de 2026"
+        "date.social-media": "4 de septiembre de 2026",
+        "date.life-lately-oct-2026": "13 de octubre de 2026",
+        "journal.entry.lifelately-oct.body": "Un trabajo nuevo, una rutina nueva, temporada de football, y por qué esta montaña rusa ya no me da tanto miedo.",
+        "post.lifelately2.title": "Life Lately 2: Encontrando mi ritmo"
     }
 }
