@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Estimated reading time on article pages: counts the words currently visible
 // in the article (so it follows the EN/ES toggle) at ~200 wpm and appends it to
-// the post-meta line. Spanish-only posts set data-label-lang="es" on .post-meta.
+// the post-meta line. Spanish-only posts set lang="es" on the article (or data-label-lang on .post-meta).
 document.addEventListener("DOMContentLoaded", () => {
     const meta = document.querySelector(".post-meta");
     const article = document.querySelector("main article");
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
             words += (el.textContent.match(/\S+/g) || []).length;
         });
         const minutes = Math.max(1, Math.round(words / WORDS_PER_MINUTE));
-        const label = LABELS[meta.dataset.labelLang || lang] || LABELS.en;
+        const label = LABELS[meta.dataset.labelLang || article.getAttribute("lang") || lang] || LABELS.en;
         time.textContent = `${minutes} ${label}`;
     }
 
